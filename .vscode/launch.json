@@ -1,0 +1,35 @@
+{
+    "configurations": [
+
+        {
+            "name": "Flutter Linux",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+              "-d",
+              "linux"
+            ]
+        },
+        {
+            "name": "Flutter Web",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+              "-d",
+              "chrome"
+            ]
+        },
+        {
+            "name": "Flutter Android",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+              "-d",
+              "3000E5540N0C2307927"
+            ]
+          }
+    ]
+}
