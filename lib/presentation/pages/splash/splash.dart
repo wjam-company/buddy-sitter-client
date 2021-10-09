@@ -1,5 +1,7 @@
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/pages/splash/body.dart';
+import 'package:buddy_sitter/presentation/utils/theme/color.dart';
+import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,8 +15,17 @@ class Splash extends StatelessWidget {
     MediaHandler.of(context);
     return ChangeNotifierProvider<ProviderOnboarding>(
       create: (_) => ProviderOnboarding(),
-      child: const Scaffold(
-        body: Body(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: AtomText.headingLeast(
+            text: 'Buddy Sitter',
+            color: BuddySitterColor.primaryBeige,
+          ),
+          centerTitle: true,
+        ),
+        body: TemplateActionBottom(
+          child: const BodyOnboarding(),
+        ),
       ),
     );
   }
