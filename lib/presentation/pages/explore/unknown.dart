@@ -10,8 +10,8 @@ import 'package:provider/provider.dart';
 import '../interfaces.dart';
 import './provider.dart';
 
-class Splash extends BuddySitterPageProvider {
-  const Splash({Key? key}) : super(key: key);
+class Explore extends BuddySitterPageProvider {
+  const Explore({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
