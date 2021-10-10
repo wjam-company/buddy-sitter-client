@@ -1,4 +1,5 @@
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
+import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
@@ -70,6 +71,9 @@ class BodyOnboarding extends StatelessWidget {
             colorHadler: (_) {
               return BuddySitterColor.actionsLog;
             },
+            onPressed: () =>
+                Provider.of<RouterPageHandler>(context, listen: false)
+                    .toSignIn(),
           ),
         ),
       ],

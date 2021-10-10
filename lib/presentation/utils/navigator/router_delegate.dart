@@ -43,7 +43,6 @@ class BuddySitterRouterDelegate extends RouterDelegate<BuddySitterPath>
   GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
 
   @override
-  Future<void> setNewRoutePath(BuddySitterPath configuration) async {
-    await _pageHandler.setNewRoutePath(configuration);
-  }
+  Future<void> setNewRoutePath(BuddySitterPath configuration) async =>
+      await _pageHandler.setNewRoutePath(configuration);
 }

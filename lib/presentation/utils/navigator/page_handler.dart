@@ -2,7 +2,7 @@ import './pages.dart';
 import './path.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import './locations.dart' show BuddySitterLocation;
+import './locations.dart';
 
 class RouterPageHandler extends ChangeNotifier {
   static RouterPageHandler of(BuildContext context) =>

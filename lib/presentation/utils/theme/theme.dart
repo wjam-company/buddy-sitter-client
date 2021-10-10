@@ -8,6 +8,9 @@ class BuddySitterTheme {
       scaffoldBackgroundColor: backgroundColor,
       backgroundColor: backgroundColor,
       appBarTheme: AppBarTheme(
+        iconTheme: IconThemeData(
+          color: BuddySitterColor.dark.brighten(0.4),
+        ),
         backgroundColor: backgroundColor,
         shadowColor: Colors.transparent,
       ),

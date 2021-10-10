@@ -1,10 +1,7 @@
-import 'package:buddy_sitter/presentation/utils/theme/theme.dart'
-    show BuddySitterTheme;
+import 'package:buddy_sitter/presentation/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
-
-import 'utils/navigator/router_information_parser.dart'
-    show BuddySitterRouteInformationParser;
-import 'utils/navigator/router_delegate.dart' show BuddySitterRouterDelegate;
+import 'utils/navigator/router_information_parser.dart';
+import 'utils/navigator/router_delegate.dart';
 
 class BuddySitterApp extends StatelessWidget {
   const BuddySitterApp({Key? key}) : super(key: key);

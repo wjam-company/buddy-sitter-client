@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 class AtomButton extends StatelessWidget {
   final String text;
   final MaterialPropertyResolver<Color> colorHadler;
+  final void Function()? onPressed;
   const AtomButton({
     Key? key,
     required this.text,
     required this.colorHadler,
+    this.onPressed,
   }) : super(key: key);
 
   @override
@@ -19,7 +21,7 @@ class AtomButton extends StatelessWidget {
             MaterialStateColor.resolveWith((states) => Colors.transparent),
         backgroundColor: MaterialStateColor.resolveWith(colorHadler),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: AtomText.subheading(
         text: text,
         color: BuddySitterColor.light.brighten(0.5),

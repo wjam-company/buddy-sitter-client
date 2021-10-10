@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart'
-    show RouteInformationParser, RouteInformation;
-import './path.dart' show BuddySitterPath;
-import './locations.dart' show BuddySitterLocation;
+import 'package:flutter/material.dart';
+import './path.dart';
+import './locations.dart';
 
 class BuddySitterRouteInformationParser
     implements RouteInformationParser<BuddySitterPath> {

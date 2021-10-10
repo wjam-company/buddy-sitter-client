@@ -1,5 +1,5 @@
-import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
+import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:flutter/material.dart';
 
 class ItemActionBottom {
@@ -25,7 +25,7 @@ class TemplateActionBottom extends StatelessWidget {
   }) =>
       Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25.0).copyWith(
+          borderRadius: BuddySitterMeasurement.borderRadiusHalf.copyWith(
             bottomLeft: Radius.zero,
             bottomRight: Radius.zero,
           ),
@@ -36,7 +36,7 @@ class TemplateActionBottom extends StatelessWidget {
           color: color,
           child: Padding(
             padding: EdgeInsets.zero.copyWith(
-              bottom: MediaHandler.proportionalHeight(mobile: 77.0 * index),
+              bottom: BuddySitterMeasurement.sizeHigh * index,
             ),
             child: child,
           ),
@@ -48,7 +48,7 @@ class TemplateActionBottom extends StatelessWidget {
     required int index,
   }) =>
       SizedBox(
-        height: MediaHandler.proportionalHeight(mobile: 77.0 * (index + 1)),
+        height: BuddySitterMeasurement.sizeHigh * (index + 1),
         width: double.infinity,
         child: child,
       );

@@ -2,8 +2,6 @@ import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
-import 'package:buddy_sitter/presentation/widgets/molecules/information/onboarding/dot_indicator.dart';
-import 'package:buddy_sitter/presentation/widgets/organisms/onboarding.dart';
 import 'package:buddy_sitter/presentation/widgets/template/action_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,8 +19,8 @@ class SignIn extends BuddySitterPageProvider {
       child: Scaffold(
         appBar: AppBar(
           title: AtomText.headingLeast(
-            text: 'Buddy Sitter',
-            color: BuddySitterColor.primaryBeige,
+            text: 'Sign In',
+            color: BuddySitterColor.dark,
           ),
           centerTitle: true,
         ),
@@ -43,26 +41,11 @@ class BodyOnboarding extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          MoleculeDotIndicator(
-            color: BuddySitterColor.actionsSuccess.brighten(.3),
-          ),
-          OrganismOnboarding(
-            color: BuddySitterColor.actionsLog,
-          ),
-          const Spacer(),
+        children: const [
+          Spacer(),
         ],
       ),
       childrenBottom: [
-        ItemActionBottom(
-          color: BuddySitterColor(Colors.transparent.value),
-          child: AtomButton(
-            text: 'Sign Up',
-            colorHadler: (_) {
-              return BuddySitterColor.actionsSuccess;
-            },
-          ),
-        ),
         ItemActionBottom(
           color: BuddySitterColor.actionsLog,
           child: AtomButton(
