@@ -4,7 +4,7 @@ import './device/web/keyboard.dart' show BuddySitterKeyEventHandler;
 
 void main() {
   runApp(const Focus(
-    onKey: BuddySitterKeyEventHandler.global,
+    //onKey: BuddySitterKeyEventHandler.global,
     autofocus: true,
     child: BuddySitterApp(),
   ));

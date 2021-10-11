@@ -8,8 +8,9 @@ class BuddySitterMeasurement {
 
   static double get sizeHigh => MediaHandler.proportionalWidth(mobile: 77.0);
 
-  static double get sizeUpper =>
-      MediaHandler.proportionalWidth(mobile: AverageResolutions.mobile.width);
+  static double get sizeUpper => MediaHandler.proportionalWidth(
+        mobile: AverageResolutions.mobile.width,
+      );
 
   static EdgeInsets get marginsLeast => EdgeInsets.all(sizeLeast);
 

@@ -27,6 +27,6 @@ class BuddySitterKeyEventHandler {
       }
       return KeyEventResult.handled;
     }
-    return KeyEventResult.ignored;
+    return KeyEventResult.handled;
   }
 }

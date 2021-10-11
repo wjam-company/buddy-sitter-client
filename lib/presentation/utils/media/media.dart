@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AverageResolutions {
@@ -73,7 +74,11 @@ class MediaHandler {
   }
 
   static MediaQueryData of(BuildContext context) {
-    MediaQueryData data = MediaQuery.of(context);
+    final MediaQueryData data = (WidgetsBinding.instance?.window == null)
+        ? MediaQuery.of(context)
+        : MediaQueryData.fromWindow(
+            WidgetsBinding.instance?.window as SingletonFlutterWindow);
+
     print('screen: ${data.size.width} x ${data.size.height}');
     _setOrientation = _setSize = _setMoble = _setTablet = _setDesktop = data;
     return data;
