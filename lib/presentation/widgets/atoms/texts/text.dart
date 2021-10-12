@@ -78,12 +78,11 @@ class AtomText extends StatelessWidget {
           padding?.right ?? style.fontSize ?? 0.5,
           padding?.bottom ?? style.fontSize ?? 1 / 2,
         ),
-        child: Expanded(
-          child: Text(
-            text,
-            style: style.copyWith(color: color ?? BuddySitterColor.dark),
-            textAlign: textAlign,
-          ),
+        child: Text(
+          text,
+          softWrap: true,
+          style: style.copyWith(color: color ?? BuddySitterColor.dark),
+          textAlign: textAlign,
         ),
       );
 }
