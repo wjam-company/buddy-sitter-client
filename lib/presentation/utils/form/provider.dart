@@ -7,8 +7,6 @@ typedef FormValidator = ValidationItem Function(
 class FormProvider extends ChangeNotifier {
   late Map<String, ValidationItem> entries;
 
-  final List<FormError> _errors = [];
-
   FormProvider(final List<String> keyOfEntries) {
     entries = keyOfEntries.asMap().map<String, ValidationItem>(
         (key, value) => MapEntry(value, ValidationItem()));
@@ -38,6 +36,7 @@ class FormProvider extends ChangeNotifier {
             TextSelection(baseOffset: value.length, extentOffset: value.length),
         composing: TextRange.empty,
       );
+
       validators?.forEach((validator) {
         valid = validator(valid, value);
       });

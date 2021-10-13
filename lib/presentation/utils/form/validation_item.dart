@@ -17,15 +17,15 @@ class FormError {
       size: BuddySitterMeasurement.sizeHalf * .75,
     ),
     Icon(
-      Icons.error_outline,
-      color: BuddySitterColor.actionsLog,
+      Icons.check,
+      color: BuddySitterColor.actionsSuccess,
       size: BuddySitterMeasurement.sizeHalf * .75,
     ),
   ]);
 
   static int warning = 0;
   static int error = 1;
-  static int log = 2;
+  static int success = 2;
   static Icon iconOf(int type) => _icons[type];
 
   FormError({required this.message, required this.type});
