@@ -30,6 +30,16 @@
               "-d",
               "3000E5540N0C2307927"
             ]
+          },
+        {
+            "name": "Flutter Android Emulation",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+              "-d",
+              "emulator-5554"
+            ]
           }
     ]
 }
