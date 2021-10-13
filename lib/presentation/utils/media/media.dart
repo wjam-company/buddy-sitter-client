@@ -79,7 +79,6 @@ class MediaHandler {
         : MediaQueryData.fromWindow(
             WidgetsBinding.instance?.window as SingletonFlutterWindow);
 
-    print('screen: ${data.size.width} x ${data.size.height}');
     _setOrientation = _setSize = _setMoble = _setTablet = _setDesktop = data;
     return data;
   }

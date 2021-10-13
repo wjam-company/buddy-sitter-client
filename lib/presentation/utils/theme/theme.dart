@@ -30,7 +30,6 @@ class BuddySitterTheme {
       );
 
   static InputDecorationTheme get inputDecorationTheme {
-    print('print to ${BuddySitterMeasurement.sizeHigh}');
     return InputDecorationTheme(
       contentPadding: EdgeInsets.symmetric(
         horizontal: BuddySitterMeasurement.sizeHalf,
