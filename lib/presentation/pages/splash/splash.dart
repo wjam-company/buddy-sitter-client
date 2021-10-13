@@ -1,4 +1,5 @@
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
+import 'package:buddy_sitter/presentation/utils/navigator/locations.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
@@ -73,7 +74,7 @@ class BodyOnboarding extends StatelessWidget {
             },
             onPressed: () =>
                 Provider.of<RouterPageHandler>(context, listen: false)
-                    .toSignIn(),
+                    .show(BuddySitterLocation.signin),
           ),
         ),
       ],
