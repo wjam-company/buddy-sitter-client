@@ -2,9 +2,19 @@ import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:flutter/material.dart';
 
-class FormError {
+abstract class BuddySitterError {
   final String message;
-  int type;
+  final int type;
+
+  BuddySitterError(this.message, this.type);
+}
+
+class FormError implements BuddySitterError {
+  @override
+  final String message;
+  @override
+  final int type;
+
   static final List<Icon> _icons = List.unmodifiable([
     Icon(
       Icons.warning_amber_outlined,
