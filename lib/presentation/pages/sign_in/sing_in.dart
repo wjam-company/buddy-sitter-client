@@ -1,3 +1,6 @@
+import 'package:buddy_sitter/presentation/utils/form/provider.dart';
+import 'package:buddy_sitter/presentation/utils/form/sign_in_validate.dart';
+import 'package:buddy_sitter/presentation/utils/form/validation_item.dart';
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
@@ -21,7 +24,7 @@ class SignIn extends BuddySitterPageProvider {
         appBar: AppBar(
           title: AtomText.content(
             text: 'Sign In',
-            color: BuddySitterColor.dark.brighten(.3),
+            color: BuddySitterColor.dark.brighten(0.3),
           ),
           centerTitle: true,
         ),
@@ -38,6 +41,10 @@ class BodyOnboarding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FormProvider validators = FormProvider([
+      SignInValidator.mail,
+      SignInValidator.password,
+    ]);
     return TemplateActionBottom(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,13 +59,22 @@ class BodyOnboarding extends StatelessWidget {
             padding: EdgeInsets.zero,
             color: BuddySitterColor.dark,
           ),
-          const OrganismForm.column(
+          OrganismForm.column(
+            provider: validators,
             fields: [
               MoleculeInput.text(
+                controler: validators.valid(
+                  SignInValidator.mail,
+                  validator: SignInValidator.validEmail,
+                ),
                 text: 'Enter your email',
                 icon: Icons.email_outlined,
               ),
               MoleculeInput.password(
+                controler: validators.valid(
+                  SignInValidator.password,
+                  validator: SignInValidator.validPassword,
+                ),
                 text: 'Enter your password',
                 icon: Icons.password_outlined,
               ),
@@ -72,9 +88,7 @@ class BodyOnboarding extends StatelessWidget {
           color: BuddySitterColor.actionsLog,
           child: AtomButton(
             text: 'Sign In',
-            colorHadler: (_) {
-              return BuddySitterColor.actionsLog;
-            },
+            colorHadler: (_) => BuddySitterColor.actionsLog,
           ),
         ),
       ],
@@ -84,14 +98,15 @@ class BodyOnboarding extends StatelessWidget {
 
 class MoleculeInput extends StatelessWidget {
   final String text;
-  //  = 'Enter your email';
   final IconData icon;
   final bool obscureText;
-  //  = Icons.email_outlined;
+  final TextEditingController? controler;
+
   const MoleculeInput.text({
     Key? key,
     required this.text,
     required this.icon,
+    this.controler,
   })  : obscureText = false,
         super(key: key);
 
@@ -99,12 +114,14 @@ class MoleculeInput extends StatelessWidget {
     Key? key,
     required this.text,
     required this.icon,
+    this.controler,
   })  : obscureText = true,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controler,
       obscureText: obscureText,
       decoration: InputDecoration(
         label: Padding(
@@ -131,27 +148,90 @@ class MoleculeInput extends StatelessWidget {
 
 class OrganismForm extends StatelessWidget {
   final List<Widget> fields;
+  final FormProvider provider;
 
-  const OrganismForm.column({Key? key, required this.fields}) : super(key: key);
-  const OrganismForm.slider({Key? key, required this.fields}) : super(key: key);
+  const OrganismForm.column({
+    Key? key,
+    required this.fields,
+    required this.provider,
+  }) : super(key: key);
+  const OrganismForm.slider({
+    Key? key,
+    required this.fields,
+    required this.provider,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> children = List.generate(
-      fields.length * 2,
-      (index) => index % 2 == 0
-          ? fields[index ~/ 2]
-          : SizedBox(
-              height: BuddySitterMeasurement.sizeHalf,
+    return ChangeNotifierProvider<FormProvider>.value(
+        value: provider,
+        child: Form(
+          child: Padding(
+              padding: BuddySitterMeasurement.marginsHalf.copyWith(bottom: 0.0),
+              child: Column(
+                children: [
+                  Column(children: children),
+                  const MoleculeFormErrors(),
+                ],
+              )),
+        ));
+  }
+
+  List<Widget> get children => List.generate(
+        fields.length * 2,
+        (index) => index % 2 == 0
+            ? fields[index ~/ 2]
+            : SizedBox(
+                height: BuddySitterMeasurement.sizeHalf,
+              ),
+      );
+}
+
+class MoleculeFormErrors extends StatelessWidget {
+  const MoleculeFormErrors({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> errors = Provider.of<FormProvider>(context)
+        .errors
+        .map<String, Widget>((key, value) {
+          List<Widget> valueWidgets = value.errors
+              .map<Widget>(
+                (error) => Row(
+                  children: [
+                    Padding(
+                      child: FormError.iconOf(error.type),
+                      padding: BuddySitterMeasurement.marginsLeast
+                          .copyWith(left: BuddySitterMeasurement.sizeHalf),
+                    ),
+                    AtomText.caption(
+                      text: error.message,
+                      padding: EdgeInsets.zero,
+                    ),
+                  ],
+                ),
+              )
+              .toList();
+          if (valueWidgets.isNotEmpty) {
+            valueWidgets.insert(
+                0,
+                AtomText.content(
+                  text: key,
+                  padding: EdgeInsets.zero,
+                ));
+          }
+          return MapEntry(
+            key,
+            Column(
+              children: valueWidgets,
             ),
-    );
-    return Form(
-      child: Padding(
-        padding: BuddySitterMeasurement.marginsHalf.copyWith(bottom: 0.0),
-        child: Column(
-          children: children,
-        ),
-      ),
-    );
+          );
+        })
+        .values
+        .toList();
+
+    return Column(children: errors);
   }
 }

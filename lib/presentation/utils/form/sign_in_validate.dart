@@ -1,5 +1,5 @@
+import 'package:buddy_sitter/data/static/forms/sign_in_validations.dart';
 import 'package:buddy_sitter/presentation/utils/form/validation_item.dart';
-//        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
 
 class SignInValidator {
   static String mail = 'mail';
@@ -7,40 +7,44 @@ class SignInValidator {
 
   static ValidationItem validEmail(
       ValidationItem prevValidation, String value) {
-    if (value.isEmpty) {
+    if (value.isEmpty ||
+        prevValidation.errors.length == 1 &&
+            prevValidation.errors.first.type == FormError.success) {
       return prevValidation;
     }
-    if (!value.contains('@')) {
+
+    if (!value.contains(SignInDataValidator.mailAt.valid)) {
       prevValidation.errors.add(
         FormError(
-          message: 'Add the at sign of the mail',
+          message: SignInDataValidator.mailAt.message,
           type: FormError.error,
         ),
       );
     }
-    if (value.contains(' ')) {
+
+    if (value.contains(SignInDataValidator.mailSpace.valid)) {
       prevValidation.errors.add(
         FormError(
-          message: 'Please remove the blanks',
+          message: SignInDataValidator.mailSpace.message,
           type: FormError.error,
         ),
       );
     }
-    if (!RegExp(r".+\.[a-zA-Z]+").hasMatch(value)) {
+
+    if (!value.contains(RegExp(SignInDataValidator.mailDomain.valid))) {
       prevValidation.errors.add(
         FormError(
-          message: 'You need to add the domain EJ: .com',
+          message: SignInDataValidator.mailDomain.message,
           type: FormError.warning,
         ),
       );
     }
 
-    if (RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(value)) {
+    if (value.contains(RegExp(SignInDataValidator.mailValid.valid))) {
+      prevValidation = ValidationItem(value: value);
       prevValidation.errors.add(
         FormError(
-          message: 'Email valid',
+          message: SignInDataValidator.mailValid.message,
           type: FormError.success,
         ),
       );
@@ -52,59 +56,53 @@ class SignInValidator {
     ValidationItem prevValidation,
     String value,
   ) {
-    if (value.isEmpty) {
+    if (value.isEmpty ||
+        prevValidation.errors.length == 1 &&
+            prevValidation.errors.first.type == FormError.success) {
       return prevValidation;
     }
 
-    if (!value.contains(RegExp(r'[A-Z]'))) {
+    if (!value.contains(RegExp(SignInDataValidator.passwordLowercase.valid))) {
       prevValidation.errors.add(
         FormError(
-          message: 'Minimum 1 uppercase',
+          message: SignInDataValidator.passwordLowercase.message,
           type: FormError.warning,
         ),
       );
     }
 
-    if (!value.contains(RegExp(r'[a-z]'))) {
+    if (!value.contains(RegExp(SignInDataValidator.passwordNumeric.valid))) {
       prevValidation.errors.add(
         FormError(
-          message: 'Minimum 1 lowercase',
+          message: SignInDataValidator.passwordNumeric.message,
           type: FormError.warning,
         ),
       );
     }
 
-    if (!value.contains(RegExp(r'[0-9]'))) {
+    if (!value.contains(RegExp(SignInDataValidator.passwordSpecial.valid))) {
       prevValidation.errors.add(
         FormError(
-          message: 'Minimum 1 Numeric Number',
+          message: SignInDataValidator.passwordSpecial.message,
           type: FormError.warning,
         ),
       );
     }
 
-    if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+    if (!value.contains(RegExp(SignInDataValidator.passwordMin8.valid))) {
       prevValidation.errors.add(
         FormError(
-          message: 'Minimum 1 Special Character',
-          type: FormError.warning,
-        ),
-      );
-    }
-
-    if (!value.contains(RegExp(r'.{8,}'))) {
-      prevValidation.errors.add(
-        FormError(
-          message: 'Minimum 8 Characters',
+          message: SignInDataValidator.passwordMin8.message,
           type: FormError.warning,
         ),
       );
     }
 
     if (prevValidation.errors.isEmpty) {
+      prevValidation = ValidationItem(value: value);
       prevValidation.errors.add(
         FormError(
-          message: 'Password valid',
+          message: SignInDataValidator.passwordValid.message,
           type: FormError.success,
         ),
       );
