@@ -12,7 +12,7 @@ class FormProvider extends ChangeNotifier {
         (key, value) => MapEntry(value, ValidationItem()));
   }
 
-  TextEditingController valid(
+  TextEditingController Function() valid(
     final String entry, {
     FormValidator? validator,
     List<FormValidator>? validators,
@@ -26,33 +26,40 @@ class FormProvider extends ChangeNotifier {
       validators = [validator];
     }
 
-    _controller.addListener(() {
-      final String value = _controller.text.toLowerCase();
-      _controller.value = _controller.value.copyWith(
-        text: value,
-        selection: TextSelection(
-          baseOffset: value.length,
-          extentOffset: value.length,
-        ),
-        composing: TextRange.empty,
-      );
-
-      ValidationItem valid = ValidationItem();
-
-      if (value.isNotEmpty) {
-        validators?.forEach((validator) {
-          valid = validator(valid, value);
-        });
-
-        if (valid.errors.isEmpty) {
-          valid = ValidationItem(value: value);
+    String preValue = _controller.text;
+    return () {
+      _controller.addListener(() {
+        if (preValue == _controller.text) {
+          return;
         }
-      }
+        final String value = preValue = _controller.text;
+        _controller.value = TextEditingValue(
+          text: value,
+          selection: TextSelection(
+            baseOffset: value.length,
+            extentOffset: value.length,
+          ),
+          composing: TextRange.empty,
+        );
 
-      entries[entry] = valid;
-      notifyListeners();
-    });
-    return _controller;
+        ValidationItem valid = ValidationItem();
+
+        if (value.isNotEmpty) {
+          validators?.forEach((validator) {
+            valid = validator(valid, value);
+          });
+
+          if (valid.errors.isEmpty) {
+            valid = ValidationItem(value: value);
+          }
+        }
+
+        entries[entry] = valid;
+        notifyListeners();
+      });
+
+      return _controller;
+    };
   }
 
   Map<String, ValidationItem> get errors => Map.unmodifiable(entries);

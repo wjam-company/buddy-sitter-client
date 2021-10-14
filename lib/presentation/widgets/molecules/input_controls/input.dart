@@ -6,19 +6,19 @@ import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MoleculeInput extends StatelessWidget {
+class MoleculeInput extends StatefulWidget {
   final String text;
   final String entry;
   final IconData icon;
   final bool obscureText;
-  final TextEditingController? controler;
+  final TextEditingController Function() controler;
 
   const MoleculeInput.text({
     Key? key,
     required this.text,
     required this.icon,
     required this.entry,
-    this.controler,
+    required this.controler,
   })  : obscureText = false,
         super(key: key);
 
@@ -27,30 +27,49 @@ class MoleculeInput extends StatelessWidget {
     required this.text,
     required this.icon,
     required this.entry,
-    this.controler,
+    required this.controler,
   })  : obscureText = true,
         super(key: key);
+
+  @override
+  State<MoleculeInput> createState() => _MoleculeInputState();
+}
+
+class _MoleculeInputState extends State<MoleculeInput> {
+  late TextEditingController _controler;
 
   bool isLog(ValidationItem? validation) =>
       (validation == null || validation.value == null);
 
   @override
+  void initState() {
+    _controler = widget.controler();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controler.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     ValidationItem? validation =
-        Provider.of<FormProvider>(context).entries[entry];
+        Provider.of<FormProvider>(context).entries[widget.entry];
     return TextFormField(
-      controller: controler,
-      obscureText: obscureText,
+      controller: _controler,
+      obscureText: widget.obscureText,
       decoration: InputDecoration(
-        focusedBorder: isLog(validation)
-            ? null
-            : OutlineInputBorder(
-                borderRadius: BuddySitterMeasurement.borderRadiusHalf,
-                borderSide: BorderSide(
-                  color: BuddySitterColor.actionsSuccess,
-                ),
-                gapPadding: BuddySitterMeasurement.sizeLeast,
-              ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BuddySitterMeasurement.borderRadiusHalf,
+          borderSide: BorderSide(
+            color: isLog(validation)
+                ? BuddySitterColor.actionsLog
+                : BuddySitterColor.actionsSuccess,
+          ),
+          gapPadding: BuddySitterMeasurement.sizeLeast,
+        ),
         label: Padding(
           padding: EdgeInsets.zero.copyWith(
             left: BuddySitterMeasurement.sizeLeast,
@@ -59,14 +78,16 @@ class MoleculeInput extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Icon(
-                  icon,
-                  color: isLog(validation)
-                      ? BuddySitterColor.actionsLog
-                      : BuddySitterColor.actionsSuccess,
+                Builder(
+                  builder: (BuildContext context) => Icon(
+                    widget.icon,
+                    color: isLog(validation)
+                        ? BuddySitterColor.actionsLog
+                        : BuddySitterColor.actionsSuccess,
+                  ),
                 ),
                 AtomText.content(
-                  text: text,
+                  text: widget.text,
                   color: BuddySitterColor.dark,
                 )
               ],
