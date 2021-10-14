@@ -8,18 +8,19 @@ import 'package:buddy_sitter/presentation/widgets/molecules/input_controls/input
 import 'package:buddy_sitter/presentation/widgets/organisms/form.dart';
 import 'package:buddy_sitter/presentation/widgets/template/action_bottom.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../interfaces.dart';
 import './provider.dart';
 
-class RecoverPassword extends BuddySitterPageProvider<ProviderOnboarding> {
-  RecoverPassword({Key? key}) : super(key: key);
+class SignUp extends BuddySitterPageProvider<ProviderOnboarding> {
+  SignUp({Key? key}) : super(key: key);
 
   @override
   ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();
 
   @override
   Widget get appBarTitle => AtomText.content(
-        text: 'Recover Password',
+        text: 'Sign Up',
         color: BuddySitterColor.dark.brighten(0.3),
       );
 
@@ -36,6 +37,7 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     final FormProvider validators = FormProvider([
       SignValidator.mail,
+      SignValidator.userName,
       SignValidator.password,
     ]);
     return TemplateActionBottom(
@@ -44,12 +46,11 @@ class Body extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           AtomText.subheading(
-            text: 'Recover Password',
+            text: DataTextSignIn.title,
             color: BuddySitterColor.dark,
           ),
           AtomText.content(
-            text:
-                'Please enter your email and will send you a link to return you acount',
+            text: DataTextSignIn.description,
             padding: EdgeInsets.zero,
             color: BuddySitterColor.dark,
           ),
@@ -57,13 +58,31 @@ class Body extends StatelessWidget {
             provider: validators,
             fields: [
               MoleculeInput.text(
+                entry: SignValidator.userName,
+                controler: validators.valid(
+                  SignValidator.userName,
+                  validator: SignValidator.validUserName,
+                ),
+                text: 'Enter a user name',
+                icon: Icons.email_outlined,
+              ),
+              MoleculeInput.text(
                 entry: SignValidator.mail,
                 controler: validators.valid(
                   SignValidator.mail,
                   validator: SignValidator.validEmail,
                 ),
-                text: DataTextSignIn.labelEmail,
+                text: 'Enter a email',
                 icon: Icons.email_outlined,
+              ),
+              MoleculeInput.password(
+                entry: SignValidator.password,
+                controler: validators.valid(
+                  SignValidator.password,
+                  validator: SignValidator.validPassword,
+                ),
+                text: 'Enter a password',
+                icon: Icons.password_outlined,
               ),
             ],
           ),
@@ -75,7 +94,7 @@ class Body extends StatelessWidget {
           color: BuddySitterColor.actionsLog,
           child: AtomButton.bottom(
             text: AtomText.content(
-              text: 'Continue',
+              text: DataTextSignIn.button,
               color: BuddySitterColor.light.brighten(0.5),
             ),
             colorHadler: (_) => BuddySitterColor.actionsLog,

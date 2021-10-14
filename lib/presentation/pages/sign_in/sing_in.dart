@@ -1,7 +1,7 @@
 import 'package:buddy_sitter/data/static/texts/sign_in.dart';
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
 import 'package:buddy_sitter/presentation/utils/form/sign_in_validate.dart';
-import 'package:buddy_sitter/presentation/utils/media/media.dart';
+import 'package:buddy_sitter/presentation/utils/navigator/locations.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
@@ -10,6 +10,7 @@ import 'package:buddy_sitter/presentation/widgets/molecules/input_controls/input
 import 'package:buddy_sitter/presentation/widgets/organisms/form.dart';
 import 'package:buddy_sitter/presentation/widgets/template/action_bottom.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../interfaces.dart';
 import './provider.dart';
 
@@ -26,19 +27,19 @@ class SignIn extends BuddySitterPageProvider<ProviderOnboarding> {
       );
 
   @override
-  Widget get body => const BodyOnboarding();
+  Widget get body => const Body();
 }
 
-class BodyOnboarding extends StatelessWidget {
-  const BodyOnboarding({
+class Body extends StatelessWidget {
+  const Body({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final FormProvider validators = FormProvider([
-      SignInValidator.mail,
-      SignInValidator.password,
+      SignValidator.mail,
+      SignValidator.password,
     ]);
     return TemplateActionBottom(
       child: Column(
@@ -58,19 +59,19 @@ class BodyOnboarding extends StatelessWidget {
             provider: validators,
             fields: [
               MoleculeInput.text(
-                entry: SignInValidator.mail,
+                entry: SignValidator.mail,
                 controler: validators.valid(
-                  SignInValidator.mail,
-                  validator: SignInValidator.validEmail,
+                  SignValidator.mail,
+                  validator: SignValidator.validEmail,
                 ),
                 text: DataTextSignIn.labelEmail,
                 icon: Icons.email_outlined,
               ),
               MoleculeInput.password(
-                entry: SignInValidator.password,
+                entry: SignValidator.password,
                 controler: validators.valid(
-                  SignInValidator.password,
-                  validator: SignInValidator.validPassword,
+                  SignValidator.password,
+                  validator: SignValidator.validPassword,
                 ),
                 text: DataTextSignIn.labelPassword,
                 icon: Icons.password_outlined,
@@ -81,13 +82,11 @@ class BodyOnboarding extends StatelessWidget {
                   color: BuddySitterColor.dark,
                   padding: EdgeInsets.zero,
                 ),
-                onPressed: () {
-                  validators.entries.forEach((key, value) {
-                    print(key);
-                    print(value.value);
-                    print(value.errors);
-                  });
-                },
+                onPressed: () =>
+                    Provider.of<RouterPageHandler>(context, listen: false).show(
+                  BuddySitterLocation.recoverPassword,
+                  preLoad: BuddySitterLocation.recoverPassword,
+                ),
               ),
             ],
           ),

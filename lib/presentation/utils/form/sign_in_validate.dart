@@ -1,9 +1,24 @@
 import 'package:buddy_sitter/data/static/forms/sign_in_validations.dart';
 import 'package:buddy_sitter/presentation/utils/form/validation_item.dart';
 
-class SignInValidator {
+class SignValidator {
   static String mail = 'mail';
   static String password = 'password';
+  static String userName = 'user-name';
+
+  static ValidationItem validUserName(
+      ValidationItem prevValidation, String value) {
+    if (!value.contains(RegExp(r'.{3,}'))) {
+      prevValidation.errors.add(
+        FormError(
+          message: 'Min 3 characters',
+          type: FormError.warning,
+        ),
+      );
+    }
+
+    return prevValidation;
+  }
 
   static ValidationItem validEmail(
       ValidationItem prevValidation, String value) {

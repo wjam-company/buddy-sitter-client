@@ -51,7 +51,8 @@ class SignInDataValidator {
     valid: r'.{8,}',
   );
 
-  static FormDataValidator passwordValid = FormDataValidator(
-    message: 'Password Valid',
+  static FormDataValidator passwordMax8 = FormDataValidator(
+    message: 'Maximun 20 Characters',
+    valid: r'.{,20}',
   );
 }

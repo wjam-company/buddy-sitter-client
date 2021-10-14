@@ -16,7 +16,9 @@ class RouterPageHandler extends ChangeNotifier {
     }
     show(
       BuddySitterLocation.splahs,
-      preLoad: BuddySitterLocation.signin,
+      preLoads: [
+        BuddySitterLocation.signin,
+      ],
       notify: false,
     );
   }

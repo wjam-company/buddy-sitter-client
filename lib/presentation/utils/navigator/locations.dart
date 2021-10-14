@@ -3,5 +3,8 @@ class BuddySitterLocation {
   static const String unknown = '/404';
   static const String splahs = '/';
   static const String explore = '/explore';
-  static const int length = 4;
+  static const String recoverPassword = '/recover_password';
+  static const String signup = '/signup';
+
+  static const int length = 6;
 }

@@ -60,6 +60,9 @@ class BodyOnboarding extends StatelessWidget {
             colorHadler: (_) {
               return BuddySitterColor.actionsSuccess;
             },
+            onPressed: () =>
+                Provider.of<RouterPageHandler>(context, listen: false)
+                    .show(BuddySitterLocation.signup),
           ),
         ),
         ItemActionBottom(
