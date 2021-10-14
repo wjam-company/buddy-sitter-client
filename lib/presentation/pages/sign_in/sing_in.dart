@@ -79,6 +79,20 @@ class BodyOnboarding extends StatelessWidget {
                 text: DataTextSignIn.labelPassword,
                 icon: Icons.password_outlined,
               ),
+              AtomButton.text(
+                text: AtomText.caption(
+                  text: 'Forgot password',
+                  color: BuddySitterColor.dark,
+                  padding: EdgeInsets.zero,
+                ),
+                onPressed: () {
+                  validators.entries.forEach((key, value) {
+                    print(key);
+                    print(value.value);
+                    print(value.errors);
+                  });
+                },
+              ),
             ],
           ),
           const Spacer(),
@@ -87,8 +101,11 @@ class BodyOnboarding extends StatelessWidget {
       childrenBottom: [
         ItemActionBottom(
           color: BuddySitterColor.actionsLog,
-          child: AtomButton(
-            text: DataTextSignIn.button,
+          child: AtomButton.bottom(
+            text: AtomText.content(
+              text: DataTextSignIn.button,
+              color: BuddySitterColor.light.brighten(0.5),
+            ),
             colorHadler: (_) => BuddySitterColor.actionsLog,
             onPressed: () {
               validators.entries.forEach((key, value) {

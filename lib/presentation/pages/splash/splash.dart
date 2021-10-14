@@ -58,8 +58,11 @@ class BodyOnboarding extends StatelessWidget {
       childrenBottom: [
         ItemActionBottom(
           color: BuddySitterColor(Colors.transparent.value),
-          child: AtomButton(
-            text: 'Sign Up',
+          child: AtomButton.bottom(
+            text: AtomText.subheading(
+              text: 'Sign Up',
+              color: BuddySitterColor.light.brighten(0.5),
+            ),
             colorHadler: (_) {
               return BuddySitterColor.actionsSuccess;
             },
@@ -67,8 +70,11 @@ class BodyOnboarding extends StatelessWidget {
         ),
         ItemActionBottom(
           color: BuddySitterColor.actionsLog,
-          child: AtomButton(
-            text: 'Sign In',
+          child: AtomButton.bottom(
+            text: AtomText.subheading(
+              text: 'Sign In',
+              color: BuddySitterColor.light.brighten(0.5),
+            ),
             colorHadler: (_) {
               return BuddySitterColor.actionsLog;
             },

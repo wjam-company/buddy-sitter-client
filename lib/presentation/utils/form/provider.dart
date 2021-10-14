@@ -18,7 +18,6 @@ class FormProvider extends ChangeNotifier {
     List<FormValidator>? validators,
   }) {
     final TextEditingController _controller = TextEditingController();
-
     assert(validator != null || validators != null,
         "your need defined any validation of entry!!");
     assert(entries.containsKey(entry),
@@ -26,12 +25,15 @@ class FormProvider extends ChangeNotifier {
     if (validator != null) {
       validators = [validator];
     }
+
     _controller.addListener(() {
       final String value = _controller.text.toLowerCase();
       _controller.value = _controller.value.copyWith(
         text: value,
-        selection:
-            TextSelection(baseOffset: value.length, extentOffset: value.length),
+        selection: TextSelection(
+          baseOffset: value.length,
+          extentOffset: value.length,
+        ),
         composing: TextRange.empty,
       );
 

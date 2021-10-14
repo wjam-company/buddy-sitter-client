@@ -53,26 +53,7 @@ class BodyOnboarding extends StatelessWidget {
           const Spacer(),
         ],
       ),
-      childrenBottom: [
-        ItemActionBottom(
-          color: BuddySitterColor(Colors.transparent.value),
-          child: AtomButton(
-            text: 'Sign Up',
-            colorHadler: (_) {
-              return BuddySitterColor.actionsSuccess;
-            },
-          ),
-        ),
-        ItemActionBottom(
-          color: BuddySitterColor.actionsLog,
-          child: AtomButton(
-            text: 'Sign In',
-            colorHadler: (_) {
-              return BuddySitterColor.actionsLog;
-            },
-          ),
-        ),
-      ],
+      childrenBottom: [],
     );
   }
 }
