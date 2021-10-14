@@ -8,10 +8,10 @@ import 'locations.dart';
 
 class BuddySitterPage {
   static final Map<String, BuddySitterPageProvider> _pages = Map.unmodifiable({
-    BuddySitterLocation.splahs: const Splash(),
-    BuddySitterLocation.unknown: const Unknown(),
-    BuddySitterLocation.signin: const SignIn(),
-    BuddySitterLocation.explore: const Explore(),
+    BuddySitterLocation.splahs: Splash(),
+    BuddySitterLocation.unknown: Unknown(),
+    BuddySitterLocation.signin: SignIn(),
+    BuddySitterLocation.explore: Explore(),
   });
 
   static int get length => _pages.length;

@@ -13,8 +13,8 @@ import 'package:flutter/material.dart';
 import '../interfaces.dart';
 import './provider.dart';
 
-class SignIn extends BuddySitterPageProvider<ProviderOnboarding> {
-  SignIn({Key? key}) : super(key: key);
+class ForgotPassword extends BuddySitterPageProvider<ProviderOnboarding> {
+  ForgotPassword({Key? key}) : super(key: key);
 
   @override
   ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();

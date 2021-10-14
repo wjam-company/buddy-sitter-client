@@ -10,28 +10,20 @@ import 'package:provider/provider.dart';
 import '../interfaces.dart';
 import './provider.dart';
 
-class Unknown extends BuddySitterPageProvider {
-  const Unknown({Key? key}) : super(key: key);
+class Unknown extends BuddySitterPageProvider<ProviderOnboarding> {
+  Unknown({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    MediaHandler.of(context);
-    return ChangeNotifierProvider<ProviderOnboarding>(
-      create: (_) => ProviderOnboarding(),
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading:
-              Provider.of<RouterPageHandler>(context).canPop,
-          title: AtomText.headingLeast(
-            text: 'Buddy Sitter',
-            color: BuddySitterColor.primaryBeige,
-          ),
-          centerTitle: true,
-        ),
-        body: const BodyOnboarding(),
-      ),
-    );
-  }
+  ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();
+
+  @override
+  Widget get appBarTitle => AtomText.headingLeast(
+        text: 'Buddy Sitter',
+        color: BuddySitterColor.primaryBeige,
+      );
+
+  @override
+  Widget get body => const BodyOnboarding();
 }
 
 class BodyOnboarding extends StatelessWidget {
