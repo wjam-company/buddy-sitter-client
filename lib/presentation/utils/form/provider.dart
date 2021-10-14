@@ -26,9 +26,7 @@ class FormProvider extends ChangeNotifier {
     if (validator != null) {
       validators = [validator];
     }
-    ValidationItem valid = entries[entry] as ValidationItem;
     _controller.addListener(() {
-      valid.errors.clear();
       final String value = _controller.text.toLowerCase();
       _controller.value = _controller.value.copyWith(
         text: value,
@@ -37,12 +35,16 @@ class FormProvider extends ChangeNotifier {
         composing: TextRange.empty,
       );
 
-      validators?.forEach((validator) {
-        valid = validator(valid, value);
-      });
+      ValidationItem valid = ValidationItem();
 
-      if (valid.errors.isEmpty) {
-        valid = ValidationItem(value: value);
+      if (value.isNotEmpty) {
+        validators?.forEach((validator) {
+          valid = validator(valid, value);
+        });
+
+        if (valid.errors.isEmpty) {
+          valid = ValidationItem(value: value);
+        }
       }
 
       entries[entry] = valid;

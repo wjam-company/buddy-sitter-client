@@ -7,12 +7,6 @@ class SignInValidator {
 
   static ValidationItem validEmail(
       ValidationItem prevValidation, String value) {
-    if (value.isEmpty ||
-        prevValidation.errors.length == 1 &&
-            prevValidation.errors.first.type == FormError.success) {
-      return prevValidation;
-    }
-
     if (!value.contains(SignInDataValidator.mailAt.valid)) {
       prevValidation.errors.add(
         FormError(
@@ -56,12 +50,6 @@ class SignInValidator {
     ValidationItem prevValidation,
     String value,
   ) {
-    if (value.isEmpty ||
-        prevValidation.errors.length == 1 &&
-            prevValidation.errors.first.type == FormError.success) {
-      return prevValidation;
-    }
-
     if (!value.contains(RegExp(SignInDataValidator.passwordLowercase.valid))) {
       prevValidation.errors.add(
         FormError(

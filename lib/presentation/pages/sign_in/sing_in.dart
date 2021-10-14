@@ -90,6 +90,13 @@ class BodyOnboarding extends StatelessWidget {
           child: AtomButton(
             text: DataTextSignIn.button,
             colorHadler: (_) => BuddySitterColor.actionsLog,
+            onPressed: () {
+              validators.entries.forEach((key, value) {
+                print(key);
+                print(value.value);
+                print(value.errors);
+              });
+            },
           ),
         ),
       ],
