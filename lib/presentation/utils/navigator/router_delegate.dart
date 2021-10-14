@@ -31,7 +31,8 @@ class BuddySitterRouterDelegate extends RouterDelegate<BuddySitterPath>
 
   bool _onPopPage(Route<dynamic> route, dynamic result) {
     final didPop = route.didPop(result);
-    if (!didPop) {
+
+    if (!didPop || _pageHandler.canNotPop) {
       return false;
     }
     _pageHandler.didPop(route.settings as Page);

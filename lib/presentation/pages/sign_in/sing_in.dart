@@ -2,6 +2,7 @@ import 'package:buddy_sitter/data/static/texts/sign_in.dart';
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
 import 'package:buddy_sitter/presentation/utils/form/sign_in_validate.dart';
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
+import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
@@ -23,6 +24,8 @@ class SignIn extends BuddySitterPageProvider {
       create: (_) => ProviderOnboarding(),
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading:
+              Provider.of<RouterPageHandler>(context).canPop,
           title: AtomText.content(
             text: DataTextSignIn.appBarTitle,
             color: BuddySitterColor.dark.brighten(0.3),

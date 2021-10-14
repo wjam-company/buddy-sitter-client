@@ -1,6 +1,6 @@
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
+import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
-import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/onboarding/dot_indicator.dart';
 import 'package:buddy_sitter/presentation/widgets/organisms/onboarding.dart';
@@ -20,6 +20,8 @@ class Unknown extends BuddySitterPageProvider {
       create: (_) => ProviderOnboarding(),
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading:
+              Provider.of<RouterPageHandler>(context).canPop,
           title: AtomText.headingLeast(
             text: 'Buddy Sitter',
             color: BuddySitterColor.primaryBeige,

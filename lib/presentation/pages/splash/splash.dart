@@ -22,6 +22,8 @@ class Splash extends BuddySitterPageProvider {
       create: (_) => ProviderOnboarding(),
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading:
+              Provider.of<RouterPageHandler>(context).canPop,
           title: AtomText.headingLeast(
             text: 'Buddy Sitter',
             color: BuddySitterColor.primaryBeige,

@@ -62,6 +62,9 @@ class RouterPageHandler extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool get canNotPop => _pages.length < 2;
+  bool get canPop => _pages.length >= 2;
+
   Future<void> setNewRoutePath(BuddySitterPath configuration) async {
     if (configuration.isUnknownPage) {
       // ! TODO logic when change the route inthe browser
