@@ -1,3 +1,4 @@
+import 'package:buddy_sitter/presentation/utils/theme/text.dart';
 import 'package:flutter/material.dart';
 import './color.dart';
 import './measurement.dart';
@@ -33,7 +34,8 @@ class BuddySitterTheme {
     return InputDecorationTheme(
       contentPadding: EdgeInsets.symmetric(
         horizontal: BuddySitterMeasurement.sizeHalf,
-        vertical: BuddySitterMeasurement.sizeLeast,
+        vertical: (BuddySitterMeasurement.sizeHigh / 2) -
+            ((BuddySitterText.content.fontSize as double) / 2),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BuddySitterMeasurement.borderRadiusHalf,

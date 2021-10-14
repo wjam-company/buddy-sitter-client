@@ -67,6 +67,7 @@ class BodyOnboarding extends StatelessWidget {
             provider: validators,
             fields: [
               MoleculeInput.text(
+                entry: SignInValidator.mail,
                 controler: validators.valid(
                   SignInValidator.mail,
                   validator: SignInValidator.validEmail,
@@ -75,6 +76,7 @@ class BodyOnboarding extends StatelessWidget {
                 icon: Icons.email_outlined,
               ),
               MoleculeInput.password(
+                entry: SignInValidator.password,
                 controler: validators.valid(
                   SignInValidator.password,
                   validator: SignInValidator.validPassword,

@@ -34,15 +34,6 @@ class SignInValidator {
       );
     }
 
-    if (value.contains(RegExp(SignInDataValidator.mailValid.valid))) {
-      prevValidation = ValidationItem(value: value);
-      prevValidation.errors.add(
-        FormError(
-          message: SignInDataValidator.mailValid.message,
-          type: FormError.success,
-        ),
-      );
-    }
     return prevValidation;
   }
 
@@ -82,16 +73,6 @@ class SignInValidator {
         FormError(
           message: SignInDataValidator.passwordMin8.message,
           type: FormError.warning,
-        ),
-      );
-    }
-
-    if (prevValidation.errors.isEmpty) {
-      prevValidation = ValidationItem(value: value);
-      prevValidation.errors.add(
-        FormError(
-          message: SignInDataValidator.passwordValid.message,
-          type: FormError.success,
         ),
       );
     }
