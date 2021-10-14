@@ -20,20 +20,20 @@ class OrganismForm extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider<FormProvider>.value(
-        value: provider,
-        child: Form(
-          child: Padding(
-              padding: BuddySitterMeasurement.marginsHalf.copyWith(bottom: 0.0),
-              child: Column(
-                children: [
-                  Column(children: children),
-                  const MoleculeFormErrors(),
-                ],
-              )),
-        ));
-  }
+  Widget build(BuildContext context) =>
+      ChangeNotifierProvider<FormProvider>.value(
+          value: provider,
+          child: Form(
+            child: Padding(
+                padding:
+                    BuddySitterMeasurement.marginsHalf.copyWith(bottom: 0.0),
+                child: Column(
+                  children: [
+                    Column(children: children),
+                    const MoleculeFormErrors(),
+                  ],
+                )),
+          ));
 
   List<Widget> get children => List.generate(
         fields.length * 2,
