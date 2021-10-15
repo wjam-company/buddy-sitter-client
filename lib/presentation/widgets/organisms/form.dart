@@ -1,6 +1,7 @@
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/input_controls/form_erros.dart';
+import 'package:buddy_sitter/presentation/widgets/molecules/input_controls/input.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,17 +31,21 @@ class OrganismForm extends StatelessWidget {
                 child: Column(
                   children: [
                     Column(children: children),
-                    const MoleculeFormErrors(),
                   ],
                 )),
           ));
 
   List<Widget> get children => List.generate(
         fields.length * 2,
-        (index) => index % 2 == 0
-            ? fields[index ~/ 2]
-            : SizedBox(
-                height: BuddySitterMeasurement.sizeHalf,
-              ),
+        (index) {
+          if (index % 2 == 0) {
+            return fields[index ~/ 2];
+          }
+          return MoleculeFormErrors(
+            entry: fields[index ~/ 2] is MoleculeInput
+                ? (fields[index ~/ 2] as MoleculeInput).entry
+                : null,
+          );
+        },
       );
 }

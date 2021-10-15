@@ -5,6 +5,16 @@ class FormDataValidator {
 }
 
 class SignInDataValidator {
+  static FormDataValidator mailMax255 = FormDataValidator(
+    message: 'Maximun 255 Characters',
+    valid: r'.{,255}',
+  );
+
+  static FormDataValidator mailMin5 = FormDataValidator(
+    message: 'Maximun 5 Characters',
+    valid: r'.{5,}',
+  );
+
   static FormDataValidator mailAt = FormDataValidator(
     message: 'Add the at sign of the mail',
     valid: '@',
@@ -51,8 +61,18 @@ class SignInDataValidator {
     valid: r'.{8,}',
   );
 
-  static FormDataValidator passwordMax8 = FormDataValidator(
+  static FormDataValidator passwordMax20 = FormDataValidator(
     message: 'Maximun 20 Characters',
     valid: r'.{,20}',
+  );
+
+  static FormDataValidator userNameMax255 = FormDataValidator(
+    message: 'Maximun 255 Characters',
+    valid: r'.{,255}',
+  );
+
+  static FormDataValidator userNameMin8 = FormDataValidator(
+    message: 'Maximun 3 Characters',
+    valid: r'.{3,}',
   );
 }

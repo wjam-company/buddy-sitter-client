@@ -8,11 +8,20 @@ class SignValidator {
 
   static ValidationItem validUserName(
       ValidationItem prevValidation, String value) {
-    if (!value.contains(RegExp(r'.{3,}'))) {
+    if (!value.contains(SignInDataValidator.mailMax255.valid)) {
       prevValidation.errors.add(
         FormError(
-          message: 'Min 3 characters',
-          type: FormError.warning,
+          message: SignInDataValidator.mailMax255.message,
+          type: FormError.error,
+        ),
+      );
+    }
+
+    if (!value.contains(SignInDataValidator.mailMin5.valid)) {
+      prevValidation.errors.add(
+        FormError(
+          message: SignInDataValidator.mailMin5.message,
+          type: FormError.error,
         ),
       );
     }
@@ -49,6 +58,23 @@ class SignValidator {
       );
     }
 
+    if (!value.contains(RegExp(SignInDataValidator.mailMax255.valid))) {
+      prevValidation.errors.add(
+        FormError(
+          message: SignInDataValidator.mailMax255.message,
+          type: FormError.warning,
+        ),
+      );
+    }
+
+    if (!value.contains(RegExp(SignInDataValidator.mailMin5.valid))) {
+      prevValidation.errors.add(
+        FormError(
+          message: SignInDataValidator.mailMin5.message,
+          type: FormError.warning,
+        ),
+      );
+    }
     return prevValidation;
   }
 
@@ -87,6 +113,24 @@ class SignValidator {
       prevValidation.errors.add(
         FormError(
           message: SignInDataValidator.passwordMin8.message,
+          type: FormError.warning,
+        ),
+      );
+    }
+
+    if (!value.contains(RegExp(SignInDataValidator.passwordMax20.valid))) {
+      prevValidation.errors.add(
+        FormError(
+          message: SignInDataValidator.passwordMax20.message,
+          type: FormError.warning,
+        ),
+      );
+    }
+
+    if (!value.contains(RegExp(SignInDataValidator.passwordUppercase.valid))) {
+      prevValidation.errors.add(
+        FormError(
+          message: SignInDataValidator.passwordUppercase.message,
           type: FormError.warning,
         ),
       );
