@@ -25,11 +25,11 @@ class Splash extends BuddySitterPageProvider<ProviderOnboarding> {
       );
 
   @override
-  Widget get body => const BodyOnboarding();
+  Widget get body => const Body();
 }
 
-class BodyOnboarding extends StatelessWidget {
-  const BodyOnboarding({
+class Body extends StatelessWidget {
+  const Body({
     Key? key,
   }) : super(key: key);
 
@@ -37,8 +37,6 @@ class BodyOnboarding extends StatelessWidget {
   Widget build(BuildContext context) {
     return TemplateActionBottom(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           MoleculeDotIndicator(
             color: BuddySitterColor.actionsSuccess.brighten(.3),

@@ -34,9 +34,7 @@ class BodyOnboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TemplateActionBottom(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
+      child: ListView(
         children: [
           MoleculeDotIndicator(
             color: BuddySitterColor.actionsSuccess.brighten(.3),

@@ -39,9 +39,7 @@ class Body extends StatelessWidget {
       SignValidator.password,
     ]);
     return TemplateActionBottom(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
+      child: ListView(
         children: [
           AtomText.subheading(
             text: 'Recover Password',
