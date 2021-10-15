@@ -57,40 +57,45 @@ class _MoleculeInputState extends State<MoleculeInput> {
   Widget build(BuildContext context) {
     ValidationItem? validation =
         Provider.of<FormProvider>(context).entries[widget.entry];
-    return TextFormField(
-      controller: _controler,
-      obscureText: widget.obscureText,
-      decoration: InputDecoration(
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BuddySitterMeasurement.borderRadiusHalf,
-          borderSide: BorderSide(
-            color: isLog(validation)
-                ? BuddySitterColor.actionsLog
-                : BuddySitterColor.actionsSuccess,
+    return Padding(
+      padding: EdgeInsets.zero.copyWith(
+        bottom: BuddySitterMeasurement.sizeHalf,
+      ),
+      child: TextFormField(
+        controller: _controler,
+        obscureText: widget.obscureText,
+        decoration: InputDecoration(
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BuddySitterMeasurement.borderRadiusHalf,
+            borderSide: BorderSide(
+              color: isLog(validation)
+                  ? BuddySitterColor.actionsLog
+                  : BuddySitterColor.actionsSuccess,
+            ),
+            gapPadding: BuddySitterMeasurement.sizeLeast,
           ),
-          gapPadding: BuddySitterMeasurement.sizeLeast,
-        ),
-        label: Padding(
-          padding: EdgeInsets.zero.copyWith(
-            left: BuddySitterMeasurement.sizeLeast,
-          ),
-          child: IntrinsicWidth(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Builder(
-                  builder: (BuildContext context) => Icon(
-                    widget.icon,
-                    color: isLog(validation)
-                        ? BuddySitterColor.actionsLog
-                        : BuddySitterColor.actionsSuccess,
+          label: Padding(
+            padding: EdgeInsets.zero.copyWith(
+              left: BuddySitterMeasurement.sizeLeast,
+            ),
+            child: IntrinsicWidth(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Builder(
+                    builder: (BuildContext context) => Icon(
+                      widget.icon,
+                      color: isLog(validation)
+                          ? BuddySitterColor.actionsLog
+                          : BuddySitterColor.actionsSuccess,
+                    ),
                   ),
-                ),
-                AtomText.content(
-                  text: widget.text,
-                  color: BuddySitterColor.dark,
-                )
-              ],
+                  AtomText.content(
+                    text: widget.text,
+                    color: BuddySitterColor.dark,
+                  )
+                ],
+              ),
             ),
           ),
         ),

@@ -8,19 +8,19 @@ class SignValidator {
 
   static ValidationItem validUserName(
       ValidationItem prevValidation, String value) {
-    if (!value.contains(SignInDataValidator.mailMax255.valid)) {
+    if (!value.contains(RegExp(SignInDataValidator.userNameMax255.valid))) {
       prevValidation.errors.add(
         FormError(
-          message: SignInDataValidator.mailMax255.message,
+          message: SignInDataValidator.userNameMax255.message,
           type: FormError.error,
         ),
       );
     }
 
-    if (!value.contains(SignInDataValidator.mailMin5.valid)) {
+    if (!value.contains(RegExp(SignInDataValidator.userNameMin8.valid))) {
       prevValidation.errors.add(
         FormError(
-          message: SignInDataValidator.mailMin5.message,
+          message: SignInDataValidator.userNameMin8.message,
           type: FormError.error,
         ),
       );

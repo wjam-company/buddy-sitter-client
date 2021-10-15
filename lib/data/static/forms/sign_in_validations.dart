@@ -7,7 +7,7 @@ class FormDataValidator {
 class SignInDataValidator {
   static FormDataValidator mailMax255 = FormDataValidator(
     message: 'Maximun 255 Characters',
-    valid: r'.{,255}',
+    valid: r'.{0,255}',
   );
 
   static FormDataValidator mailMin5 = FormDataValidator(
@@ -63,12 +63,12 @@ class SignInDataValidator {
 
   static FormDataValidator passwordMax20 = FormDataValidator(
     message: 'Maximun 20 Characters',
-    valid: r'.{,20}',
+    valid: r'.{0,20}',
   );
 
   static FormDataValidator userNameMax255 = FormDataValidator(
     message: 'Maximun 255 Characters',
-    valid: r'.{,255}',
+    valid: r'.{0,255}',
   );
 
   static FormDataValidator userNameMin8 = FormDataValidator(
