@@ -9,7 +9,7 @@ import '../interfaces.dart';
 import './provider.dart';
 
 class Explore extends BuddySitterPageProvider {
-  Explore({Key? key}) : super(key: key);
+  const Explore({Key? key}) : super(key: key);
 
   @override
   ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();

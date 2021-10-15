@@ -11,7 +11,7 @@ import '../interfaces.dart';
 import './provider.dart';
 
 class Unknown extends BuddySitterPageProvider<ProviderOnboarding> {
-  Unknown({Key? key}) : super(key: key);
+  const Unknown({Key? key}) : super(key: key);
 
   @override
   ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();

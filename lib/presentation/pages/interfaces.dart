@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 abstract class BuddySitterPageProvider<T extends ChangeNotifier>
     extends StatelessWidget {
-  BuddySitterPageProvider({Key? key}) : super(key: key);
+  const BuddySitterPageProvider({Key? key}) : super(key: key);
 
   T provider(BuildContext context) {
     throw UnimplementedError();

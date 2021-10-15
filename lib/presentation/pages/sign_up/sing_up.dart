@@ -13,7 +13,7 @@ import '../interfaces.dart';
 import './provider.dart';
 
 class SignUp extends BuddySitterPageProvider<ProviderOnboarding> {
-  SignUp({Key? key}) : super(key: key);
+  const SignUp({Key? key}) : super(key: key);
 
   @override
   ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();

@@ -12,7 +12,7 @@ import '../interfaces.dart';
 import './provider.dart';
 
 class RecoverPassword extends BuddySitterPageProvider<ProviderOnboarding> {
-  RecoverPassword({Key? key}) : super(key: key);
+  const RecoverPassword({Key? key}) : super(key: key);
 
   @override
   ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();

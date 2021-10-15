@@ -10,11 +10,11 @@ import 'locations.dart';
 
 class BuddySitterPage {
   static final Map<String, BuddySitterPageProvider> _pages = Map.unmodifiable({
-    BuddySitterLocation.splahs: Splash(),
-    BuddySitterLocation.unknown: Unknown(),
-    BuddySitterLocation.signin: SignIn(),
-    BuddySitterLocation.signup: SignUp(),
-    BuddySitterLocation.explore: Explore(),
+    BuddySitterLocation.splahs: const Splash(),
+    BuddySitterLocation.unknown: const Unknown(),
+    BuddySitterLocation.signin: const SignIn(),
+    BuddySitterLocation.signup: const SignUp(),
+    BuddySitterLocation.explore: const Explore(),
     BuddySitterLocation.recoverPassword: RecoverPassword(),
   });
 

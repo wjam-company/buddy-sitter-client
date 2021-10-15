@@ -13,7 +13,7 @@ import '../interfaces.dart';
 import './provider.dart';
 
 class Splash extends BuddySitterPageProvider<ProviderOnboarding> {
-  Splash({Key? key}) : super(key: key);
+  const Splash({Key? key}) : super(key: key);
 
   @override
   ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();
