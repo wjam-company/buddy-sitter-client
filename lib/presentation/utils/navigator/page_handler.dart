@@ -18,6 +18,7 @@ class RouterPageHandler extends ChangeNotifier {
       BuddySitterLocation.splahs,
       preLoads: [
         BuddySitterLocation.signin,
+        BuddySitterLocation.signup,
       ],
       notify: false,
     );
@@ -35,12 +36,12 @@ class RouterPageHandler extends ChangeNotifier {
     bool notify = true,
   }) {
     int index = _pagesPreLoad
-        .indexWhere((element) => BuddySitterLocation.signin == element.name);
-    if (index != -1) {
+        .indexWhere((element) => buddySitterLocation == element.name);
+    if (index == -1) {
+      _pages.add(BuddySitterPage.of(buddySitterLocation));
+    } else {
       Page<dynamic> page = _pagesPreLoad.removeAt(index);
       _pages.add(page);
-    } else {
-      _pages.add(BuddySitterPage.of(buddySitterLocation));
     }
 
     _pagesPreLoad.clear();

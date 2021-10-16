@@ -15,20 +15,35 @@ class BuddySitterPage {
     BuddySitterLocation.signin: const SignIn(),
     BuddySitterLocation.signup: const SignUp(),
     BuddySitterLocation.explore: const Explore(),
-    BuddySitterLocation.recoverPassword: RecoverPassword(),
+    BuddySitterLocation.recoverPassword: const RecoverPassword(),
+  });
+
+  static final Map<String, BuddySitterPageProvider> _animationPage =
+      Map.unmodifiable({
+    BuddySitterLocation.recoverPassword: const RecoverPassword(),
   });
 
   static int get length => _pages.length;
 
-  static Page of(String url) => _pages.containsKey(url)
-      ? MaterialPage(
-          key: UniqueKey(),
-          name: url,
-          child: _pages[url] as Widget,
-        )
-      : MaterialPage(
-          key: UniqueKey(),
-          name: BuddySitterLocation.unknown,
-          child: _pages[BuddySitterLocation.unknown] as Widget,
-        );
+  static Page of(String url) {
+    if (_pages.containsKey(url)) {
+      return MaterialPage(
+        key: UniqueKey(),
+        name: url,
+        child: _pages[url] as Widget,
+      );
+    }
+    if (_animationPage.containsKey(url)) {
+      return MaterialPage(
+        key: UniqueKey(),
+        name: BuddySitterLocation.unknown,
+        child: _animationPage[url] as Widget,
+      );
+    }
+    return MaterialPage(
+      key: UniqueKey(),
+      name: BuddySitterLocation.unknown,
+      child: _pages[BuddySitterLocation.unknown] as Widget,
+    );
+  }
 }

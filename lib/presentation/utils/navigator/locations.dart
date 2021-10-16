@@ -7,4 +7,6 @@ class BuddySitterLocation {
   static const String signup = '/signup';
 
   static const int length = 6;
+
+  static const String animationSlide = 'slide';
 }
