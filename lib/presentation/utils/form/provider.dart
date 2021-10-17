@@ -62,5 +62,9 @@ class FormProvider extends ChangeNotifier {
     };
   }
 
+  bool get isValid => entries.values
+      .map<bool>((e) => e.value != null)
+      .reduce((value, element) => value && element);
+
   Map<String, ValidationItem> get errors => Map.unmodifiable(entries);
 }

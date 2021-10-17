@@ -1,4 +1,4 @@
-import 'package:buddy_sitter/presentation/pages/splash/provider.dart';
+import 'package:buddy_sitter/presentation/pages/onboarding/provider.dart';
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/animation.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';

@@ -4,8 +4,17 @@ import 'dart:convert';
 import 'model/requets/log.dart';
 
 class ApiMananger {
-  Future<Login> fetchLogin() async {
-    final response = await http.get(Uri.parse(Url.login));
+  Future<Login> fetchLogin({
+    required String password,
+    required String email,
+  }) async {
+    final response = await http.post(
+      Uri.parse(Url.login),
+      body: jsonEncode(<String, String>{
+        'password': password,
+        'email': email,
+      }),
+    );
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.

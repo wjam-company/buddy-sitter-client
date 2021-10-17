@@ -1,5 +1,6 @@
 import 'package:buddy_sitter/data/static/texts/sign_in.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
+import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/onboarding/dot_indicator.dart';
 import 'package:buddy_sitter/presentation/widgets/organisms/onboarding.dart';
@@ -8,15 +9,15 @@ import 'package:flutter/material.dart';
 import '../interfaces.dart';
 import './provider.dart';
 
-class Explore extends BuddySitterPageProvider {
+class Explore extends BuddySitterPageProvider<ProviderExplore> {
   const Explore({Key? key}) : super(key: key);
 
   @override
-  ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();
+  ProviderExplore provider(BuildContext context) => ProviderExplore();
 
   @override
   Widget get appBarTitle => AtomText.content(
-        text: DataTextSignIn.appBarTitle,
+        text: 'Explore',
         color: BuddySitterColor.dark.brighten(0.3),
       );
 
@@ -34,16 +35,23 @@ class BodyOnboarding extends StatelessWidget {
     return TemplateActionBottom(
       child: ListView(
         children: [
-          MoleculeDotIndicator(
-            color: BuddySitterColor.actionsSuccess.brighten(.3),
-          ),
-          OrganismOnboarding(
-            color: BuddySitterColor.actionsLog,
-          ),
-          const Spacer(),
+          AtomText.headingHalf(text: 'Explore'),
         ],
       ),
-      childrenBottom: [],
+      childrenBottom: [
+        ItemActionBottom(
+          color: BuddySitterColor(Colors.transparent.value),
+          child: AtomButton.bottom(
+              text: AtomText.subheading(
+                text: 'Menu',
+                color: BuddySitterColor.light.brighten(0.5),
+              ),
+              colorHadler: (_) {
+                return BuddySitterColor.actionsSuccess;
+              },
+              onPressed: () {}),
+        ),
+      ],
     );
   }
 }

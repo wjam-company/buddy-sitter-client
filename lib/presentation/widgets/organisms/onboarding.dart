@@ -1,5 +1,5 @@
 import 'package:buddy_sitter/data/static/texts/onboarding.dart';
-import 'package:buddy_sitter/presentation/pages/splash/provider.dart';
+import 'package:buddy_sitter/presentation/pages/onboarding/provider.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/onboarding/cart.dart';
 import 'package:flutter/material.dart';

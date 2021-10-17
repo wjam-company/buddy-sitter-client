@@ -1,51 +1,37 @@
-import 'package:buddy_sitter/presentation/utils/media/media.dart';
-import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
-import 'package:buddy_sitter/presentation/widgets/molecules/information/onboarding/dot_indicator.dart';
-import 'package:buddy_sitter/presentation/widgets/organisms/onboarding.dart';
-import 'package:buddy_sitter/presentation/widgets/template/action_bottom.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../interfaces.dart';
 import './provider.dart';
 
-class Unknown extends BuddySitterPageProvider<ProviderOnboarding> {
+class Unknown extends BuddySitterPageProvider<Provider404> {
   const Unknown({Key? key}) : super(key: key);
 
   @override
-  ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();
+  Provider404 provider(BuildContext context) => Provider404();
 
   @override
   Widget get appBarTitle => AtomText.headingLeast(
-        text: 'Buddy Sitter',
+        text: '404',
         color: BuddySitterColor.primaryBeige,
       );
 
   @override
-  Widget get body => const BodyOnboarding();
+  Widget get body => const Body();
 }
 
-class BodyOnboarding extends StatelessWidget {
-  const BodyOnboarding({
+class Body extends StatelessWidget {
+  const Body({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TemplateActionBottom(
-      child: ListView(
-        children: [
-          MoleculeDotIndicator(
-            color: BuddySitterColor.actionsSuccess.brighten(.3),
-          ),
-          OrganismOnboarding(
-            color: BuddySitterColor.actionsLog,
-          ),
-          const Spacer(),
-        ],
+    return Center(
+      child: AtomText.headingHigh(
+        text: 'No page found',
+        color: BuddySitterColor.actionsSuccess.brighten(.3),
       ),
-      childrenBottom: [],
     );
   }
 }

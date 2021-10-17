@@ -11,11 +11,12 @@ import 'package:flutter/material.dart';
 import '../interfaces.dart';
 import './provider.dart';
 
-class RecoverPassword extends BuddySitterPageProvider<ProviderOnboarding> {
+class RecoverPassword extends BuddySitterPageProvider<ProviderForgotPassword> {
   const RecoverPassword({Key? key}) : super(key: key);
 
   @override
-  ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();
+  ProviderForgotPassword provider(BuildContext context) =>
+      ProviderForgotPassword();
 
   @override
   Widget get appBarTitle => AtomText.content(

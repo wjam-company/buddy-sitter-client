@@ -1,6 +1,7 @@
-import 'package:buddy_sitter/presentation/pages/explore/unknown.dart';
+import 'package:buddy_sitter/presentation/pages/explore/explore.dart';
 import 'package:buddy_sitter/presentation/pages/forgot_password/forgot_password.dart';
 import 'package:buddy_sitter/presentation/pages/interfaces.dart';
+import 'package:buddy_sitter/presentation/pages/onboarding/onboarding.dart';
 import 'package:buddy_sitter/presentation/pages/sign_in/sing_in.dart';
 import 'package:buddy_sitter/presentation/pages/sign_up/sing_up.dart';
 import 'package:buddy_sitter/presentation/pages/splash/splash.dart';
@@ -15,6 +16,7 @@ class BuddySitterPage {
     BuddySitterLocation.signin: const SignIn(),
     BuddySitterLocation.signup: const SignUp(),
     BuddySitterLocation.explore: const Explore(),
+    BuddySitterLocation.onboarding: const Onboarding(),
     BuddySitterLocation.recoverPassword: const RecoverPassword(),
   });
 

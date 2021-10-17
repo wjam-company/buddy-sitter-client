@@ -12,11 +12,11 @@ import 'package:provider/provider.dart';
 import '../interfaces.dart';
 import './provider.dart';
 
-class SignUp extends BuddySitterPageProvider<ProviderOnboarding> {
+class SignUp extends BuddySitterPageProvider<ProviderSignUp> {
   const SignUp({Key? key}) : super(key: key);
 
   @override
-  ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();
+  ProviderSignUp provider(BuildContext context) => ProviderSignUp();
 
   @override
   Widget get appBarTitle => AtomText.content(

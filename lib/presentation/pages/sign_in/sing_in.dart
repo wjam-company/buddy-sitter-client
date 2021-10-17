@@ -14,11 +14,11 @@ import 'package:provider/provider.dart';
 import '../interfaces.dart';
 import './provider.dart';
 
-class SignIn extends BuddySitterPageProvider<ProviderOnboarding> {
+class SignIn extends BuddySitterPageProvider<ProviderSignIn> {
   const SignIn({Key? key}) : super(key: key);
 
   @override
-  ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();
+  ProviderSignIn provider(BuildContext context) => ProviderSignIn();
 
   @override
   Widget get appBarTitle => AtomText.content(
@@ -101,11 +101,12 @@ class Body extends StatelessWidget {
             ),
             colorHadler: (_) => BuddySitterColor.actionsLog,
             onPressed: () {
-              validators.entries.forEach((key, value) {
-                print(key);
-                print(value.value);
-                print(value.errors);
-              });
+              if (validators.isValid) {
+                final RouterPageHandler pageHandler =
+                    Provider.of<RouterPageHandler>(context, listen: false);
+                pageHandler.state = true;
+                pageHandler.show(BuddySitterLocation.explore);
+              }
             },
           ),
         ),

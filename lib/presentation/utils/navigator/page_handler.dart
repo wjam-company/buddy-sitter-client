@@ -1,3 +1,5 @@
+import 'package:buddy_sitter/presentation/utils/localstorage/localstorage.dart';
+
 import './pages.dart';
 import './path.dart';
 import 'package:flutter/material.dart';
@@ -8,40 +10,72 @@ class RouterPageHandler extends ChangeNotifier {
   static RouterPageHandler of(BuildContext context) =>
       Provider.of<RouterPageHandler>(context, listen: false);
 
-  List<Page> get pages => List.unmodifiable(_pagesPreLoad + _pages);
+  List<Page> get pages => List.unmodifiable(_pagesPreLoad + _pagesActive);
+  late BuddySitterStorage _state;
 
   RouterPageHandler() {
     if (BuddySitterPage.length != BuddySitterLocation.length) {
       throw Error();
     }
+    _state = BuddySitterStorage<bool>(type: 'log', initial: false);
+
+    // show splash
     show(
       BuddySitterLocation.splahs,
       preLoads: [
-        BuddySitterLocation.signin,
-        BuddySitterLocation.signup,
+        BuddySitterLocation.explore,
+        BuddySitterLocation.onboarding,
       ],
       notify: false,
     );
+    _state.get().then((value) {
+      if (value) {
+        show(
+          BuddySitterLocation.explore,
+          stack: _authPages,
+        );
+      } else {
+        show(
+          BuddySitterLocation.onboarding,
+          stack: _pages,
+          preLoads: [
+            BuddySitterLocation.signin,
+            BuddySitterLocation.signup,
+          ],
+        );
+      }
+      _state.addListener(notifyListeners);
+    });
   }
 
   final List<Page> _pages = [];
+  final List<Page> _authPages = [];
   final List<Page> _pagesPreLoad = [];
 
-  BuddySitterPath get currentPath => BuddySitterPath.parse(_pages.last.name);
+  List<Page> get _pagesActive => _state.syncGet() ? _authPages : _pages;
+
+  BuddySitterPath get currentPath =>
+      BuddySitterPath.parse(_pagesActive.last.name);
+
+  set state(bool value) {
+    _state.set(value);
+  }
 
   void show(
     String buddySitterLocation, {
     List<String>? preLoads,
     String? preLoad,
     bool notify = true,
+    List<Page>? stack,
   }) {
+    List<Page> curentPages = stack ?? _pagesActive;
     int index = _pagesPreLoad
         .indexWhere((element) => buddySitterLocation == element.name);
     if (index == -1) {
-      _pages.add(BuddySitterPage.of(buddySitterLocation));
+      curentPages.add(BuddySitterPage.of(buddySitterLocation));
     } else {
       Page<dynamic> page = _pagesPreLoad.removeAt(index);
-      _pages.add(page);
+      curentPages.add(page);
     }
 
     _pagesPreLoad.clear();
@@ -61,12 +95,12 @@ class RouterPageHandler extends ChangeNotifier {
   }
 
   void didPop(Page page) {
-    _pages.remove(page);
+    _pagesActive.remove(page);
     notifyListeners();
   }
 
-  bool get canNotPop => _pages.length < 2;
-  bool get canPop => _pages.length >= 2;
+  bool get canNotPop => _pagesActive.length < 2;
+  bool get canPop => _pagesActive.length >= 2;
 
   Future<void> setNewRoutePath(BuddySitterPath configuration) async {
     if (configuration.isUnknownPage) {
