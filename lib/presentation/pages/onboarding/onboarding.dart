@@ -18,13 +18,13 @@ class Onboarding extends BuddySitterPageProvider<ProviderOnboarding> {
   ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();
 
   @override
-  Widget get appBarTitle => AtomText.headingLeast(
+  Widget appBarTitle(_) => AtomText.headingLeast(
         text: 'Buddy Sitter',
         color: BuddySitterColor.primaryBeige,
       );
 
   @override
-  Widget get body => const Body();
+  Widget body(_) => const Body();
 }
 
 class Body extends StatelessWidget {

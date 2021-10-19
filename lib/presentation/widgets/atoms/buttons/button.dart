@@ -1,19 +1,29 @@
+import 'package:buddy_sitter/presentation/utils/theme/color.dart';
+import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:flutter/material.dart';
 
 class AtomButton extends StatelessWidget {
   final MaterialPropertyResolver<Color>? colorHadler;
-  final AtomText text;
+  final MaterialPropertyResolver<Color>? splashColorHandler;
+  final Icon? icon;
+  final double? height;
+  final AtomText? text;
   final void Function()? onPressed;
   static const int typeBottom = 0;
   static const int typeText = 1;
+  static const int typeCicle = 2;
+  static const int typeInput = 3;
   final int type;
 
   const AtomButton.bottom({
     Key? key,
     required this.text,
     this.colorHadler,
-    this.onPressed,
+    required this.onPressed,
+    this.splashColorHandler,
+    this.height,
+    this.icon,
   })  : type = typeBottom,
         super(key: key);
 
@@ -21,8 +31,33 @@ class AtomButton extends StatelessWidget {
     Key? key,
     required this.text,
     this.colorHadler,
-    this.onPressed,
+    required this.onPressed,
+    this.splashColorHandler,
+    this.height,
+    this.icon,
   })  : type = typeText,
+        super(key: key);
+
+  const AtomButton.cicle({
+    Key? key,
+    this.text,
+    this.colorHadler,
+    required this.onPressed,
+    this.splashColorHandler,
+    required this.height,
+    required this.icon,
+  })  : type = typeCicle,
+        super(key: key);
+
+  const AtomButton.input({
+    Key? key,
+    this.text,
+    this.colorHadler,
+    required this.onPressed,
+    this.splashColorHandler,
+    this.height,
+    required this.icon,
+  })  : type = typeInput,
         super(key: key);
 
   @override
@@ -32,25 +67,87 @@ class AtomButton extends StatelessWidget {
         return bottom;
       case typeText:
         return textButton;
+      case typeCicle:
+        return circleButton;
+      case typeInput:
+        return inputButton;
       default:
         return bottom;
     }
   }
 
-  ElevatedButton get bottom => ElevatedButton(
-        style: ButtonStyle(
-          shadowColor:
-              MaterialStateColor.resolveWith((states) => Colors.transparent),
-          backgroundColor: MaterialStateColor.resolveWith(
-            colorHadler ?? (_) => Colors.transparent,
-          ),
+  ElevatedButton get bottom {
+    assert(text != null, 'Your need defined the height');
+    return ElevatedButton(
+      style: ButtonStyle(
+        shadowColor:
+            MaterialStateColor.resolveWith((states) => Colors.transparent),
+        backgroundColor: MaterialStateColor.resolveWith(
+          colorHadler ?? (_) => Colors.transparent,
         ),
-        onPressed: onPressed,
-        child: text,
-      );
+      ),
+      onPressed: onPressed,
+      child: text ?? AtomText.content(text: ''),
+    );
+  }
 
-  TextButton get textButton => TextButton(
+  TextButton get textButton {
+    assert(text != null, 'Your need defined the height');
+    return TextButton(
+      style: ButtonStyle(
+        shadowColor:
+            MaterialStateColor.resolveWith((states) => Colors.transparent),
+        backgroundColor: MaterialStateColor.resolveWith(
+          colorHadler ?? (_) => Colors.transparent,
+        ),
+      ),
+      onPressed: onPressed,
+      child: text ?? AtomText.content(text: ''),
+    );
+  }
+
+  ClipOval get circleButton {
+    assert(height != null, 'Your need defined the height');
+    assert(icon != null, 'Your need defined the icon');
+    return ClipOval(
+      child: Material(
+        color: colorHadler != null
+            ? colorHadler!(<MaterialState>{})
+            : Colors.transparent,
+        child: InkWell(
+          splashColor: splashColorHandler != null
+              ? splashColorHandler!(<MaterialState>{})
+              : Color.lerp(
+                  Colors.transparent,
+                  BuddySitterColor.light,
+                  0.2,
+                ),
+          onTap: onPressed,
+          child: SizedBox(
+            width: height,
+            height: height,
+            child: icon,
+          ),
+        ),
+      ),
+    );
+  }
+
+  SizedBox get inputButton {
+    assert(text != null, 'Your need defined the height');
+    return SizedBox(
+      width: double.infinity,
+      child: TextButton(
         style: ButtonStyle(
+          splashFactory: NoSplash.splashFactory,
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BuddySitterMeasurement.borderRadiusHalf,
+              side: BorderSide(
+                color: BuddySitterColor.actionsLog,
+              ),
+            ),
+          ),
           shadowColor:
               MaterialStateColor.resolveWith((states) => Colors.transparent),
           backgroundColor: MaterialStateColor.resolveWith(
@@ -58,6 +155,20 @@ class AtomButton extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
-        child: text,
-      );
+        child: Row(
+          children: [
+            text ?? AtomText.content(text: ''),
+            const Spacer(),
+            Padding(
+              padding: BuddySitterMeasurement.marginsHalf.copyWith(
+                top: 0.0,
+                bottom: 0.0,
+              ),
+              child: icon ?? const Icon(Icons.search_outlined),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

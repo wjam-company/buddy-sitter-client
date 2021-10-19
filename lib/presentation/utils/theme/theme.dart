@@ -23,6 +23,8 @@ class BuddySitterTheme {
       );
 
   static AppBarTheme get appBarTheme => AppBarTheme(
+        toolbarHeight:
+            BuddySitterMeasurement.sizeHigh + BuddySitterMeasurement.sizeHalf,
         iconTheme: IconThemeData(
           color: BuddySitterColor.dark.brighten(0.4),
         ),

@@ -11,13 +11,13 @@ class Splash extends BuddySitterPageProvider<ProviderSplash> {
   ProviderSplash provider(BuildContext context) => ProviderSplash();
 
   @override
-  Widget get appBarTitle => AtomText.headingLeast(
+  Widget appBarTitle(_) => AtomText.headingLeast(
         text: 'Buddy Sitter',
         color: BuddySitterColor.primaryBeige,
       );
 
   @override
-  Widget get body => const Body();
+  Widget body(_) => const Body();
 }
 
 class Body extends StatelessWidget {

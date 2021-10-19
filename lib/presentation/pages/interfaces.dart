@@ -11,11 +11,11 @@ abstract class BuddySitterPageProvider<T extends ChangeNotifier>
     throw UnimplementedError();
   }
 
-  Widget get appBarTitle {
+  Widget appBarTitle(BuildContext context) {
     throw UnimplementedError();
   }
 
-  Widget get body {
+  Widget body(BuildContext context) {
     throw UnimplementedError();
   }
 
@@ -28,10 +28,10 @@ abstract class BuddySitterPageProvider<T extends ChangeNotifier>
         appBar: AppBar(
           automaticallyImplyLeading:
               Provider.of<RouterPageHandler>(context).canPop,
-          title: appBarTitle,
+          title: appBarTitle(context),
           centerTitle: true,
         ),
-        body: body,
+        body: body(context),
       ),
     );
   }

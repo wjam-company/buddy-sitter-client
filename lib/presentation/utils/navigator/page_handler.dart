@@ -1,5 +1,4 @@
 import 'package:buddy_sitter/presentation/utils/localstorage/localstorage.dart';
-
 import './pages.dart';
 import './path.dart';
 import 'package:flutter/material.dart';

@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class MoleculeInput extends StatefulWidget {
   final String text;
   final String entry;
-  final IconData icon;
+  final IconData? icon;
   final FocusNode? focus;
   final bool obscureText;
   final TextEditingController Function() controler;
@@ -17,7 +17,7 @@ class MoleculeInput extends StatefulWidget {
   const MoleculeInput.text({
     Key? key,
     required this.text,
-    required this.icon,
+    this.icon,
     required this.entry,
     required this.controler,
     this.focus,
@@ -27,7 +27,7 @@ class MoleculeInput extends StatefulWidget {
   const MoleculeInput.password({
     Key? key,
     required this.text,
-    required this.icon,
+    this.icon,
     required this.entry,
     required this.controler,
     this.focus,
@@ -60,6 +60,26 @@ class _MoleculeInputState extends State<MoleculeInput> {
   Widget build(BuildContext context) {
     ValidationItem? validation =
         Provider.of<FormProvider>(context).entries[widget.entry];
+
+    List<Widget> children = [
+      AtomText.content(
+        text: widget.text,
+        color: BuddySitterColor.dark,
+      )
+    ];
+
+    if (widget.icon != null) {
+      children.insert(
+        0,
+        Icon(
+          widget.icon,
+          color: isLog(validation)
+              ? BuddySitterColor.actionsLog
+              : BuddySitterColor.actionsSuccess,
+        ),
+      );
+    }
+
     return Padding(
       padding: EdgeInsets.zero.copyWith(
         bottom: BuddySitterMeasurement.sizeHalf,
@@ -85,20 +105,7 @@ class _MoleculeInputState extends State<MoleculeInput> {
             child: IntrinsicWidth(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Builder(
-                    builder: (BuildContext context) => Icon(
-                      widget.icon,
-                      color: isLog(validation)
-                          ? BuddySitterColor.actionsLog
-                          : BuddySitterColor.actionsSuccess,
-                    ),
-                  ),
-                  AtomText.content(
-                    text: widget.text,
-                    color: BuddySitterColor.dark,
-                  )
-                ],
+                children: children,
               ),
             ),
           ),

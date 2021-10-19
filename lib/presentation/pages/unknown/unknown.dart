@@ -11,13 +11,13 @@ class Unknown extends BuddySitterPageProvider<Provider404> {
   Provider404 provider(BuildContext context) => Provider404();
 
   @override
-  Widget get appBarTitle => AtomText.headingLeast(
+  Widget appBarTitle(_) => AtomText.headingLeast(
         text: '404',
         color: BuddySitterColor.primaryBeige,
       );
 
   @override
-  Widget get body => const Body();
+  Widget body(_) => const Body();
 }
 
 class Body extends StatelessWidget {

@@ -19,13 +19,13 @@ class RecoverPassword extends BuddySitterPageProvider<ProviderForgotPassword> {
       ProviderForgotPassword();
 
   @override
-  Widget get appBarTitle => AtomText.content(
+  Widget appBarTitle(_) => AtomText.content(
         text: 'Recover Password',
         color: BuddySitterColor.dark.brighten(0.3),
       );
 
   @override
-  Widget get body => const Body();
+  Widget body(_) => const Body();
 }
 
 class Body extends StatelessWidget {

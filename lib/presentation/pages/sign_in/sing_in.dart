@@ -21,13 +21,13 @@ class SignIn extends BuddySitterPageProvider<ProviderSignIn> {
   ProviderSignIn provider(BuildContext context) => ProviderSignIn();
 
   @override
-  Widget get appBarTitle => AtomText.content(
+  Widget appBarTitle(_) => AtomText.content(
         text: DataTextSignIn.appBarTitle,
         color: BuddySitterColor.dark.brighten(0.3),
       );
 
   @override
-  Widget get body => const Body();
+  Widget body(_) => const Body();
 }
 
 class Body extends StatelessWidget {

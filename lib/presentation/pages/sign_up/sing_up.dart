@@ -8,7 +8,6 @@ import 'package:buddy_sitter/presentation/widgets/molecules/input_controls/input
 import 'package:buddy_sitter/presentation/widgets/organisms/form.dart';
 import 'package:buddy_sitter/presentation/widgets/template/action_bottom.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../interfaces.dart';
 import './provider.dart';
 
@@ -19,13 +18,13 @@ class SignUp extends BuddySitterPageProvider<ProviderSignUp> {
   ProviderSignUp provider(BuildContext context) => ProviderSignUp();
 
   @override
-  Widget get appBarTitle => AtomText.content(
+  Widget appBarTitle(_) => AtomText.content(
         text: 'Sign Up',
         color: BuddySitterColor.dark.brighten(0.3),
       );
 
   @override
-  Widget get body => const Body();
+  Widget body(_) => const Body();
 }
 
 class Body extends StatelessWidget {
