@@ -83,7 +83,6 @@ class Body extends StatelessWidget {
                 onPressed: () =>
                     Provider.of<RouterPageHandler>(context, listen: false).show(
                   BuddySitterLocation.recoverPassword,
-                  preLoad: BuddySitterLocation.recoverPassword,
                 ),
               ),
             ],

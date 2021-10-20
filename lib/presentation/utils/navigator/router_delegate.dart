@@ -36,7 +36,6 @@ class BuddySitterRouterDelegate extends RouterDelegate<BuddySitterPath>
       return false;
     }
     _pageHandler.didPop(route.settings as Page);
-
     return true;
   }
 

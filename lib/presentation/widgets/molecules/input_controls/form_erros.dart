@@ -1,7 +1,6 @@
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
 import 'package:buddy_sitter/presentation/utils/form/validation_item.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/feedback/error.dart';
-import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

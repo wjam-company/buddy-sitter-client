@@ -96,11 +96,7 @@ class Body extends StatelessWidget {
             ),
             colorHadler: (_) => BuddySitterColor.actionsLog,
             onPressed: () {
-              validators.entries.forEach((key, value) {
-                print(key);
-                print(value.value);
-                print(value.errors);
-              });
+              validators.entries.forEach((key, value) {});
             },
           ),
         ),

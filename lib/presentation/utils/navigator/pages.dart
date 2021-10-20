@@ -34,14 +34,7 @@ class BuddySitterPage {
       return MaterialPage(
         key: UniqueKey(),
         name: url,
-        child: _pages[url] as Widget,
-      );
-    }
-    if (_animationPage.containsKey(url)) {
-      return MaterialPage(
-        key: UniqueKey(),
-        name: BuddySitterLocation.unknown,
-        child: _animationPage[url] as Widget,
+        child: _pages[url] as BuddySitterPageProvider,
       );
     }
     return MaterialPage(

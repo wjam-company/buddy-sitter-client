@@ -393,13 +393,11 @@ class CustomClipperPath extends CustomClipper<Path> {
 
   @override
   Path getClip(Size size) {
-    // TODO: implement getClip
     throw UnimplementedError();
   }
 
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
     throw UnimplementedError();
   }
 }
@@ -413,8 +411,7 @@ class CardProfileClipper extends CustomClipperPath {
         bottom = size.height,
         left = 0,
         right = size.width,
-        centerX = size.width * 0.5,
-        centerY = size.height * 0.5;
+        centerX = size.width * 0.5;
     _curve(
       path,
       start: Point(left, bottom),
