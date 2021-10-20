@@ -151,7 +151,7 @@ class AtomButton extends StatelessWidget {
           shadowColor:
               MaterialStateColor.resolveWith((states) => Colors.transparent),
           backgroundColor: MaterialStateColor.resolveWith(
-            colorHadler ?? (_) => Colors.transparent,
+            colorHadler ?? (_) => BuddySitterColor.light.brighten(0.8),
           ),
         ),
         onPressed: onPressed,

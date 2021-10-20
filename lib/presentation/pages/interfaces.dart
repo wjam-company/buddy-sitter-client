@@ -19,18 +19,22 @@ abstract class BuddySitterPageProvider<T extends ChangeNotifier>
     throw UnimplementedError();
   }
 
+  bool get haveAppBar => true;
+
   @override
   Widget build(BuildContext context) {
     MediaHandler.of(context);
     return ChangeNotifierProvider<T>(
       create: (_) => provider(_),
       child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading:
-              Provider.of<RouterPageHandler>(context).canPop,
-          title: appBarTitle(context),
-          centerTitle: true,
-        ),
+        appBar: haveAppBar
+            ? AppBar(
+                automaticallyImplyLeading:
+                    Provider.of<RouterPageHandler>(context).canPop,
+                title: appBarTitle(context),
+                centerTitle: true,
+              )
+            : null,
         body: body(context),
       ),
     );

@@ -6,8 +6,9 @@ class BuddySitterLocation {
   static const String explore = '/explore';
   static const String recoverPassword = '/recover_password';
   static const String signup = '/signup';
+  static const String home = '/home';
 
-  static const int length = 7;
+  static const int length = 8;
 
   static const String animationSlide = '/slide';
 }

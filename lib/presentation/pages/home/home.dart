@@ -13,53 +13,14 @@ import 'package:provider/provider.dart';
 import '../interfaces.dart';
 import './provider.dart';
 
-class Explore extends BuddySitterPageProvider<ProviderExplore> {
-  const Explore({Key? key}) : super(key: key);
+class Home extends BuddySitterPageProvider<ProviderHome> {
+  const Home({Key? key}) : super(key: key);
 
   @override
-  ProviderExplore provider(BuildContext context) => ProviderExplore();
+  ProviderHome provider(BuildContext context) => ProviderHome();
 
   @override
-  Widget appBarTitle(BuildContext context) {
-    return AtomButton.input(
-      onPressed: () {},
-      text: AtomText.content(text: 'Search'),
-      icon: const Icon(Icons.search),
-    );
-
-    /*
-    final FormProvider validators = FormProvider([
-      ExploreValidator.search,
-    ]);
-    return Stack(
-      children: [
-        OrganismForm.column(
-          provider: validators,
-          fields: [
-            MoleculeInput.text(
-              entry: ExploreValidator.search,
-              controler: validators.valid(
-                ExploreValidator.search,
-                validator: ExploreValidator.validSearch,
-              ),
-              text: 'Search',
-            ),
-          ],
-        ),
-        Positioned(
-          right: BuddySitterMeasurement.sizeHalf,
-          top: BuddySitterMeasurement.sizeHalf,
-          child: AtomButton.cicle(
-            onPressed: () {},
-            height: BuddySitterMeasurement.sizeHigh,
-            icon: const Icon(Icons.search),
-          ),
-        ),
-      ],
-    );
-    */
-  }
-// ,
+  bool get haveAppBar => false;
 
   @override
   Widget body(_) => const BodyOnboarding();
@@ -76,131 +37,109 @@ class BodyOnboarding extends StatelessWidget {
       child: ListView(
         children: [
           // Popus
-          AtomSnack(
-            caption: 'Badges',
-            title: 'New Acount',
-            icon: Icon(
-              Icons.star_purple500_sharp,
-              color: BuddySitterColor.actionsWarning,
-            ),
-            action: () {},
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: AtomText.subheading(text: 'Sitters'),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(
-              horizontal: BuddySitterMeasurement.sizeHalf / 2,
-            ),
+          SizedBox(
             height: BuddySitterMeasurement.sizeHigh * 4.5,
-            child: ClipPath(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              clipper: CardPostClipper(
-                radius: BuddySitterMeasurement.sizeHalf,
-              ),
-              child: Column(
-                children: [
-                  Stack(
-                    alignment: Alignment.topCenter,
-                    children: [
-                      ImageFiltered(
-                        imageFilter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 2.0),
-                        child: Image.network(
-                          'https://statics-cuidateplus.marca.com/cms/mascotas_0.jpg',
+            child: Column(
+              children: [
+                Stack(
+                  alignment: Alignment.topCenter,
+                  children: [
+                    ImageFiltered(
+                      imageFilter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 2.0),
+                      child: Image.network(
+                        'https://statics-cuidateplus.marca.com/cms/mascotas_0.jpg',
+                        height: BuddySitterMeasurement.sizeHigh * 3,
+                      ),
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: AspectRatio(
+                        aspectRatio: 2.0,
+                        child: Container(
+                          color: Colors.blue,
+                          width: double.infinity,
+                          child: Image.network(
+                            'https://statics-cuidateplus.marca.com/cms/mascotas_0.jpg',
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(
+                        top: BuddySitterMeasurement.sizeHigh * 1.45,
+                      ),
+                      child: ClipPath(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        clipper: CardProfileClipper(
+                          radius: BuddySitterMeasurement.sizeHalf,
+                        ),
+                        child: Container(
+                          color: BuddySitterColor.primaryBeige.brighten(.9),
                           height: BuddySitterMeasurement.sizeHigh * 3,
-                        ),
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: AspectRatio(
-                          aspectRatio: 2.0,
-                          child: Container(
-                            color: Colors.blue,
-                            width: double.infinity,
-                            child: Image.network(
-                              'https://statics-cuidateplus.marca.com/cms/mascotas_0.jpg',
-                            ),
+                          padding:
+                              EdgeInsets.all(BuddySitterMeasurement.sizeHalf),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: BuddySitterMeasurement.sizeHigh,
+                              ),
+                              AtomText.subheading(
+                                text: 'Juanita',
+                                padding: EdgeInsets.zero,
+                                color: BuddySitterColor.dark,
+                              ),
+                              const Spacer(),
+                              AtomText.content(
+                                text:
+                                    'Eu adipisicing eu ex sit non in nulla incididunt adipisicing culpa incididunt elit. Ut cillum incididunt anim velit aute est duis esse esse et est. ',
+                                padding: EdgeInsets.zero,
+                                color: BuddySitterColor.dark,
+                              ),
+                              const Spacer(),
+                            ],
                           ),
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.only(
-                          top: BuddySitterMeasurement.sizeHigh * 1.45,
-                        ),
-                        child: ClipPath(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          clipper: CardProfileClipper(
-                            radius: BuddySitterMeasurement.sizeHalf,
-                          ),
-                          child: Container(
-                            color: BuddySitterColor.primaryBeige.brighten(.9),
-                            height: BuddySitterMeasurement.sizeHigh * 3,
-                            padding:
-                                EdgeInsets.all(BuddySitterMeasurement.sizeHalf),
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: BuddySitterMeasurement.sizeHigh,
-                                ),
-                                AtomText.subheading(
-                                  text: 'Juanita',
-                                  padding: EdgeInsets.zero,
-                                  color: BuddySitterColor.dark,
-                                ),
-                                const Spacer(),
-                                AtomText.content(
-                                  text:
-                                      'Eu adipisicing eu ex sit non in nulla incididunt adipisicing culpa incididunt elit. Ut cillum incididunt anim velit aute est duis esse esse et est. ',
-                                  padding: EdgeInsets.zero,
-                                  color: BuddySitterColor.dark,
-                                ),
-                                const Spacer(),
-                              ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                          top: BuddySitterMeasurement.sizeHalf * 4.45),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Spacer(),
+                          AtomButton.cicle(
+                            onPressed: () {},
+                            height: BuddySitterMeasurement.sizeHalf * 3,
+                            icon: Icon(
+                              Icons.bookmark_border_outlined,
+                              color: BuddySitterColor.actionsLog,
                             ),
                           ),
-                        ),
+                          const Spacer(),
+                          CircleAvatar(
+                            backgroundImage: const NetworkImage(
+                              'https://i.scdn.co/image/ab6761610000e5eb567128259b78fea242010245',
+                            ),
+                            radius: BuddySitterMeasurement.sizeHalf * 1.8,
+                          ),
+                          const Spacer(),
+                          AtomButton.cicle(
+                            onPressed: () {},
+                            height: BuddySitterMeasurement.sizeHalf * 3,
+                            icon: Icon(
+                              Icons.settings_outlined,
+                              color: BuddySitterColor.actionsLog,
+                            ),
+                          ),
+                          const Spacer(),
+                        ],
                       ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: BuddySitterMeasurement.sizeHalf * 4.45),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Spacer(),
-                            AtomButton.cicle(
-                              onPressed: () {},
-                              height: BuddySitterMeasurement.sizeHalf * 3,
-                              icon: Icon(
-                                CupertinoIcons.captions_bubble,
-                                color: BuddySitterColor.actionsLog,
-                              ),
-                            ),
-                            const Spacer(),
-                            CircleAvatar(
-                              backgroundImage: const NetworkImage(
-                                'https://i.scdn.co/image/ab6761610000e5eb567128259b78fea242010245',
-                              ),
-                              radius: BuddySitterMeasurement.sizeHalf * 1.8,
-                            ),
-                            const Spacer(),
-                            AtomButton.cicle(
-                              onPressed: () {},
-                              height: BuddySitterMeasurement.sizeHalf * 3,
-                              icon: Icon(
-                                CupertinoIcons.heart,
-                                color: BuddySitterColor.complementaryRed,
-                              ),
-                            ),
-                            const Spacer(),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],
@@ -214,10 +153,7 @@ class BodyOnboarding extends StatelessWidget {
               children: [
                 const Spacer(),
                 AtomButton.cicle(
-                  onPressed: () {
-                    Provider.of<RouterPageHandler>(context, listen: false)
-                        .show(BuddySitterLocation.home, change: true);
-                  },
+                  onPressed: () {},
                   height: BuddySitterMeasurement.sizeHalf * 3,
                   icon: Icon(
                     CupertinoIcons.home,
@@ -226,7 +162,10 @@ class BodyOnboarding extends StatelessWidget {
                 ),
                 const Spacer(),
                 AtomButton.cicle(
-                  onPressed: () {},
+                  onPressed: () {
+                    Provider.of<RouterPageHandler>(context, listen: false)
+                        .show(BuddySitterLocation.explore, change: true);
+                  },
                   height: BuddySitterMeasurement.sizeHalf * 3,
                   icon: Icon(
                     CupertinoIcons.search,

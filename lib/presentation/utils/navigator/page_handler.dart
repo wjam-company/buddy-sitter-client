@@ -65,15 +65,22 @@ class RouterPageHandler extends ChangeNotifier {
     List<String>? preLoads,
     String? preLoad,
     bool notify = true,
+    bool change = false,
     List<Page>? stack,
   }) {
     List<Page> curentPages = stack ?? _pagesActive;
     int index = _pagesPreLoad
         .indexWhere((element) => buddySitterLocation == element.name);
     if (index == -1) {
+      if (change && curentPages.isNotEmpty) {
+        curentPages.removeLast();
+      }
       curentPages.add(BuddySitterPage.of(buddySitterLocation));
     } else {
       Page<dynamic> page = _pagesPreLoad.removeAt(index);
+      if (change && curentPages.isNotEmpty) {
+        curentPages.removeLast();
+      }
       curentPages.add(page);
     }
 
