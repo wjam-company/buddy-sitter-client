@@ -10,6 +10,7 @@ class AtomButton extends StatelessWidget {
   final double? height;
   final AtomText? text;
   final void Function()? onPressed;
+  final void Function()? onLongPress;
   static const int typeBottom = 0;
   static const int typeText = 1;
   static const int typeCicle = 2;
@@ -24,6 +25,7 @@ class AtomButton extends StatelessWidget {
     this.splashColorHandler,
     this.height,
     this.icon,
+    this.onLongPress,
   })  : type = typeBottom,
         super(key: key);
 
@@ -35,6 +37,7 @@ class AtomButton extends StatelessWidget {
     this.splashColorHandler,
     this.height,
     this.icon,
+    this.onLongPress,
   })  : type = typeText,
         super(key: key);
 
@@ -46,6 +49,7 @@ class AtomButton extends StatelessWidget {
     this.splashColorHandler,
     required this.height,
     required this.icon,
+    this.onLongPress,
   })  : type = typeCicle,
         super(key: key);
 
@@ -57,6 +61,7 @@ class AtomButton extends StatelessWidget {
     this.splashColorHandler,
     this.height,
     required this.icon,
+    this.onLongPress,
   })  : type = typeInput,
         super(key: key);
 
@@ -87,6 +92,7 @@ class AtomButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
+      onLongPress: onLongPress,
       child: text ?? AtomText.content(text: ''),
     );
   }
@@ -102,6 +108,7 @@ class AtomButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
+      onLongPress: onLongPress,
       child: text ?? AtomText.content(text: ''),
     );
   }
@@ -123,6 +130,7 @@ class AtomButton extends StatelessWidget {
                   0.2,
                 ),
           onTap: onPressed,
+          onLongPress: onLongPress,
           child: SizedBox(
             width: height,
             height: height,
@@ -155,6 +163,7 @@ class AtomButton extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
+        onLongPress: onLongPress,
         child: Row(
           children: [
             text ?? AtomText.content(text: ''),
