@@ -82,7 +82,26 @@ class BodyOnboarding extends StatelessWidget {
             contentPadding: EdgeInsets.zero,
             leading: AtomText.subheading(text: 'Sitters'),
           ),
-          OrganismCard(),
+          OrganismCard.simple(
+            actionLeft: ActionsRowFLex(
+              icon: Icon(
+                CupertinoIcons.captions_bubble,
+                color: BuddySitterColor.actionsLog,
+              ),
+            ),
+            actionRight: ActionsRowFLex(
+              icon: Icon(
+                CupertinoIcons.heart,
+                color: BuddySitterColor.complementaryRed,
+              ),
+            ),
+            content:
+                'Eu adipisicing eu ex sit non in nulla incididunt adipisicing culpa incididunt elit. Ut cillum incididunt anim velit aute est duis esse esse et est.',
+            image: 'https://statics-cuidateplus.marca.com/cms/mascotas_0.jpg',
+            name: 'Juanita',
+            profile:
+                'https://i.scdn.co/image/ab6761610000e5eb567128259b78fea242010245',
+          ),
         ],
       ),
       childrenBottom: [
@@ -136,18 +155,63 @@ class OrganismBarMenu extends StatelessWidget {
 }
 
 class OrganismCard extends StatelessWidget {
-  const OrganismCard({
+  final String image;
+  final String profile;
+  final String name;
+  final String content;
+  final ActionsRowFLex actionLeft;
+  final ActionsRowFLex actionRight;
+  final bool margin;
+  const OrganismCard.simple({
     Key? key,
-  }) : super(key: key);
+    required this.image,
+    required this.profile,
+    required this.name,
+    required this.content,
+    required this.actionLeft,
+    required this.actionRight,
+  })  : margin = true,
+        super(key: key);
+
+  const OrganismCard.complete({
+    Key? key,
+    required this.image,
+    required this.profile,
+    required this.name,
+    required this.content,
+    required this.actionLeft,
+    required this.actionRight,
+  })  : margin = true,
+        super(key: key);
+
+  const OrganismCard.headder({
+    Key? key,
+    required this.image,
+    required this.profile,
+    required this.name,
+    required this.content,
+    required this.actionLeft,
+    required this.actionRight,
+  })  : margin = false,
+        super(key: key);
+
+  Widget decoratorMargin(Widget child) => margin
+      ? Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: BuddySitterMeasurement.sizeHalf / 2,
+          ),
+          height: BuddySitterMeasurement.sizeHigh * 4.5,
+          child: child,
+        )
+      : SizedBox(
+          height: BuddySitterMeasurement.sizeHigh * 4.5,
+          child: child,
+        );
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: BuddySitterMeasurement.sizeHalf / 2,
-      ),
-      height: BuddySitterMeasurement.sizeHigh * 4.5,
-      child: ClipPath(
+    return decoratorMargin(
+      ClipPath(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         clipper: CardPostClipper(
           radius: BuddySitterMeasurement.sizeHalf,
@@ -159,15 +223,13 @@ class OrganismCard extends StatelessWidget {
               children: [
                 AtomImage.simple(
                   imageFilter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 2.0),
-                  src:
-                      'https://statics-cuidateplus.marca.com/cms/mascotas_0.jpg',
+                  src: image,
                   type: AtomImage.typeNetwork,
                   height: BuddySitterMeasurement.sizeHigh * 3,
                 ),
-                const AtomImage.aspectRatio(
+                AtomImage.aspectRatio(
                   aspectRatio: 2.0,
-                  src:
-                      'https://statics-cuidateplus.marca.com/cms/mascotas_0.jpg',
+                  src: image,
                   type: AtomImage.typeNetwork,
                 ),
                 Container(
@@ -189,14 +251,13 @@ class OrganismCard extends StatelessWidget {
                             height: BuddySitterMeasurement.sizeHigh,
                           ),
                           AtomText.subheading(
-                            text: 'Juanita',
+                            text: name,
                             padding: EdgeInsets.zero,
                             color: BuddySitterColor.dark,
                           ),
                           const Spacer(),
                           AtomText.content(
-                            text:
-                                'Eu adipisicing eu ex sit non in nulla incididunt adipisicing culpa incididunt elit. Ut cillum incididunt anim velit aute est duis esse esse et est. ',
+                            text: content,
                             padding: EdgeInsets.zero,
                             color: BuddySitterColor.dark,
                           ),
@@ -212,26 +273,21 @@ class OrganismCard extends StatelessWidget {
                   child: MoleculeRowFLex.simple(
                     children: [
                       AtomButton.cicle(
-                        onPressed: () {},
+                        onPressed: actionLeft.onPressed,
+                        onLongPress: actionLeft.onLongPress,
                         height: BuddySitterMeasurement.sizeHalf * 3,
-                        icon: Icon(
-                          CupertinoIcons.captions_bubble,
-                          color: BuddySitterColor.actionsLog,
-                        ),
+                        icon: actionLeft.icon,
                       ),
                       AtomImage.circle(
-                        src:
-                            'https://i.scdn.co/image/ab6761610000e5eb567128259b78fea242010245',
+                        src: profile,
                         radius: BuddySitterMeasurement.sizeHalf * 1.8,
                         type: AtomImage.typeNetwork,
                       ),
                       AtomButton.cicle(
-                        onPressed: () {},
+                        onPressed: actionRight.onPressed,
+                        onLongPress: actionRight.onLongPress,
                         height: BuddySitterMeasurement.sizeHalf * 3,
-                        icon: Icon(
-                          CupertinoIcons.heart,
-                          color: BuddySitterColor.complementaryRed,
-                        ),
+                        icon: actionRight.icon,
                       ),
                     ],
                   ),
