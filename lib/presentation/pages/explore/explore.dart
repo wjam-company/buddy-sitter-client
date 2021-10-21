@@ -1,11 +1,4 @@
-import 'dart:io';
-import 'dart:math';
-import 'dart:typed_data';
-import 'dart:ui';
-import 'package:buddy_sitter/presentation/utils/navigator/locations.dart';
-import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
-import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
@@ -108,7 +101,7 @@ class Body extends StatelessWidget {
       ),
       childrenBottom: [
         ItemActionBottom(
-          color: BuddySitterColor(Colors.transparent.value),
+          color: BuddySitterColor.primaryPurple.brighten(.9),
           child: const OrganismBarMenu(),
         ),
       ],

@@ -16,6 +16,7 @@ class OrganismCard extends StatelessWidget {
   final ActionsRowFLex actionLeft;
   final ActionsRowFLex actionRight;
   final bool margin;
+  final bool topBorderRadius;
   const OrganismCard.simple({
     Key? key,
     required this.image,
@@ -25,6 +26,7 @@ class OrganismCard extends StatelessWidget {
     required this.actionLeft,
     required this.actionRight,
   })  : margin = true,
+        topBorderRadius = true,
         super(key: key);
 
   const OrganismCard.complete({
@@ -36,6 +38,7 @@ class OrganismCard extends StatelessWidget {
     required this.actionLeft,
     required this.actionRight,
   })  : margin = true,
+        topBorderRadius = true,
         super(key: key);
 
   const OrganismCard.headder({
@@ -47,6 +50,7 @@ class OrganismCard extends StatelessWidget {
     required this.actionLeft,
     required this.actionRight,
   })  : margin = false,
+        topBorderRadius = false,
         super(key: key);
 
   Widget decoratorMargin(Widget child) => margin
@@ -62,15 +66,21 @@ class OrganismCard extends StatelessWidget {
           child: child,
         );
 
+  Widget decoratorBorderRadius(Widget child) => topBorderRadius
+      ? ClipPath(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          clipper: CardPostClipper(
+            radius: BuddySitterMeasurement.sizeHalf,
+          ),
+          child: child,
+        )
+      : child;
+
   @override
   Widget build(BuildContext context) {
     return decoratorMargin(
-      ClipPath(
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        clipper: CardPostClipper(
-          radius: BuddySitterMeasurement.sizeHalf,
-        ),
-        child: Column(
+      decoratorBorderRadius(
+        Column(
           children: [
             Stack(
               alignment: Alignment.topCenter,
@@ -150,7 +160,7 @@ class OrganismCard extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      ), // decoratorBorderRadius
+    ); // decoratorMargin(
   }
 }
