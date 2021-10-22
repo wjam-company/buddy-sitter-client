@@ -1,5 +1,7 @@
+import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
+import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
 import 'package:flutter/material.dart';
 
 class ItemActionBottom {
@@ -24,10 +26,12 @@ class TemplateActionBottom extends StatelessWidget {
     required final BuddySitterColor color,
   }) =>
       Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BuddySitterMeasurement.borderRadiusHalf.copyWith(
-            bottomLeft: Radius.zero,
-            bottomRight: Radius.zero,
+        shape: MediaHandler.dynamicType(
+          mobile: RoundedRectangleBorder(
+            borderRadius: BuddySitterMeasurement.borderRadiusHalf.copyWith(
+              bottomLeft: Radius.zero,
+              bottomRight: Radius.zero,
+            ),
           ),
         ),
         margin: EdgeInsets.zero,
@@ -36,7 +40,9 @@ class TemplateActionBottom extends StatelessWidget {
           color: color,
           child: Padding(
             padding: EdgeInsets.zero.copyWith(
-              bottom: BuddySitterMeasurement.sizeHigh * index,
+              bottom: MediaHandler.dynamicType(
+                mobile: BuddySitterMeasurement.sizeHigh * index,
+              ),
             ),
             child: child,
           ),
@@ -47,10 +53,16 @@ class TemplateActionBottom extends StatelessWidget {
     required Widget child,
     required int index,
   }) =>
-      SizedBox(
-        height: BuddySitterMeasurement.sizeHigh * (index + 1),
-        width: double.infinity,
-        child: child,
+      MediaHandler.requiredSingle(
+        mobile: SizedBox(
+          height: BuddySitterMeasurement.sizeHigh * (index + 1),
+          width: double.infinity,
+          child: child,
+        ),
+        desktop: SizedBox(
+          height: BuddySitterMeasurement.sizeHigh,
+          child: child,
+        ),
       );
 
   @override
@@ -75,16 +87,66 @@ class TemplateActionBottom extends StatelessWidget {
         .reversed
         .toList();
 
+    List<Widget> content = MediaHandler.runWhen<List<Widget>>(
+      mobile: () => [
+        Expanded(child: child),
+        Stack(
+          alignment: Alignment.bottomCenter,
+          children: children,
+        ),
+      ],
+      tablet: () => [
+        Expanded(child: child),
+        Stack(
+          alignment: Alignment.bottomCenter,
+          children: children,
+        ),
+      ],
+      desktop: () => [
+        Expanded(child: child),
+        MoleculeRowFLex.simple(
+          children: [
+            Row(
+              children: List.generate(
+                (children.length * 2) - 1,
+                (index) {
+                  if (index % 2 == 0) {
+                    return children[index ~/ 2];
+                  }
+                  return SizedBox(width: BuddySitterMeasurement.sizeHalf);
+                },
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: BuddySitterMeasurement.sizeHigh,
+        ),
+      ],
+    ) as List<Widget>;
+
     return SafeArea(
-      child: Column(
-        children: [
-          Expanded(child: child),
-          Stack(
-            alignment: Alignment.bottomCenter,
-            children: children,
-          ),
-        ],
-      ),
+      child: MediaHandler.requiredSingle(
+        mobile: Column(
+          children: content,
+        ),
+        desktop: Row(
+          children: [
+            SizedBox(
+              width: BuddySitterMeasurement.sizeUpper * 0.2,
+            ),
+            SizedBox(
+              width: BuddySitterMeasurement.sizeUpper * 0.6,
+              child: Column(
+                children: content,
+              ),
+            ),
+            SizedBox(
+              width: BuddySitterMeasurement.sizeUpper * 0.2,
+            ),
+          ],
+        ),
+      ), // MediaHandler.requiredSingle
     );
   }
 }

@@ -11,12 +11,14 @@ class Splash extends BuddySitterPageProvider<ProviderSplash> {
   ProviderSplash provider(BuildContext context) => ProviderSplash();
 
   @override
+  // ignore: avoid_renaming_method_parameters
   Widget appBarTitle(_) => AtomText.headingLeast(
         text: 'Buddy Sitter',
         color: BuddySitterColor.primaryBeige,
       );
 
   @override
+  // ignore: avoid_renaming_method_parameters
   Widget body(_) => const Body();
 }
 

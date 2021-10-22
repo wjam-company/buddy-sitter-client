@@ -2,6 +2,7 @@ import 'package:buddy_sitter/data/static/texts/sign_in.dart';
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
 import 'package:buddy_sitter/presentation/utils/form/sign_in_validate.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
+import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/input_controls/input.dart';
@@ -18,12 +19,14 @@ class SignUp extends BuddySitterPageProvider<ProviderSignUp> {
   ProviderSignUp provider(BuildContext context) => ProviderSignUp();
 
   @override
+  // ignore: avoid_renaming_method_parameters
   Widget appBarTitle(_) => AtomText.content(
         text: 'Sign Up',
         color: BuddySitterColor.dark.brighten(0.3),
       );
 
   @override
+  // ignore: avoid_renaming_method_parameters
   Widget body(_) => const Body();
 }
 
@@ -90,6 +93,11 @@ class Body extends StatelessWidget {
         ItemActionBottom(
           color: BuddySitterColor.actionsLog,
           child: AtomButton.bottom(
+            icon: Icon(
+              Icons.check,
+              color: BuddySitterColor.actionsSuccess,
+            ),
+            height: BuddySitterMeasurement.sizeHalf / 2,
             text: AtomText.content(
               text: DataTextSignIn.button,
               color: BuddySitterColor.light.brighten(0.5),

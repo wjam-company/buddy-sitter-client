@@ -8,6 +8,84 @@ class AverageResolutions {
 }
 
 class MediaHandler {
+  static T? runWhen<T>({
+    T? Function()? mobile,
+    T? Function()? desktop,
+    T? Function()? tablet,
+  }) {
+    if (isDesktop) {
+      return desktop == null ? null : desktop();
+    }
+    if (isTablet) {
+      return tablet == null ? null : tablet();
+    }
+    return mobile == null ? null : mobile();
+  }
+
+  static dynamic dynamicType({
+    dynamic mobile,
+    dynamic desktop,
+    dynamic tablet,
+  }) {
+    if (isDesktop) {
+      return desktop;
+    }
+    if (isTablet) {
+      return tablet;
+    }
+    return mobile;
+  }
+
+  static Widget requiredSingle({
+    required Widget mobile,
+    Widget? desktop,
+    Widget? tablet,
+  }) =>
+      MediaHandler.single(
+        mobile: mobile,
+        desktop: desktop,
+        tablet: tablet,
+      ) as Widget;
+
+  static List<Widget> requiredMultiple({
+    required List<Widget> mobile,
+    List<Widget>? desktop,
+    List<Widget>? tablet,
+  }) =>
+      MediaHandler.multiple(
+        mobile: mobile,
+        desktop: desktop,
+        tablet: tablet,
+      ) as List<Widget>;
+
+  static Widget? single({
+    Widget? mobile,
+    Widget? desktop,
+    Widget? tablet,
+  }) {
+    if (isDesktop) {
+      return desktop;
+    }
+    if (isTablet) {
+      return tablet;
+    }
+    return mobile;
+  }
+
+  static List<Widget>? multiple({
+    List<Widget>? mobile,
+    List<Widget>? desktop,
+    List<Widget>? tablet,
+  }) {
+    if (isDesktop) {
+      return desktop;
+    }
+    if (isTablet) {
+      return tablet;
+    }
+    return mobile;
+  }
+
   static bool _isMobile = false;
   static bool _isTablet = false;
   static bool _isDesktop = false;

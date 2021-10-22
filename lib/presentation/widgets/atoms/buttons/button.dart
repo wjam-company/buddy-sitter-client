@@ -1,3 +1,4 @@
+import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
@@ -20,11 +21,11 @@ class AtomButton extends StatelessWidget {
   const AtomButton.bottom({
     Key? key,
     required this.text,
-    this.colorHadler,
+    required this.icon,
     required this.onPressed,
+    required this.height,
+    this.colorHadler,
     this.splashColorHandler,
-    this.height,
-    this.icon,
     this.onLongPress,
   })  : type = typeBottom,
         super(key: key);
@@ -32,8 +33,8 @@ class AtomButton extends StatelessWidget {
   const AtomButton.text({
     Key? key,
     required this.text,
-    this.colorHadler,
     required this.onPressed,
+    this.colorHadler,
     this.splashColorHandler,
     this.height,
     this.icon,
@@ -93,7 +94,19 @@ class AtomButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       onLongPress: onLongPress,
-      child: text ?? AtomText.content(text: ''),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: MediaHandler.requiredMultiple(
+          mobile: [
+            text ?? AtomText.content(text: ''),
+          ],
+          desktop: [
+            icon as Icon,
+            text ?? AtomText.content(text: ''),
+          ],
+        ),
+      ),
     );
   }
 

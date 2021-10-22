@@ -11,12 +11,14 @@ class Unknown extends BuddySitterPageProvider<Provider404> {
   Provider404 provider(BuildContext context) => Provider404();
 
   @override
+  // ignore: avoid_renaming_method_parameters
   Widget appBarTitle(_) => AtomText.headingLeast(
         text: '404',
         color: BuddySitterColor.primaryBeige,
       );
 
   @override
+  // ignore: avoid_renaming_method_parameters
   Widget body(_) => const Body();
 }
 

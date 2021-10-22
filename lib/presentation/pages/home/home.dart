@@ -18,11 +18,12 @@ class Home extends BuddySitterPageProvider<ProviderHome> {
   bool get haveAppBar => false;
 
   @override
-  Widget body(_) => const BodyOnboarding();
+  // ignore: avoid_renaming_method_parameters
+  Widget body(_) => const Body();
 }
 
-class BodyOnboarding extends StatelessWidget {
-  const BodyOnboarding({
+class Body extends StatelessWidget {
+  const Body({
     Key? key,
   }) : super(key: key);
 

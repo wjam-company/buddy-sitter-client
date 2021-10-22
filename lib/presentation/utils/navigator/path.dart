@@ -44,7 +44,6 @@ class BuddySitterPath {
         _signup = false,
         _home = false,
         _recoverPassword = false;
-
   BuddySitterPath.onboarding()
       : _explore = false,
         _splash = false,

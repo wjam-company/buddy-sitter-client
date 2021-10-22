@@ -1,3 +1,5 @@
+import 'package:buddy_sitter/presentation/utils/media/media.dart';
+import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:flutter/material.dart';
 
@@ -42,16 +44,21 @@ class MoleculeRowFLex extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> childrenFLex =
-        List.generate((currentList.length * 2) + 1, (index) {
-      if (index % 2 == 0) {
-        return const Spacer();
+        List.generate((currentList.length * 2) - 1, (index) {
+      if (index % 2 == 1) {
+        return MediaHandler.requiredSingle(
+          mobile: const Spacer(),
+          tablet: SizedBox(width: BuddySitterMeasurement.sizeHalf),
+          desktop: SizedBox(width: BuddySitterMeasurement.sizeHalf),
+        );
       } else {
         return decoratorAction(currentList[index ~/ 2]);
       }
     });
     return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: childrenFLex);
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: childrenFLex,
+    );
   }
 }

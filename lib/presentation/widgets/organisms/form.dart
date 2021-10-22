@@ -1,4 +1,5 @@
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
+import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/input_controls/form_erros.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/input_controls/input.dart';
@@ -23,17 +24,21 @@ class OrganismForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       ChangeNotifierProvider<FormProvider>.value(
-          value: provider,
-          child: Form(
-            child: Padding(
-                padding:
-                    BuddySitterMeasurement.marginsHalf.copyWith(bottom: 0.0),
-                child: Column(
-                  children: [
-                    Column(children: children),
-                  ],
-                )),
-          ));
+        value: provider,
+        child: Form(
+          child: Padding(
+            padding: MediaHandler.dynamicType(
+              mobile: BuddySitterMeasurement.marginsHalf.copyWith(bottom: 0.0),
+              tablet: BuddySitterMeasurement.marginsHalf.copyWith(bottom: 0.0),
+              desktop: EdgeInsets.symmetric(
+                horizontal: BuddySitterMeasurement.sizeHigh * 5,
+                vertical: BuddySitterMeasurement.sizeHigh,
+              ).copyWith(bottom: 0.0),
+            ),
+            child: Column(children: children),
+          ),
+        ),
+      );
 
   List<Widget> get children => List.generate(
         fields.length * 2,

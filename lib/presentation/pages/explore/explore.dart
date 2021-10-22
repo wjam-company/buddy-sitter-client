@@ -59,6 +59,7 @@ class Explore extends BuddySitterPageProvider<ProviderExplore> {
 // ,
 
   @override
+  // ignore: avoid_renaming_method_parameters
   Widget body(_) => const Body();
 }
 
