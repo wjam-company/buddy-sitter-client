@@ -3,6 +3,7 @@ import 'package:buddy_sitter/presentation/pages/forgot_password/forgot_password.
 import 'package:buddy_sitter/presentation/pages/home/home.dart';
 import 'package:buddy_sitter/presentation/pages/interfaces.dart';
 import 'package:buddy_sitter/presentation/pages/onboarding/onboarding.dart';
+import 'package:buddy_sitter/presentation/pages/select_your_pet/select_your_pet.dart';
 import 'package:buddy_sitter/presentation/pages/sign_in/sing_in.dart';
 import 'package:buddy_sitter/presentation/pages/sign_up/sing_up.dart';
 import 'package:buddy_sitter/presentation/pages/splash/splash.dart';
@@ -20,6 +21,7 @@ class BuddySitterPage {
     BuddySitterLocation.onboarding: const Onboarding(),
     BuddySitterLocation.recoverPassword: const RecoverPassword(),
     BuddySitterLocation.home: const Home(),
+    BuddySitterLocation.selectYourPet: const SelectYourPet(),
   });
 
   static final Map<String, BuddySitterPageProvider> _animationPage =

@@ -1,4 +1,5 @@
 import 'package:buddy_sitter/presentation/utils/localstorage/localstorage.dart';
+import 'package:buddy_sitter/presentation/utils/navigator/router_information_parser.dart';
 import './pages.dart';
 import './path.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,8 @@ import 'package:provider/provider.dart';
 import './locations.dart';
 
 class RouterPageHandler extends ChangeNotifier {
+  static BuddySitterRouteInformationParser routeInformationParser =
+      BuddySitterRouteInformationParser();
   static RouterPageHandler of(BuildContext context) =>
       Provider.of<RouterPageHandler>(context, listen: false);
 
@@ -16,7 +19,7 @@ class RouterPageHandler extends ChangeNotifier {
     if (BuddySitterPage.length != BuddySitterLocation.length) {
       throw Error();
     }
-    _state = BuddySitterStorage<bool>(type: 'log', initial: true); //false);
+    _state = BuddySitterStorage<bool>(type: 'log', initial: false);
 
     // show splash
     show(
@@ -70,9 +73,8 @@ class RouterPageHandler extends ChangeNotifier {
   bool get canPop => _pagesActive.length >= 2;
 
   Future<void> setNewRoutePath(BuddySitterPath configuration) async {
-    print('setNewRoutePath');
-    if (configuration.isUnknownPage) {
-      // ! TODO logic when change the route inthe browser
-    }
+    RouteInformation? routeInformation =
+        routeInformationParser.restoreRouteInformation(configuration);
+    show(routeInformation?.location ?? '/404');
   }
 }

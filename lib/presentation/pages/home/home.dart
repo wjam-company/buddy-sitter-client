@@ -35,14 +35,16 @@ class Body extends StatelessWidget {
           // Popus
           OrganismCard.headder(
             actionLeft: ActionsRowFLex(
+              onPressed: () {},
               icon: Icon(
-                CupertinoIcons.captions_bubble,
+                CupertinoIcons.add,
                 color: BuddySitterColor.actionsLog,
               ),
             ),
             actionRight: ActionsRowFLex(
+              onPressed: () {},
               icon: Icon(
-                CupertinoIcons.heart,
+                CupertinoIcons.shield,
                 color: BuddySitterColor.complementaryRed,
               ),
             ),

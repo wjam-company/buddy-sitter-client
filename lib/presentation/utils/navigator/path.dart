@@ -7,6 +7,7 @@ class BuddySitterPath {
   final bool _signup;
   final bool _home;
   final bool _recoverPassword;
+  final bool _selectYourPet;
 
   BuddySitterPath.splashArt()
       : _explore = false,
@@ -16,7 +17,8 @@ class BuddySitterPath {
         _onboarding = false,
         _signup = false,
         _home = false,
-        _recoverPassword = false;
+        _recoverPassword = false,
+        _selectYourPet = false;
   BuddySitterPath.singin()
       : _explore = false,
         _splash = false,
@@ -25,7 +27,8 @@ class BuddySitterPath {
         _onboarding = false,
         _signup = false,
         _home = false,
-        _recoverPassword = false;
+        _recoverPassword = false,
+        _selectYourPet = false;
   BuddySitterPath.explore()
       : _explore = true,
         _splash = false,
@@ -34,7 +37,8 @@ class BuddySitterPath {
         _onboarding = false,
         _signup = false,
         _home = false,
-        _recoverPassword = false;
+        _recoverPassword = false,
+        _selectYourPet = false;
   BuddySitterPath.unknown()
       : _explore = false,
         _splash = false,
@@ -43,7 +47,8 @@ class BuddySitterPath {
         _onboarding = false,
         _signup = false,
         _home = false,
-        _recoverPassword = false;
+        _recoverPassword = false,
+        _selectYourPet = false;
   BuddySitterPath.onboarding()
       : _explore = false,
         _splash = false,
@@ -52,7 +57,8 @@ class BuddySitterPath {
         _onboarding = true,
         _signup = false,
         _home = false,
-        _recoverPassword = false;
+        _recoverPassword = false,
+        _selectYourPet = false;
   BuddySitterPath.signup()
       : _explore = false,
         _splash = false,
@@ -61,7 +67,8 @@ class BuddySitterPath {
         _onboarding = false,
         _signup = true,
         _home = false,
-        _recoverPassword = false;
+        _recoverPassword = false,
+        _selectYourPet = false;
   BuddySitterPath.home()
       : _explore = false,
         _splash = false,
@@ -70,7 +77,8 @@ class BuddySitterPath {
         _onboarding = false,
         _signup = false,
         _home = true,
-        _recoverPassword = false;
+        _recoverPassword = false,
+        _selectYourPet = false;
   BuddySitterPath.recoverPassword()
       : _explore = false,
         _splash = false,
@@ -79,7 +87,18 @@ class BuddySitterPath {
         _onboarding = false,
         _signup = false,
         _home = false,
-        _recoverPassword = true;
+        _recoverPassword = true,
+        _selectYourPet = false;
+  BuddySitterPath.selectYourPet()
+      : _explore = false,
+        _splash = false,
+        _unknown = false,
+        _singin = false,
+        _onboarding = false,
+        _signup = false,
+        _home = false,
+        _recoverPassword = false,
+        _selectYourPet = true;
 
   bool get isUnknownPage => _unknown;
   bool get isSplashPage => _splash;
@@ -89,6 +108,7 @@ class BuddySitterPath {
   bool get isSignupPage => _signup;
   bool get isHomePage => _home;
   bool get isRecoverPasswordPage => _recoverPassword;
+  bool get isSelectYourPet => _selectYourPet;
 
   static BuddySitterPath parse(String? url) {
     final Uri uri = Uri.parse(url ?? '');
@@ -116,9 +136,13 @@ class BuddySitterPath {
     if (uri.pathSegments.first == 'home') {
       return BuddySitterPath.home();
     }
-    // path: /signup
-    if (uri.pathSegments.first == 'recover_password') {
+    // path: /recover-password
+    if (uri.pathSegments.first == 'recover-password') {
       return BuddySitterPath.recoverPassword();
+    }
+    // path: /select-your-pet
+    if (uri.pathSegments.first == 'select-your-pet') {
+      return BuddySitterPath.selectYourPet();
     }
     // path: 404
     return BuddySitterPath.unknown();

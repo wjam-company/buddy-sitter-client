@@ -38,7 +38,7 @@ class OrganismBarMenu extends StatelessWidget {
         ActionsRowFLex(
           onPressed: () {},
           icon: Icon(
-            CupertinoIcons.chat_bubble,
+            CupertinoIcons.settings,
             color: BuddySitterColor.actionsLog,
           ),
         ),

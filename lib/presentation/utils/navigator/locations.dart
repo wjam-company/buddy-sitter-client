@@ -4,11 +4,12 @@ class BuddySitterLocation {
   static const String onboarding = '/onboarding';
   static const String splahs = '/';
   static const String explore = '/explore';
-  static const String recoverPassword = '/recover_password';
+  static const String recoverPassword = '/recover-password';
   static const String signup = '/signup';
   static const String home = '/home';
+  static const String selectYourPet = '/select-your-pet';
 
-  static const int length = 8;
+  static const int length = 9;
 
   static const String animationSlide = '/slide';
 }
