@@ -16,7 +16,7 @@ class RouterPageHandler extends ChangeNotifier {
     if (BuddySitterPage.length != BuddySitterLocation.length) {
       throw Error();
     }
-    _state = BuddySitterStorage<bool>(type: 'log', initial: false);
+    _state = BuddySitterStorage<bool>(type: 'log', initial: true); //false);
 
     // show splash
     show(

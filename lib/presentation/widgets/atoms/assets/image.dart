@@ -16,10 +16,13 @@ class AtomImage extends StatelessWidget {
   final double? radius;
   final double? scale;
   final ImageFilter? imageFilter;
+  final BoxFit? fit;
+  final ImageRepeat? repeat;
   static const int typeNetwork = 0;
   static const int typeAsset = 1;
   static const int typeFile = 2;
   static const int typeMemory = 3;
+
   const AtomImage.simple({
     Key? key,
     required this.type,
@@ -32,6 +35,8 @@ class AtomImage extends StatelessWidget {
     this.width,
     this.radius,
     this.scale,
+    this.fit,
+    this.repeat,
   }) : super(key: key);
   const AtomImage.aspectRatio({
     Key? key,
@@ -45,6 +50,8 @@ class AtomImage extends StatelessWidget {
     this.width,
     this.radius,
     this.scale,
+    this.fit,
+    this.repeat,
   }) : super(key: key);
 
   AtomImage.circle({
@@ -57,14 +64,13 @@ class AtomImage extends StatelessWidget {
     this.bytes,
     this.imageFilter,
     this.scale,
-  })  : height =
-            fromRadius(radius ?? BuddySitterMeasurement.sizeHalf, scale ?? 1.0),
-        width =
-            fromRadius(radius ?? BuddySitterMeasurement.sizeHalf, scale ?? 1.0),
+    this.fit,
+    this.repeat,
+  })  : height = fromRadius(radius ?? BuddySitterMeasurement.sizeHalf),
+        width = fromRadius(radius ?? BuddySitterMeasurement.sizeHalf),
         super(key: key);
 
-  static double fromRadius(double radius, double scale) =>
-      ((radius * scale) * 2.0);
+  static double fromRadius(double radius) => (radius * 2.0);
 
   Image get getImage {
     switch (type) {
@@ -73,12 +79,16 @@ class AtomImage extends StatelessWidget {
           src ?? '',
           height: height,
           width: width,
+          repeat: repeat ?? ImageRepeat.noRepeat,
+          scale: scale ?? 1.0,
         );
       case typeAsset:
         return Image.asset(
           src ?? '',
           height: height,
           width: width,
+          repeat: repeat ?? ImageRepeat.noRepeat,
+          scale: scale ?? 1.0,
         );
       case typeFile:
         assert(file != null, 'file no defined');
@@ -87,6 +97,8 @@ class AtomImage extends StatelessWidget {
           file as File,
           height: height,
           width: width,
+          repeat: repeat ?? ImageRepeat.noRepeat,
+          scale: scale ?? 1.0,
         );
       case typeMemory:
         assert(bytes != null, 'bytes no defined');
@@ -95,12 +107,16 @@ class AtomImage extends StatelessWidget {
           bytes as Uint8List,
           height: height,
           width: width,
+          repeat: repeat ?? ImageRepeat.noRepeat,
+          scale: scale ?? 1.0,
         );
       default:
         return Image.asset(
           src ?? '',
           height: height,
           width: width,
+          repeat: repeat ?? ImageRepeat.noRepeat,
+          scale: scale ?? 1.0,
         );
     }
   }

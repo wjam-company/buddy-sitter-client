@@ -4,15 +4,19 @@ import 'package:flutter/material.dart';
 class BuddySitterMeasurement {
   static double get sizeLeast => MediaHandler.proportionalWidth(
         mobile: 3.0,
+        tablet: 3.0,
+        desktop: 5.0,
       );
 
   static double get sizeHalf => MediaHandler.proportionalWidth(
         mobile: 25.0,
+        tablet: 21.0,
         desktop: 18.0,
       );
 
   static double get sizeHigh => MediaHandler.proportionalWidth(
         mobile: 77.0,
+        tablet: 65.0,
         desktop: 55.0,
       );
 

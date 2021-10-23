@@ -8,18 +8,25 @@ class ActionsRowFLex {
   final void Function()? onPressed;
   final void Function()? onLongPress;
 
-  ActionsRowFLex({required this.icon, this.onPressed, this.onLongPress});
+  ActionsRowFLex({
+    required this.icon,
+    this.onPressed,
+    this.onLongPress,
+  });
 }
 
 class MoleculeRowFLex extends StatelessWidget {
   final List<Widget>? children;
   final List<ActionsRowFLex>? actions;
   final double? height;
+  final bool ever;
+
   const MoleculeRowFLex.simple({
     Key? key,
     required this.children,
     this.actions,
     this.height,
+    this.ever = false,
   }) : super(key: key);
 
   const MoleculeRowFLex.action({
@@ -27,6 +34,7 @@ class MoleculeRowFLex extends StatelessWidget {
     this.children,
     required this.actions,
     required this.height,
+    this.ever = false,
   }) : super(key: key);
 
   List<dynamic> get currentList =>
@@ -44,13 +52,15 @@ class MoleculeRowFLex extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> childrenFLex =
-        List.generate((currentList.length * 2) - 1, (index) {
-      if (index % 2 == 1) {
-        return MediaHandler.requiredSingle(
-          mobile: const Spacer(),
-          tablet: SizedBox(width: BuddySitterMeasurement.sizeHalf),
-          desktop: SizedBox(width: BuddySitterMeasurement.sizeHalf),
-        );
+        List.generate((currentList.length * 2) + 1, (index) {
+      if (index % 2 == 0) {
+        return (ever)
+            ? const Spacer()
+            : MediaHandler.requiredSingle(
+                mobile: const Spacer(),
+                tablet: const Spacer(),
+                desktop: SizedBox(width: BuddySitterMeasurement.sizeHalf),
+              );
       } else {
         return decoratorAction(currentList[index ~/ 2]);
       }

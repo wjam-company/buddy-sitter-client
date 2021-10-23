@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class AverageResolutions {
   static const Size desktop = Size(1600.0, 860);
-  static const Size tablet = Size(1024.0, 1366.0);
+  static const Size tablet = Size(950.0, 1366.0);
   static const Size mobile = Size(387.0, 777.0);
 }
 
@@ -45,7 +45,8 @@ class MediaHandler {
         mobile: mobile,
         desktop: desktop,
         tablet: tablet,
-      ) as Widget;
+      ) ??
+      mobile;
 
   static List<Widget> requiredMultiple({
     required List<Widget> mobile,
@@ -56,7 +57,8 @@ class MediaHandler {
         mobile: mobile,
         desktop: desktop,
         tablet: tablet,
-      ) as List<Widget>;
+      ) ??
+      mobile;
 
   static Widget? single({
     Widget? mobile,
@@ -158,6 +160,13 @@ class MediaHandler {
             WidgetsBinding.instance?.window as SingletonFlutterWindow);
 
     _setOrientation = _setSize = _setMoble = _setTablet = _setDesktop = data;
+
+    runWhen(
+      mobile: () => print('Mobile'),
+      tablet: () => print('tablet'),
+      desktop: () => print('desktop'),
+    );
+
     return data;
   }
 }
