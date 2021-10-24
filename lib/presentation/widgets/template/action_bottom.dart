@@ -33,6 +33,8 @@ class TemplateActionBottom extends StatelessWidget {
               bottomRight: Radius.zero,
             ),
           ),
+          desktop: RoundedRectangleBorder(
+              borderRadius: BuddySitterMeasurement.borderRadiusHalf),
         ),
         margin: EdgeInsets.zero,
         clipBehavior: Clip.antiAlias,
