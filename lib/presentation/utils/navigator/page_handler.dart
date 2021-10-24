@@ -57,8 +57,14 @@ class RouterPageHandler extends ChangeNotifier {
     if (change && curentPages.isNotEmpty) {
       curentPages.removeLast();
     }
+    if (BuddySitterPage.access(buddySitterLocation, _state.syncGet())) {
+      curentPages.add(BuddySitterPage.of(buddySitterLocation));
+    } else if (buddySitterLocation == BuddySitterLocation.splahs) {
+      curentPages.add(BuddySitterPage.of(buddySitterLocation));
+    } else {
+      curentPages.add(BuddySitterPage.of(BuddySitterLocation.unknown));
+    }
 
-    curentPages.add(BuddySitterPage.of(buddySitterLocation));
     if (notify) {
       notifyListeners();
     }
@@ -75,6 +81,7 @@ class RouterPageHandler extends ChangeNotifier {
   Future<void> setNewRoutePath(BuddySitterPath configuration) async {
     RouteInformation? routeInformation =
         routeInformationParser.restoreRouteInformation(configuration);
-    show(routeInformation?.location ?? '/404');
+    String location = routeInformation?.location ?? '/404';
+    show(location);
   }
 }

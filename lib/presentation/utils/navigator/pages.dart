@@ -12,6 +12,17 @@ import 'package:flutter/material.dart';
 import 'locations.dart';
 
 class BuddySitterPage {
+  static final Map<String, bool> _auth = Map.unmodifiable({
+    BuddySitterLocation.splahs: false,
+    BuddySitterLocation.unknown: false,
+    BuddySitterLocation.signin: false,
+    BuddySitterLocation.signup: false,
+    BuddySitterLocation.onboarding: false,
+    BuddySitterLocation.explore: true,
+    BuddySitterLocation.recoverPassword: true,
+    BuddySitterLocation.home: true,
+    BuddySitterLocation.selectYourPet: true,
+  });
   static final Map<String, BuddySitterPageProvider> _pages = Map.unmodifiable({
     BuddySitterLocation.splahs: const Splash(),
     BuddySitterLocation.unknown: const Unknown(),
@@ -24,10 +35,9 @@ class BuddySitterPage {
     BuddySitterLocation.selectYourPet: const SelectYourPet(),
   });
 
-  static final Map<String, BuddySitterPageProvider> _animationPage =
-      Map.unmodifiable({
-    BuddySitterLocation.recoverPassword: const RecoverPassword(),
-  });
+  static bool access(String location, bool state) {
+    return (_auth[location] ?? false) == state;
+  }
 
   static int get length => _pages.length;
 
