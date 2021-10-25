@@ -3,21 +3,23 @@ import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:flutter/material.dart';
 
-class ActionsRowFLex {
+class BuddySitterAction {
   final Icon icon;
+  final String text;
   final void Function()? onPressed;
   final void Function()? onLongPress;
 
-  ActionsRowFLex({
+  BuddySitterAction({
     required this.icon,
     this.onPressed,
     this.onLongPress,
+    this.text = '',
   });
 }
 
 class MoleculeRowFLex extends StatelessWidget {
   final List<Widget>? children;
-  final List<ActionsRowFLex>? actions;
+  final List<BuddySitterAction>? actions;
   final double? height;
   final bool ever;
 

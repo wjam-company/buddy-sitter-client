@@ -133,6 +133,7 @@ class TemplateActionBottom extends StatelessWidget {
           children: content,
         ),
         desktop: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               width: BuddySitterMeasurement.sizeUpper * 0.2,

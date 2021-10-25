@@ -14,8 +14,8 @@ class OrganismCard extends StatelessWidget {
   final String profile;
   final String name;
   final String content;
-  final ActionsRowFLex actionLeft;
-  final ActionsRowFLex actionRight;
+  final BuddySitterAction actionLeft;
+  final BuddySitterAction actionRight;
   final bool margin;
   final bool topBorderRadius;
   const OrganismCard.simple({

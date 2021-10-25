@@ -109,39 +109,39 @@ class BuddySitterColor implements Color {
       ) ??
       this;
 
-  static BuddySitterColor get light =>
+  static final BuddySitterColor light =
       BuddySitterColor.fromRGBO(0xD1, 0xFF, 0xDA, 1);
 
-  static BuddySitterColor get dark =>
+  static final BuddySitterColor dark =
       BuddySitterColor.fromRGBO(0x33, 0x47, 0x37, 1);
 
-  static BuddySitterColor get primaryGreen =>
+  static final BuddySitterColor primaryGreen =
       BuddySitterColor.fromRGBO(0x5E, 0xE1, 0x77, 1);
 
-  static BuddySitterColor get primaryPurple =>
+  static final BuddySitterColor primaryPurple =
       BuddySitterColor.fromRGBO(0x9B, 0x75, 0xE0, 1);
 
-  static BuddySitterColor get primaryBeige =>
+  static final BuddySitterColor primaryBeige =
       BuddySitterColor.fromRGBO(0xE0, 0x99, 0x48, 1);
 
-  static BuddySitterColor get complementaryBlue =>
+  static final BuddySitterColor complementaryBlue =
       BuddySitterColor.fromRGBO(0x69, 0xE0, 0xC3, 1);
 
-  static BuddySitterColor get complementaryLilac =>
+  static final BuddySitterColor complementaryLilac =
       BuddySitterColor.fromRGBO(0xD6, 0x75, 0xE0, 1);
 
-  static BuddySitterColor get complementaryRed =>
+  static final BuddySitterColor complementaryRed =
       BuddySitterColor.fromRGBO(0xE0, 0x6C, 0x48, 1);
 
-  static BuddySitterColor get actionsError =>
+  static final BuddySitterColor actionsError =
       BuddySitterColor.fromRGBO(0xE0, 0x48, 0x63, 1);
 
-  static BuddySitterColor get actionsWarning =>
+  static final BuddySitterColor actionsWarning =
       BuddySitterColor.fromRGBO(0xE0, 0xBD, 0x53, 1);
 
-  static BuddySitterColor get actionsLog =>
+  static final BuddySitterColor actionsLog =
       BuddySitterColor.fromRGBO(0x75, 0x88, 0xE0, 1);
 
-  static BuddySitterColor get actionsSuccess =>
+  static final BuddySitterColor actionsSuccess =
       BuddySitterColor.fromRGBO(0x48, 0xE0, 0x64, 1);
 }

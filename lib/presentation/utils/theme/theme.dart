@@ -34,6 +34,10 @@ class BuddySitterTheme {
 
   static InputDecorationTheme get inputDecorationTheme {
     return InputDecorationTheme(
+      focusColor: BuddySitterColor.light.brighten(0.8),
+      fillColor: BuddySitterColor.light.brighten(0.8),
+      hoverColor: BuddySitterColor.light.brighten(0.8),
+      filled: true,
       contentPadding: EdgeInsets.symmetric(
         horizontal: BuddySitterMeasurement.sizeHalf,
         vertical: (BuddySitterMeasurement.sizeHigh / 2) -
@@ -48,8 +52,8 @@ class BuddySitterTheme {
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BuddySitterMeasurement.borderRadiusHalf,
-        borderSide: const BorderSide(
-          color: Colors.transparent,
+        borderSide: BorderSide(
+          color: BuddySitterColor.actionsLog,
         ),
         gapPadding: BuddySitterMeasurement.sizeLeast,
       ),

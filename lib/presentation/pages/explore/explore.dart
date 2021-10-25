@@ -1,6 +1,7 @@
 import 'package:buddy_sitter/presentation/utils/navigator/locations.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
+import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
@@ -26,8 +27,14 @@ class Explore extends BuddySitterPageProvider<ProviderExplore> {
         Provider.of<RouterPageHandler>(context, listen: false)
             .show(BuddySitterLocation.selectYourPet);
       },
-      text: AtomText.content(text: 'Search'),
-      icon: const Icon(Icons.search),
+      text: AtomText.content(
+        text: 'Search',
+        padding: EdgeInsets.only(left: BuddySitterMeasurement.sizeHigh * .5),
+      ),
+      icon: Icon(
+        Icons.search,
+        color: BuddySitterColor.dark.brighten(.5),
+      ),
     );
 
     /*
@@ -88,14 +95,14 @@ class Body extends StatelessWidget {
             ),
           ),
           OrganismCard.simple(
-            actionLeft: ActionsRowFLex(
+            actionLeft: BuddySitterAction(
               onPressed: () {},
               icon: Icon(
                 CupertinoIcons.captions_bubble,
                 color: BuddySitterColor.actionsLog,
               ),
             ),
-            actionRight: ActionsRowFLex(
+            actionRight: BuddySitterAction(
               onPressed: () {},
               icon: Icon(
                 CupertinoIcons.heart,

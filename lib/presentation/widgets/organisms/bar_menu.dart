@@ -17,7 +17,7 @@ class OrganismBarMenu extends StatelessWidget {
     return MoleculeRowFLex.action(
       height: BuddySitterMeasurement.sizeHalf * 3,
       actions: [
-        ActionsRowFLex(
+        BuddySitterAction(
           onPressed: () =>
               Provider.of<RouterPageHandler>(context, listen: false)
                   .show(BuddySitterLocation.home, change: true),
@@ -26,7 +26,7 @@ class OrganismBarMenu extends StatelessWidget {
             color: BuddySitterColor.actionsLog,
           ),
         ),
-        ActionsRowFLex(
+        BuddySitterAction(
           onPressed: () =>
               Provider.of<RouterPageHandler>(context, listen: false)
                   .show(BuddySitterLocation.explore, change: true),
@@ -35,7 +35,7 @@ class OrganismBarMenu extends StatelessWidget {
             color: BuddySitterColor.actionsLog,
           ),
         ),
-        ActionsRowFLex(
+        BuddySitterAction(
           onPressed: () {},
           icon: Icon(
             CupertinoIcons.settings,

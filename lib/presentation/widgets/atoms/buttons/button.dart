@@ -1,6 +1,7 @@
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
+import 'package:buddy_sitter/presentation/utils/theme/text.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:flutter/material.dart';
 
@@ -158,6 +159,8 @@ class AtomButton extends StatelessWidget {
     assert(text != null, 'Your need defined the height');
     return SizedBox(
       width: double.infinity,
+      height: (BuddySitterMeasurement.sizeHigh) -
+          ((BuddySitterText.content.fontSize as double) / 2),
       child: TextButton(
         style: ButtonStyle(
           splashFactory: NoSplash.splashFactory,
@@ -171,6 +174,8 @@ class AtomButton extends StatelessWidget {
           ),
           shadowColor:
               MaterialStateColor.resolveWith((states) => Colors.transparent),
+          overlayColor:
+              MaterialStateColor.resolveWith((states) => Colors.transparent),
           backgroundColor: MaterialStateColor.resolveWith(
             colorHadler ?? (_) => BuddySitterColor.light.brighten(0.8),
           ),
@@ -182,11 +187,11 @@ class AtomButton extends StatelessWidget {
             text ?? AtomText.content(text: ''),
             const Spacer(),
             Padding(
-              padding: BuddySitterMeasurement.marginsHalf.copyWith(
-                top: 0.0,
-                bottom: 0.0,
+              padding: EdgeInsets.zero.copyWith(
+                left: BuddySitterMeasurement.sizeHalf * 0.75,
+                right: ((BuddySitterMeasurement.sizeHalf) * 1.75),
               ),
-              child: icon ?? const Icon(Icons.search_outlined),
+              child: icon ?? const Icon(Icons.search),
             ),
           ],
         ),

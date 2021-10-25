@@ -34,14 +34,14 @@ class Body extends StatelessWidget {
         children: [
           // Popus
           OrganismCard.headder(
-            actionLeft: ActionsRowFLex(
+            actionLeft: BuddySitterAction(
               onPressed: () {},
               icon: Icon(
                 CupertinoIcons.add,
                 color: BuddySitterColor.actionsLog,
               ),
             ),
-            actionRight: ActionsRowFLex(
+            actionRight: BuddySitterAction(
               onPressed: () {},
               icon: Icon(
                 CupertinoIcons.shield,

@@ -29,7 +29,12 @@ class RouterPageHandler extends ChangeNotifier {
     _state.get().then((value) {
       show(
         value ? BuddySitterLocation.explore : BuddySitterLocation.onboarding,
+        /*
+        value
+            ? BuddySitterLocation.selectYourPet
+            : BuddySitterLocation.onboarding,
         change: true,
+        */
       );
       _state.addListener(notifyListeners);
     });
