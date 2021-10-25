@@ -18,6 +18,7 @@ class Review {
     required this.createdAt,
     required this.updatedAt,
   });
+
   factory Review.fromJson(Map<String, dynamic> json) {
     return Review(
       id: json['id'],

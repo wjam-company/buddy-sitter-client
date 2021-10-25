@@ -1,24 +1,28 @@
-import 'package:buddy_sitter/data/dynamic/url.dart';
+import './url.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'model/requets/log.dart';
 
 class ApiMananger {
-  Future<Login> fetchLogin({
+  static Future<Login> fetchLogin({
     required String password,
     required String email,
   }) async {
     final response = await http.post(
       Uri.parse(Url.login),
-      body: jsonEncode(<String, String>{
-        'password': password,
-        'email': email,
-      }),
+      body: jsonEncode(
+        <String, String>{
+          'password': password,
+          'email': email,
+        },
+      ),
     );
+
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      return Login.fromJson(jsonDecode(response.body));
+      Login log = Login.fromJson(jsonDecode(response.body));
+      return log;
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
@@ -26,7 +30,7 @@ class ApiMananger {
     }
   }
 
-  Future<Login> fetchProfile() async {
+  static Future<Login> fetchProfile() async {
     final response = await http.get(Uri.parse(Url.profile));
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -38,4 +42,11 @@ class ApiMananger {
       throw Exception('Failed to load login');
     }
   }
+}
+
+void main() {
+  ApiMananger.fetchLogin(
+    password: 'holapetter',
+    email: 'doctor@octopus.com',
+  ).then((value) => print(value)).catchError((e) => print(e));
 }
