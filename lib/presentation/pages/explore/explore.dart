@@ -111,10 +111,11 @@ class Body extends StatelessWidget {
             ),
             content:
                 'Eu adipisicing eu ex sit non in nulla incididunt adipisicing culpa incididunt elit. Ut cillum incididunt anim velit aute est duis esse esse et est.',
-            image: 'https://statics-cuidateplus.marca.com/cms/mascotas_0.jpg',
+            image:
+                'https://media.istockphoto.com/photos/young-redhead-woman-hug-her-small-mixedbreed-dog-picture-id485251750?b=1&k=20&m=485251750&s=170667a&w=0&h=v7Wf4tPLnkGl_yZxXiWyjzKYdLgirM_zieYBLilAM5c=',
             name: 'Juanita',
             profile:
-                'https://i.scdn.co/image/ab6761610000e5eb567128259b78fea242010245',
+                'https://media.istockphoto.com/photos/young-redhead-woman-hug-her-small-mixedbreed-dog-picture-id485251750?b=1&k=20&m=485251750&s=170667a&w=0&h=v7Wf4tPLnkGl_yZxXiWyjzKYdLgirM_zieYBLilAM5c=',
           ),
         ],
       ),

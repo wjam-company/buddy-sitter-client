@@ -48,23 +48,10 @@ class OrganismForm extends StatelessWidget {
                       bottom: 0.0,
                     ),
                   )
-                : MediaHandler.dynamicType(
-                    mobile: BuddySitterMeasurement.marginsHalf.copyWith(
-                      bottom: 0.0,
-                      left: 0.0,
-                      right: 0.0,
-                    ),
-                    tablet: BuddySitterMeasurement.marginsHalf.copyWith(
-                      bottom: 0.0,
-                      left: 0.0,
-                      right: 0.0,
-                    ),
-                    desktop: EdgeInsets.symmetric(
-                      vertical: BuddySitterMeasurement.sizeHigh,
-                    ).copyWith(
-                      bottom: 0.0,
-                      left: 0.0,
-                    ),
+                : BuddySitterMeasurement.marginsHalf.copyWith(
+                    bottom: 0.0,
+                    left: 0.0,
+                    right: 0.0,
                   ),
             child: Column(children: children),
           ),

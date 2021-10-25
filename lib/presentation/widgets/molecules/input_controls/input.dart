@@ -12,6 +12,7 @@ class MoleculeInput extends StatefulWidget {
   final IconData? icon;
   final FocusNode? focus;
   final bool obscureText;
+  final bool autofocus;
   final TextEditingController Function() controler;
 
   const MoleculeInput.text({
@@ -21,6 +22,7 @@ class MoleculeInput extends StatefulWidget {
     required this.entry,
     required this.controler,
     this.focus,
+    this.autofocus = false,
   })  : obscureText = false,
         super(key: key);
 
@@ -31,6 +33,7 @@ class MoleculeInput extends StatefulWidget {
     required this.entry,
     required this.controler,
     this.focus,
+    this.autofocus = false,
   })  : obscureText = true,
         super(key: key);
 
@@ -85,6 +88,7 @@ class _MoleculeInputState extends State<MoleculeInput> {
         bottom: BuddySitterMeasurement.sizeHalf,
       ),
       child: TextFormField(
+        autofocus: widget.autofocus,
         focusNode: widget.focus,
         controller: _controler,
         obscureText: widget.obscureText,
