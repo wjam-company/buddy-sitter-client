@@ -46,7 +46,7 @@ class ApiMananger {
 
 void main() {
   ApiMananger.fetchLogin(
-    password: 'holapetter',
-    email: 'doctor@octopus.com',
+    password: '12345678fF*',
+    email: 'willy@gmail.com',
   ).then((value) => print(value)).catchError((e) => print(e));
 }

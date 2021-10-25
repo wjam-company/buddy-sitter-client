@@ -1,6 +1,6 @@
 class Bathroom {
-  final DateTime times;
-  final DateTime hours;
+  final int times;
+  final List<String> hours;
   final String type;
   Bathroom({required this.times, required this.hours, required this.type});
 }
@@ -8,19 +8,19 @@ class Bathroom {
 class Pet {
   final String id;
   final String name;
-  final String vacationationCard;
+  final String vaccinationationCard;
   final String observations;
-  final int walkFrequency;
+  final int walkFrequencyPerDay;
   final Bathroom bathroom;
-  final String mealHours;
+  final List<String> mealHours;
   final String diet;
   final String disabilities;
   final String healthStatus;
   final String prevSurgeries;
-  final String vestPhone;
-  final String vestName;
+  final String vetsPhone;
+  final String vetsName;
   final String breed;
-  final int weight;
+  final double weight;
   final String gender;
   final DateTime birthDate;
   final String typeAnimal;
@@ -28,17 +28,17 @@ class Pet {
   Pet({
     required this.id,
     required this.name,
-    required this.vacationationCard,
+    required this.vaccinationationCard,
     required this.observations,
-    required this.walkFrequency,
+    required this.walkFrequencyPerDay,
     required this.bathroom,
     required this.mealHours,
     required this.diet,
     required this.disabilities,
     required this.healthStatus,
     required this.prevSurgeries,
-    required this.vestPhone,
-    required this.vestName,
+    required this.vetsPhone,
+    required this.vetsName,
     required this.breed,
     required this.weight,
     required this.gender,
@@ -50,12 +50,12 @@ class Pet {
       id: json['id'],
       name: json['name'],
       observations: json['observations'],
-      vacationationCard: json['vaccination_card'],
-      walkFrequency: json['walk_frequency'],
+      vaccinationationCard: json['vaccination_card'],
+      walkFrequencyPerDay: json['walk_frequency'],
       weight: json['weight'],
       bathroom: Bathroom(
-        hours: DateTime(json['bathroom_hours']),
-        times: DateTime(json['bathroom_times']),
+        hours: json['bathroom_hours'],
+        times: json['bathroom_times'],
         type: json['bathroom'],
       ),
       birthDate: DateTime(json['birth_date']),
@@ -67,8 +67,8 @@ class Pet {
       mealHours: json['meal_hours'],
       prevSurgeries: json['prev_surgeries'],
       typeAnimal: json['type_animal'],
-      vestName: json['vets_name'],
-      vestPhone: json['vets_phone'],
+      vetsName: json['vets_name'],
+      vetsPhone: json['vets_phone'],
     );
   }
 }
