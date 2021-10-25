@@ -7,13 +7,13 @@ class AtomSnack extends StatelessWidget {
   final String caption;
   final String title;
   final Icon icon;
-  final Function() action;
+  final void Function()? action;
   const AtomSnack({
     Key? key,
     required this.caption,
     required this.title,
     required this.icon,
-    required this.action,
+    this.action,
   }) : super(key: key);
 
   @override

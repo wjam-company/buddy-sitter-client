@@ -12,7 +12,7 @@ import 'package:buddy_sitter/presentation/widgets/organisms/form.dart';
 import 'package:buddy_sitter/presentation/widgets/template/action_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../interfaces.dart';
+import '../interfaces/interfaces.dart';
 import './provider.dart';
 
 class SignIn extends BuddySitterPageProvider<ProviderSignIn> {

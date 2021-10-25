@@ -1,7 +1,7 @@
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:flutter/material.dart';
-import '../interfaces.dart';
+import '../interfaces/interfaces.dart';
 import './provider.dart';
 
 class Unknown extends BuddySitterPageProvider<Provider404> {

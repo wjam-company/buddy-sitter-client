@@ -1,7 +1,7 @@
 import 'package:buddy_sitter/presentation/pages/explore/explore.dart';
 import 'package:buddy_sitter/presentation/pages/forgot_password/forgot_password.dart';
 import 'package:buddy_sitter/presentation/pages/home/home.dart';
-import 'package:buddy_sitter/presentation/pages/interfaces.dart';
+import 'package:buddy_sitter/presentation/pages/interfaces/interfaces.dart';
 import 'package:buddy_sitter/presentation/pages/onboarding/onboarding.dart';
 import 'package:buddy_sitter/presentation/pages/select_your_pet/select_your_pet.dart';
 import 'package:buddy_sitter/presentation/pages/sign_in/sing_in.dart';
