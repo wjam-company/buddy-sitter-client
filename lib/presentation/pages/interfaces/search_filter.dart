@@ -34,7 +34,7 @@ class SearchFilter<T extends ChangeNotifier>
     extends BuddySitterPageProvider<T> {
   const SearchFilter({Key? key}) : super(key: key);
 
-  BuddySitterAction get appBarAction {
+  BuddySitterAction appBarAction(BuildContext context, T currentProvider) {
     throw UnimplementedError();
   }
 
@@ -49,7 +49,8 @@ class SearchFilter<T extends ChangeNotifier>
   bool get haveAppBarProvider => true;
 
   @override
-  Widget appBarTitleProvider(BuildContext context, FormProvider validators) {
+  Widget appBarTitleProvider(
+      BuildContext context, T currentProvider, FormProvider validators) {
     return Stack(
       children: [
         OrganismForm.column(
@@ -64,7 +65,7 @@ class SearchFilter<T extends ChangeNotifier>
                 ExploreValidator.search,
                 validator: ExploreValidator.validSearch,
               ),
-              text: appBarAction.text,
+              text: appBarAction(context, currentProvider).text,
             ),
           ],
         ),
@@ -72,18 +73,12 @@ class SearchFilter<T extends ChangeNotifier>
           right: BuddySitterMeasurement.sizeHalf,
           top: BuddySitterMeasurement.sizeHalf,
           child: AtomButton.cicle(
-              onPressed: appBarAction.onPressed,
-              onLongPress: appBarAction.onLongPress,
-              height: (BuddySitterMeasurement.sizeHigh) -
-                  ((BuddySitterText.content.fontSize as double) / 2),
-              icon: appBarAction.icon
-              /*
-            Icon(
-              Icons.search,
-              color: BuddySitterColor.dark.brighten(.5),
-            ),
-            */
-              ),
+            onPressed: appBarAction(context, currentProvider).onPressed,
+            onLongPress: appBarAction(context, currentProvider).onLongPress,
+            height: (BuddySitterMeasurement.sizeHigh) -
+                ((BuddySitterText.content.fontSize as double) / 2),
+            icon: appBarAction(context, currentProvider).icon,
+          ),
         ),
       ],
     );
@@ -128,47 +123,27 @@ class BodySearchFilter extends StatelessWidget {
                 }
                 index -= 1;
                 return MoleculeListTile(
-                    image: snapshot.data[index].image,
-                    /*
-                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjh5E6lDdlw5R7h6tiwcvuly5qfbRnrVV6tKrGc-bb1Zq-Mu1kbcwPgFIN0w_jKsAFbNo&usqp=CAU',
-                 'https://t3.ftcdn.net/jpg/02/95/94/94/360_F_295949484_8BrlWkTrPXTYzgMn3UebDl1O13PcVNMU.jpg',
-                */
-                    title: snapshot.data[index].title,
-                    /*
-                  'Buster',
-                  'Magna',
-                */
-                    content: snapshot.data[index].content,
-                    /*
-                  'Deserunt aqui magna',
-                  'Deserunt aqui magna',
-                */
-                    action: snapshot.data[index].action
-                    /* 
-             BuddySitterAction(
-                text: 
-                'Select',
-                onPressed: () {},
-                icon: Icon(
-                  CupertinoIcons.check_mark_circled,
-                  color: BuddySitterColor.light,
-                ),
-              ),
-              */
-                    );
+                  image: snapshot.data[index].image,
+                  title: snapshot.data[index].title,
+                  content: snapshot.data[index].content,
+                  action: snapshot.data[index].action,
+                );
               },
             );
           } else if (snapshot.hasError) {
-            return const AtomSnack(
-              title: 'Connection error',
-              caption: 'Ups your connection has an error',
-              icon: Icon(CupertinoIcons.exclamationmark_circle),
+            return const Center(
+              child: AtomSnack(
+                title: 'Connection error',
+                caption: 'Ups your connection has an error',
+                icon: Icon(CupertinoIcons.exclamationmark_circle),
+              ),
             );
           } else {
             return Center(
               child: SpinKitPumpingHeart(
                 color: BuddySitterColor.complementaryRed,
                 size: BuddySitterMeasurement.sizeHigh,
+                duration: const Duration(milliseconds: 1200),
               ),
             );
           }
@@ -179,16 +154,9 @@ class BodySearchFilter extends StatelessWidget {
           color: BuddySitterColor.actionsLog,
           child: AtomButton.bottom(
             icon: action(context).icon,
-            /*
-            Icon(
-              Icons.check,
-              color: BuddySitterColor.actionsSuccess,
-            ),
-            */
             height: BuddySitterMeasurement.sizeHalf / 2,
             text: AtomText.content(
               text: action(context).text,
-              // 'Continue',
               color: BuddySitterColor.light.brighten(0.5),
             ),
             colorHadler: (_) => BuddySitterColor.actionsLog,

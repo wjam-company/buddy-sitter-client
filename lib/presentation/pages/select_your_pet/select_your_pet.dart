@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:buddy_sitter/presentation/pages/interfaces/search_filter.dart';
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
@@ -16,12 +18,13 @@ class SelectYourPet extends SearchFilter<ProviderSelectYourPet> {
       ProviderSelectYourPet(formProvider);
 
   @override
-  BuddySitterAction get appBarAction => BuddySitterAction(
+  BuddySitterAction appBarAction(context, currentProvider) => BuddySitterAction(
         icon: Icon(
           Icons.search,
           color: BuddySitterColor.dark.brighten(.5),
         ),
         text: 'Search',
+        onPressed: currentProvider.filter,
       );
 
   @override
@@ -31,19 +34,18 @@ class SelectYourPet extends SearchFilter<ProviderSelectYourPet> {
 
 class Body extends BodySearchFilter {
   @override
-  Future<List<ItemListItem>> listData(BuildContext context) {
-    Provider.of<ProviderSelectYourPet>(context);
+  Future<List<ItemListItem>> listData(BuildContext context) async {
+    ProviderSelectYourPet providerSelectYourPet =
+        Provider.of<ProviderSelectYourPet>(context);
+    return await providerSelectYourPet.data;
   }
 
   @override
-  String listTitle(BuildContext context) {
-    Provider.of<ProviderSelectYourPet>(context);
-  }
+  String listTitle(BuildContext context) => 'Chouse your pet';
 
   @override
-  BuddySitterAction action(BuildContext context) {
-    Provider.of<ProviderSelectYourPet>(context);
-  }
+  BuddySitterAction action(BuildContext context) =>
+      Provider.of<ProviderSelectYourPet>(context, listen: false).action;
 
   const Body({
     Key? key,

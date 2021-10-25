@@ -24,7 +24,8 @@ abstract class BuddySitterPageProvider<T extends ChangeNotifier>
     throw UnimplementedError();
   }
 
-  Widget appBarTitleProvider(BuildContext context, FormProvider validators) {
+  Widget appBarTitleProvider(
+      BuildContext context, T currentProvider, FormProvider validators) {
     throw UnimplementedError();
   }
 
@@ -39,20 +40,16 @@ abstract class BuddySitterPageProvider<T extends ChangeNotifier>
   @override
   Widget build(BuildContext context) {
     late FormProvider barProvider;
+    late T currentProvider;
     if (haveAppBarProvider) {
       barProvider = appBarProvider;
+      currentProvider = providerWithAppBar(context, barProvider);
+    } else {
+      currentProvider = provider(context);
     }
     MediaHandler.of(context);
-    return ChangeNotifierProvider<T>(
-      create: (_) {
-        final T currentProvider;
-        if (haveAppBarProvider) {
-          currentProvider = providerWithAppBar(context, barProvider);
-        } else {
-          currentProvider = provider(_);
-        }
-        return currentProvider;
-      },
+    return ChangeNotifierProvider<T>.value(
+      value: currentProvider,
       child: Scaffold(
         appBar: haveAppBar
             ? AppBar(
@@ -60,7 +57,7 @@ abstract class BuddySitterPageProvider<T extends ChangeNotifier>
                     Provider.of<RouterPageHandler>(context, listen: false)
                         .canPop,
                 title: haveAppBarProvider
-                    ? appBarTitleProvider(context, barProvider)
+                    ? appBarTitleProvider(context, currentProvider, barProvider)
                     : appBarTitle(context),
                 centerTitle: true,
               )

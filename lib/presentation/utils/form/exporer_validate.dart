@@ -5,7 +5,7 @@ class ExploreValidator {
 
   static ValidationItem validSearch(
       ValidationItem prevValidation, String value) {
-    if (!value.contains(RegExp('{0, 255}'))) {
+    if (!value.contains(RegExp(r'.{0,255}'))) {
       prevValidation.errors.add(
         FormError(
           message: 'Maximun 254 characters',

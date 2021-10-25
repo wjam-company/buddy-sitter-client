@@ -9,6 +9,10 @@ class BuddySitterRouterDelegate extends RouterDelegate<BuddySitterPath>
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
   final RouterPageHandler _pageHandler = RouterPageHandler();
 
+  void resize() {
+    _pageHandler.notifyListeners();
+  }
+
   BuddySitterRouterDelegate() {
     _pageHandler.addListener(notifyListeners);
   }
