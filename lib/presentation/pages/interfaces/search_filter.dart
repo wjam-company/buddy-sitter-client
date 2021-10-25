@@ -30,7 +30,23 @@ class ItemListItem {
   });
 }
 
-class SearchFilter<T extends ChangeNotifier>
+class ProviderSearchFilter with ChangeNotifier {
+  final FormProvider formProvider;
+
+  ProviderSearchFilter(this.formProvider) {
+    formProvider.addListener(notifyListeners);
+  }
+
+  BuddySitterAction get action {
+    throw UnimplementedError();
+  }
+
+  Future<List<ItemListItem>> get data async {
+    throw UnimplementedError();
+  }
+}
+
+class SearchFilter<T extends ProviderSearchFilter>
     extends BuddySitterPageProvider<T> {
   const SearchFilter({Key? key}) : super(key: key);
 

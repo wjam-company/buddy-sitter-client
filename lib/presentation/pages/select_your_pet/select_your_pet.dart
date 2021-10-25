@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:buddy_sitter/presentation/pages/interfaces/search_filter.dart';
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
@@ -24,7 +22,6 @@ class SelectYourPet extends SearchFilter<ProviderSelectYourPet> {
           color: BuddySitterColor.dark.brighten(.5),
         ),
         text: 'Search',
-        onPressed: currentProvider.filter,
       );
 
   @override

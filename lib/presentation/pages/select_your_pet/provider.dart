@@ -3,19 +3,13 @@ import 'package:buddy_sitter/presentation/utils/form/provider.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class ProviderSelectYourPet with ChangeNotifier {
-  final FormProvider formProvider;
+class ProviderSelectYourPet extends ProviderSearchFilter {
+  ProviderSelectYourPet(FormProvider formProvider) : super(formProvider);
 
-  ProviderSelectYourPet(this.formProvider) {
-    formProvider.addListener(notifyListeners);
-  }
-
-  void filter() {}
-
+  @override
   BuddySitterAction get action {
     return BuddySitterAction(
       icon: Icon(
@@ -29,6 +23,7 @@ class ProviderSelectYourPet with ChangeNotifier {
     );
   }
 
+  @override
   Future<List<ItemListItem>> get data async {
     List<ItemListItem> value = await Future<List<ItemListItem>>.delayed(
       const Duration(seconds: 2),

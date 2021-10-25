@@ -125,7 +125,14 @@ class OrganismCard extends StatelessWidget {
                       radius: BuddySitterMeasurement.sizeHalf,
                     ),
                     child: Container(
-                      color: BuddySitterColor.primaryBeige.brighten(.9),
+                      color: BuddySitterColor.complementaryLilac.brighten(.6),
+                      /*
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: BuddySitterColor.dark,
+                        ),
+                      ),
+                      */
                       height: BuddySitterMeasurement.sizeHigh * 3,
                       width: double.infinity,
                       padding: EdgeInsets.all(BuddySitterMeasurement.sizeHalf),
