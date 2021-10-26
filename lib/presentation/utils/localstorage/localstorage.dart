@@ -67,4 +67,34 @@ class BuddySitterStorage<T> extends ChangeNotifier {
       return;
     }
   }
+
+  Future<void> update(T value, {bool notify = true}) async {
+    try {
+      if (T == int) {
+        _data.add(value);
+        (await _storage)?.setInt(_key, value as int);
+      }
+      if (T == double) {
+        _data.add(value);
+        (await _storage)?.setDouble(_key, value as double);
+      }
+      if (T == bool) {
+        _data.add(value);
+        (await _storage)?.setBool(_key, value as bool);
+      }
+      if (T == String) {
+        _data.add(value);
+        (await _storage)?.setString(_key, value as String);
+      }
+      if (T == List) {
+        _data.add(value);
+        (await _storage)?.setStringList(_key, value as List<String>);
+      }
+      if (notify) {
+        notifyListeners();
+      }
+    } catch (_) {
+      return;
+    }
+  }
 }

@@ -51,6 +51,7 @@ abstract class BuddySitterPageProvider<T extends ChangeNotifier>
     return ChangeNotifierProvider<T>.value(
       value: currentProvider,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: haveAppBar
             ? AppBar(
                 automaticallyImplyLeading:

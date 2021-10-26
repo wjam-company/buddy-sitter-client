@@ -18,6 +18,7 @@ class OrganismCard extends StatelessWidget {
   final BuddySitterAction actionRight;
   final bool margin;
   final bool topBorderRadius;
+  final int typeImage;
   const OrganismCard.simple({
     Key? key,
     required this.image,
@@ -26,6 +27,7 @@ class OrganismCard extends StatelessWidget {
     required this.content,
     required this.actionLeft,
     required this.actionRight,
+    this.typeImage = AtomImage.typeNetwork,
   })  : margin = true,
         topBorderRadius = true,
         super(key: key);
@@ -38,6 +40,7 @@ class OrganismCard extends StatelessWidget {
     required this.content,
     required this.actionLeft,
     required this.actionRight,
+    this.typeImage = AtomImage.typeNetwork,
   })  : margin = true,
         topBorderRadius = true,
         super(key: key);
@@ -50,6 +53,7 @@ class OrganismCard extends StatelessWidget {
     required this.content,
     required this.actionLeft,
     required this.actionRight,
+    this.typeImage = AtomImage.typeNetwork,
   })  : margin = false,
         topBorderRadius = false,
         super(key: key);
@@ -105,7 +109,7 @@ class OrganismCard extends StatelessWidget {
                   repeat: ImageRepeat.repeat,
                   imageFilter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                   src: image,
-                  type: AtomImage.typeNetwork,
+                  type: typeImage,
                 ),
               ),
               Column(
@@ -117,7 +121,7 @@ class OrganismCard extends StatelessWidget {
                       tablet: BuddySitterMeasurement.sizeHigh * 5,
                       desktop: BuddySitterMeasurement.sizeHigh * 5,
                     ),
-                    type: AtomImage.typeNetwork,
+                    type: typeImage,
                   ),
                   ClipPath(
                     clipBehavior: Clip.antiAliasWithSaveLayer,
