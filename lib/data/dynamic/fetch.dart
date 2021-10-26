@@ -1,3 +1,5 @@
+import 'package:buddy_sitter/data/dynamic/model/requets/signin.dart';
+
 import './url.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -10,12 +12,10 @@ class ApiMananger {
   }) async {
     final response = await http.post(
       Uri.parse(Url.login),
-      body: jsonEncode(
-        <String, String>{
-          'password': password,
-          'email': email,
-        },
-      ),
+      body: jsonEncode(<String, String>{
+        'email': email,
+        'password': password,
+      }),
     );
 
     if (response.statusCode == 200) {
