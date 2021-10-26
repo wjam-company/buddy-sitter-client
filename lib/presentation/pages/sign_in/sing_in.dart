@@ -51,6 +51,7 @@ class Body extends StatelessWidget {
           AtomText.subheading(
             text: DataTextSignIn.title,
             color: BuddySitterColor.dark,
+            padding: EdgeInsets.zero,
           ),
           AtomText.content(
             text: DataTextSignIn.description,

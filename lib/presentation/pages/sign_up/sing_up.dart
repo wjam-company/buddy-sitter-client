@@ -44,10 +44,12 @@ class Body extends StatelessWidget {
     ]);
     return TemplateActionBottom(
       child: ListView(
+        physics: const AlwaysScrollableScrollPhysics(),
         children: [
           AtomText.subheading(
             text: DataTextSignIn.title,
             color: BuddySitterColor.dark,
+            padding: EdgeInsets.zero,
           ),
           AtomText.content(
             text: DataTextSignIn.description,
@@ -86,7 +88,6 @@ class Body extends StatelessWidget {
               ),
             ],
           ),
-          const Spacer(),
         ],
       ),
       childrenBottom: [

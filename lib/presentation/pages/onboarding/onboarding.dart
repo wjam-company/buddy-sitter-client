@@ -21,6 +21,9 @@ class Onboarding extends BuddySitterPageProvider<ProviderOnboarding> {
   ProviderOnboarding provider(BuildContext context) => ProviderOnboarding();
 
   @override
+  bool get automaticallyImplyLeading => false;
+
+  @override
   // ignore: avoid_renaming_method_parameters
   Widget appBarTitle(_) => AtomText.headingLeast(
         text: 'Buddy Sitter',

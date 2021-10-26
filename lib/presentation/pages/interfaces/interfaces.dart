@@ -37,6 +37,8 @@ abstract class BuddySitterPageProvider<T extends ChangeNotifier>
 
   bool get haveAppBarProvider => false;
 
+  bool get automaticallyImplyLeading => true;
+
   @override
   Widget build(BuildContext context) {
     late FormProvider barProvider;
@@ -54,9 +56,10 @@ abstract class BuddySitterPageProvider<T extends ChangeNotifier>
         resizeToAvoidBottomInset: false,
         appBar: haveAppBar
             ? AppBar(
-                automaticallyImplyLeading:
-                    Provider.of<RouterPageHandler>(context, listen: false)
-                        .canPop,
+                automaticallyImplyLeading: automaticallyImplyLeading
+                    ? Provider.of<RouterPageHandler>(context, listen: false)
+                        .canPop
+                    : false,
                 title: haveAppBarProvider
                     ? appBarTitleProvider(context, currentProvider, barProvider)
                     : appBarTitle(context),
