@@ -4,6 +4,7 @@ import 'package:buddy_sitter/presentation/pages/home/home.dart';
 import 'package:buddy_sitter/presentation/pages/interfaces/interfaces.dart';
 import 'package:buddy_sitter/presentation/pages/onboarding/onboarding.dart';
 import 'package:buddy_sitter/presentation/pages/select_your_pet/select_your_pet.dart';
+import 'package:buddy_sitter/presentation/pages/select_your_services/select_your_services.dart';
 import 'package:buddy_sitter/presentation/pages/sign_in/sing_in.dart';
 import 'package:buddy_sitter/presentation/pages/sign_up/sing_up.dart';
 import 'package:buddy_sitter/presentation/pages/splash/splash.dart';
@@ -22,6 +23,7 @@ class BuddySitterPage {
     BuddySitterLocation.recoverPassword: true,
     BuddySitterLocation.home: true,
     BuddySitterLocation.selectYourPet: true,
+    BuddySitterLocation.selectYourService: true,
   });
   static final Map<String, BuddySitterPageProvider> _pages = Map.unmodifiable({
     BuddySitterLocation.splahs: const Splash(),
@@ -33,6 +35,7 @@ class BuddySitterPage {
     BuddySitterLocation.recoverPassword: const RecoverPassword(),
     BuddySitterLocation.home: const Home(),
     BuddySitterLocation.selectYourPet: const SelectYourPet(),
+    BuddySitterLocation.selectYourService: const SelectYourService(),
   });
 
   static bool access(String location, bool state) {

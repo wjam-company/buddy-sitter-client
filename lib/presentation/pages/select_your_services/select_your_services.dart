@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './provider.dart';
 
-class SelectYourPet extends SearchFilter<ProviderSelectYourPet> {
-  const SelectYourPet({Key? key}) : super(key: key);
+class SelectYourService extends SearchFilter<ProviderSelectYourService> {
+  const SelectYourService({Key? key}) : super(key: key);
 
   @override
-  ProviderSelectYourPet providerWithAppBar(
+  ProviderSelectYourService providerWithAppBar(
           BuildContext context, FormProvider formProvider) =>
-      ProviderSelectYourPet(formProvider);
+      ProviderSelectYourService(formProvider);
 
   @override
   BuddySitterAction appBarAction(context, currentProvider) => BuddySitterAction(
@@ -30,22 +30,22 @@ class SelectYourPet extends SearchFilter<ProviderSelectYourPet> {
 }
 
 class Body extends BodySearchFilter {
+  const Body({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Future<List<ItemListItem>> listData(BuildContext context) async {
-    ProviderSelectYourPet providerSelectYourPet =
-        Provider.of<ProviderSelectYourPet>(context);
+    ProviderSelectYourService providerSelectYourPet =
+        Provider.of<ProviderSelectYourService>(context);
     return await providerSelectYourPet.data;
   }
 
   @override
-  String listTitle(BuildContext context) => 'Chouse your pet';
+  String listTitle(BuildContext context) => 'Chouse your service';
 
   @override
   BuddySitterAction action(BuildContext context) =>
-      Provider.of<ProviderSelectYourPet>(context, listen: false)
+      Provider.of<ProviderSelectYourService>(context, listen: false)
           .action(context);
-
-  const Body({
-    Key? key,
-  }) : super(key: key);
 }

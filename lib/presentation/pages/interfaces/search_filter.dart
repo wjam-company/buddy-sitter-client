@@ -37,7 +37,7 @@ class ProviderSearchFilter with ChangeNotifier {
     formProvider.addListener(notifyListeners);
   }
 
-  BuddySitterAction get action {
+  BuddySitterAction action(BuildContext context) {
     throw UnimplementedError();
   }
 

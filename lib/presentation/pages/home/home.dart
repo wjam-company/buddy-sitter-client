@@ -34,27 +34,28 @@ class Body extends StatelessWidget {
         children: [
           // Popus
           OrganismCard.headder(
-              actionLeft: BuddySitterAction(
-                onPressed: () {},
-                icon: Icon(
-                  CupertinoIcons.add,
-                  color: BuddySitterColor.actionsLog,
-                ),
+            actionLeft: BuddySitterAction(
+              onPressed: () {},
+              icon: Icon(
+                CupertinoIcons.add,
+                color: BuddySitterColor.actionsLog,
               ),
-              actionRight: BuddySitterAction(
-                onPressed: () {},
-                icon: Icon(
-                  CupertinoIcons.shield,
-                  color: BuddySitterColor.complementaryRed,
-                ),
+            ),
+            actionRight: BuddySitterAction(
+              onPressed: () {},
+              icon: Icon(
+                CupertinoIcons.shield,
+                color: BuddySitterColor.complementaryRed,
               ),
-              content:
-                  'Eu adipisicing eu ex sit non in nulla incididunt adipisicing culpa incididunt elit. Ut cillum incididunt anim velit aute est duis esse esse et est.',
-              image:
-                  'https://cms.finnair.com/resource/blob/1393186/668fd19a69a530c7895e91940fe7803a/finnair-lapland-dog-woman-face-closeup-data.jpg?impolicy=crop&width=992&height=558&x=0&y=807&imwidth=768',
-              name: 'Buster',
-              profile:
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjh5E6lDdlw5R7h6tiwcvuly5qfbRnrVV6tKrGc-bb1Zq-Mu1kbcwPgFIN0w_jKsAFbNo&usqp=CAU'),
+            ),
+            content:
+                'Eu adipisicing eu ex sit non in nulla incididunt adipisicing culpa incididunt elit. Ut cillum incididunt anim velit aute est duis esse esse et est.',
+            image:
+                'https://cms.finnair.com/resource/blob/1393186/668fd19a69a530c7895e91940fe7803a/finnair-lapland-dog-woman-face-closeup-data.jpg?impolicy=crop&width=992&height=558&x=0&y=807&imwidth=768',
+            name: 'Buster',
+            profile:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjh5E6lDdlw5R7h6tiwcvuly5qfbRnrVV6tKrGc-bb1Zq-Mu1kbcwPgFIN0w_jKsAFbNo&usqp=CAU',
+          ),
         ],
       ),
       childrenBottom: [

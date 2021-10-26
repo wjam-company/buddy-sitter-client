@@ -8,8 +8,7 @@ class BuddySitterLocation {
   static const String signup = '/signup';
   static const String home = '/home';
   static const String selectYourPet = '/select-your-pet';
+  static const String selectYourService = '/select-your-service';
 
-  static const int length = 9;
-
-  static const String animationSlide = '/slide';
+  static const int length = 10;
 }

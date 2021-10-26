@@ -38,7 +38,7 @@ class OrganismBarMenu extends StatelessWidget {
         BuddySitterAction(
           onPressed: () {},
           icon: Icon(
-            CupertinoIcons.settings,
+            CupertinoIcons.calendar,
             color: BuddySitterColor.actionsLog,
           ),
         ),
