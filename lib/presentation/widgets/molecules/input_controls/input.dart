@@ -10,6 +10,7 @@ class MoleculeInput extends StatefulWidget {
   final String text;
   final String entry;
   final IconData? icon;
+  final bool padding;
   final FocusNode? focus;
   final bool obscureText;
   final bool autofocus;
@@ -23,6 +24,7 @@ class MoleculeInput extends StatefulWidget {
     required this.controler,
     this.focus,
     this.autofocus = false,
+    this.padding = true,
   })  : obscureText = false,
         super(key: key);
 
@@ -34,6 +36,7 @@ class MoleculeInput extends StatefulWidget {
     required this.controler,
     this.focus,
     this.autofocus = false,
+    this.padding = true,
   })  : obscureText = true,
         super(key: key);
 
@@ -59,6 +62,15 @@ class _MoleculeInputState extends State<MoleculeInput> {
     super.dispose();
   }
 
+  Widget decoratorPadding(Widget child) => widget.padding
+      ? Padding(
+          padding: EdgeInsets.zero.copyWith(
+            bottom: BuddySitterMeasurement.sizeHalf,
+          ),
+          child: child,
+        )
+      : child;
+
   @override
   Widget build(BuildContext context) {
     ValidationItem? validation =
@@ -83,11 +95,8 @@ class _MoleculeInputState extends State<MoleculeInput> {
       );
     }
 
-    return Padding(
-      padding: EdgeInsets.zero.copyWith(
-        bottom: BuddySitterMeasurement.sizeHalf,
-      ),
-      child: TextFormField(
+    return decoratorPadding(
+      TextFormField(
         autofocus: widget.autofocus,
         focusNode: widget.focus,
         controller: _controler,
@@ -115,6 +124,6 @@ class _MoleculeInputState extends State<MoleculeInput> {
           ),
         ),
       ),
-    );
+    ); // decoratorPadding
   }
 }

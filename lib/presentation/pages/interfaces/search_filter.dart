@@ -74,26 +74,31 @@ class SearchFilter<T extends ProviderSearchFilter>
           valid: false,
           provider: validators,
           fields: [
-            MoleculeInput.text(
-              autofocus: true,
-              entry: ExploreValidator.search,
-              controler: validators.valid(
-                ExploreValidator.search,
-                validator: ExploreValidator.validSearch,
+            SizedBox(
+              height: (BuddySitterMeasurement.sizeHigh) -
+                  ((BuddySitterText.content.fontSize as double) / 2),
+              child: MoleculeInput.text(
+                padding: false,
+                entry: ExploreValidator.search,
+                controler: validators.valid(
+                  ExploreValidator.search,
+                  validator: ExploreValidator.validSearch,
+                ),
+                text: appBarAction(context, currentProvider).text,
               ),
-              text: appBarAction(context, currentProvider).text,
             ),
           ],
         ),
         Positioned(
           right: BuddySitterMeasurement.sizeHalf,
-          top: BuddySitterMeasurement.sizeHalf,
-          child: AtomButton.cicle(
-            onPressed: appBarAction(context, currentProvider).onPressed,
-            onLongPress: appBarAction(context, currentProvider).onLongPress,
-            height: (BuddySitterMeasurement.sizeHigh) -
-                ((BuddySitterText.content.fontSize as double) / 2),
-            icon: appBarAction(context, currentProvider).icon,
+          child: Center(
+            child: AtomButton.cicle(
+              onPressed: appBarAction(context, currentProvider).onPressed,
+              onLongPress: appBarAction(context, currentProvider).onLongPress,
+              height: (BuddySitterMeasurement.sizeHigh) -
+                  ((BuddySitterText.content.fontSize as double) / 2),
+              icon: appBarAction(context, currentProvider).icon,
+            ),
           ),
         ),
       ],

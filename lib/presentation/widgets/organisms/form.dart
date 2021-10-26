@@ -48,11 +48,7 @@ class OrganismForm extends StatelessWidget {
                       bottom: 0.0,
                     ),
                   )
-                : BuddySitterMeasurement.marginsHalf.copyWith(
-                    bottom: 0.0,
-                    left: 0.0,
-                    right: 0.0,
-                  ),
+                : EdgeInsets.zero,
             child: Column(children: children),
           ),
         ),
