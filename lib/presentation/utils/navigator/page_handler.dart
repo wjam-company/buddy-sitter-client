@@ -1,4 +1,5 @@
 import 'package:buddy_sitter/presentation/utils/localstorage/localstorage.dart';
+import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/router_information_parser.dart';
 import './pages.dart';
 import './path.dart';
@@ -13,17 +14,15 @@ class RouterPageHandler extends ChangeNotifier {
       Provider.of<RouterPageHandler>(context, listen: false);
 
   List<Page> get pages => List.unmodifiable(_pagesActive);
-  late BuddySitterStorage _state;
 
   RouterPageHandler() {
-    _state = BuddySitterStorage<bool>(type: 'log', initial: false);
-
+    BuddySitterData();
     // show splash
     show(
       BuddySitterLocation.splahs,
       notify: false,
     );
-    _state.get().then((value) {
+    BuddySitterData().state.get().then((value) {
       show(
         value ? BuddySitterLocation.explore : BuddySitterLocation.onboarding,
         /*
@@ -32,20 +31,21 @@ class RouterPageHandler extends ChangeNotifier {
             : BuddySitterLocation.onboarding,
             */
       );
-      _state.addListener(notifyListeners);
+      BuddySitterData().state.addListener(notifyListeners);
     });
   }
 
   final List<Page> _pages = [];
   final List<Page> _authPages = [];
 
-  List<Page> get _pagesActive => _state.syncGet() ? _authPages : _pages;
+  List<Page> get _pagesActive =>
+      BuddySitterData().state.syncGet() ? _authPages : _pages;
 
   BuddySitterPath get currentPath =>
       BuddySitterPath.parse(_pagesActive.last.name);
 
   set state(bool value) {
-    _state.set(value);
+    BuddySitterData().state.set(value);
   }
 
   void show(
@@ -58,7 +58,8 @@ class RouterPageHandler extends ChangeNotifier {
     if (change && curentPages.isNotEmpty) {
       curentPages.removeLast();
     }
-    if (BuddySitterPage.access(buddySitterLocation, _state.syncGet())) {
+    if (BuddySitterPage.access(
+        buddySitterLocation, BuddySitterData().state.syncGet())) {
       curentPages.add(BuddySitterPage.of(buddySitterLocation));
     } else if (buddySitterLocation == BuddySitterLocation.splahs) {
       curentPages.add(BuddySitterPage.of(buddySitterLocation));
