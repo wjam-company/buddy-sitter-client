@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'dart:typed_data';
+import 'package:image/image.dart' show Image, decodeImage;
+import 'package:flutter/material.dart' hide Image;
 
 class BuddySitterColor implements Color {
   final Color _color;
@@ -144,4 +146,73 @@ class BuddySitterColor implements Color {
 
   static final BuddySitterColor actionsSuccess =
       BuddySitterColor.fromRGBO(0x48, 0xE0, 0x64, 1);
+
+  static const int noOfPixelsPerAxis = 10;
+
+  static List<BuddySitterColor> extractPixelsColors(Uint8List? bytes) {
+    List<BuddySitterColor> colors = [];
+
+    List<int> values = bytes!.buffer.asUint8List();
+    Image? image = decodeImage(values);
+
+    List<int?> pixels = [];
+
+    int? width = image?.width;
+    int? height = image?.height;
+
+    int xChunk = width! ~/ (noOfPixelsPerAxis + 1);
+    int yChunk = height! ~/ (noOfPixelsPerAxis + 1);
+
+    for (int j = 1; j < noOfPixelsPerAxis + 1; j++) {
+      for (int i = 1; i < noOfPixelsPerAxis + 1; i++) {
+        int pixel = image?.getPixel(xChunk * i, yChunk * j) ?? 0;
+        if (pixel == 0) {
+          continue;
+        }
+        pixels.add(pixel);
+        colors.add(
+          BuddySitterColor.fromRGBO(
+            (pixel >> 24) & 0x0ff,
+            (pixel >> 16) & 0x0ff,
+            (pixel >> 8) & 0x0ff,
+            1,
+          ),
+        );
+      }
+    }
+
+/*
+    value = ((((opacity * 0xff ~/ 1) & 0xff) << 24) |
+              ((r                    & 0xff) << 16) |
+              ((g                    & 0xff) << 8)  |
+              ((b                    & 0xff) << 0)) & 0xFFFFFFFF;
+
+*/
+    return colors;
+  }
+
+  static List<BuddySitterColor> sortColors(List<BuddySitterColor> colors) {
+    List<BuddySitterColor> sorted = [];
+
+    sorted.addAll(colors);
+    sorted.sort((a, b) => b.computeLuminance().compareTo(a.computeLuminance()));
+
+    return sorted;
+  }
+
+  static BuddySitterColor getAverageColor(List<BuddySitterColor> colors) {
+    int r = 0, g = 0, b = 0;
+
+    for (int i = 0; i < colors.length; i++) {
+      r += colors[i].red;
+      g += colors[i].green;
+      b += colors[i].blue;
+    }
+
+    r = r ~/ colors.length;
+    g = g ~/ colors.length;
+    b = b ~/ colors.length;
+
+    return BuddySitterColor.fromRGBO(r, g, b, 1);
+  }
 }

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:buddy_sitter/presentation/utils/clipper/card.dart';
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
@@ -8,6 +9,7 @@ import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class OrganismCard extends StatelessWidget {
   final String image;
@@ -62,6 +64,7 @@ class OrganismCard extends StatelessWidget {
       ? Container(
           margin: EdgeInsets.symmetric(
             horizontal: BuddySitterMeasurement.sizeHalf / 2,
+            vertical: BuddySitterMeasurement.sizeHalf / 4,
           ),
           child: child,
         )
@@ -85,6 +88,53 @@ class OrganismCard extends StatelessWidget {
           child: child,
         );
 
+  Widget containerInfo(BuddySitterColor color) => Container(
+        color: color,
+        height: BuddySitterMeasurement.sizeHigh * 3,
+        width: double.infinity,
+        padding: EdgeInsets.all(BuddySitterMeasurement.sizeHalf),
+        child: Column(
+          children: [
+            SizedBox(
+              height: BuddySitterMeasurement.sizeHigh,
+            ),
+            AtomText.subheading(
+              text: name,
+              padding: EdgeInsets.zero,
+              color: BuddySitterColor.dark,
+            ),
+            const Spacer(),
+            AtomText.content(
+              text: content,
+              padding: EdgeInsets.zero,
+              color: BuddySitterColor.dark,
+            ),
+            const Spacer(),
+          ],
+        ),
+      );
+
+  Widget decoratorColorImage(Widget Function(BuddySitterColor color) widget) =>
+      kIsWeb
+          ? widget(BuddySitterColor.complementaryLilac.brighten(.6))
+          : FutureBuilder(
+              future: (typeImage == AtomImage.typeNetwork
+                  ? NetworkAssetBundle(Uri.parse(image)).load(image)
+                  : rootBundle.load(image)),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  BuddySitterColor color = BuddySitterColor.getAverageColor(
+                    BuddySitterColor.sortColors(
+                      BuddySitterColor.extractPixelsColors(
+                        (snapshot.data as ByteData).buffer.asUint8List(),
+                      ),
+                    ),
+                  );
+                  return widget(color);
+                }
+                return widget(BuddySitterColor.complementaryLilac.brighten(.6));
+              },
+            );
   @override
   Widget build(BuildContext context) {
     return decoratorMargin(
@@ -128,38 +178,7 @@ class OrganismCard extends StatelessWidget {
                     clipper: CardProfileClipper(
                       radius: BuddySitterMeasurement.sizeHalf,
                     ),
-                    child: Container(
-                      color: BuddySitterColor.complementaryLilac.brighten(.6),
-                      /*
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: BuddySitterColor.dark,
-                        ),
-                      ),
-                      */
-                      height: BuddySitterMeasurement.sizeHigh * 3,
-                      width: double.infinity,
-                      padding: EdgeInsets.all(BuddySitterMeasurement.sizeHalf),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: BuddySitterMeasurement.sizeHigh,
-                          ),
-                          AtomText.subheading(
-                            text: name,
-                            padding: EdgeInsets.zero,
-                            color: BuddySitterColor.dark,
-                          ),
-                          const Spacer(),
-                          AtomText.content(
-                            text: content,
-                            padding: EdgeInsets.zero,
-                            color: BuddySitterColor.dark,
-                          ),
-                          const Spacer(),
-                        ],
-                      ),
-                    ),
+                    child: decoratorColorImage(containerInfo),
                   ),
                 ],
               ),

@@ -39,6 +39,7 @@ dependencies:
   localstorage: ^4.0.0+1
   shared_preferences: ^2.0.8
   flutter_spinkit: ^5.1.0
+  image: ^3.0.8
 
 dev_dependencies:
   flutter_test:

@@ -1,11 +1,14 @@
 import 'package:buddy_sitter/presentation/pages/interfaces/search_filter.dart';
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
+import 'package:buddy_sitter/presentation/utils/navigator/locations.dart';
+import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/assets/image.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class ProviderSelectYourService extends ProviderSearchFilter {
   ProviderSelectYourService(FormProvider formProvider) : super(formProvider);
@@ -18,7 +21,8 @@ class ProviderSelectYourService extends ProviderSearchFilter {
         color: BuddySitterColor.actionsSuccess,
       ),
       onPressed: () {
-        print('save the model of service');
+        Provider.of<RouterPageHandler>(context, listen: false)
+            .show(BuddySitterLocation.resultSitters);
       },
       text: 'Continue',
     );
