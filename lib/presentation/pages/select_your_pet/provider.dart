@@ -22,7 +22,7 @@ class ProviderSelectYourPet extends ProviderSearchFilter {
       onPressed: () {
         print('save the model of pet');
         Provider.of<RouterPageHandler>(context, listen: false)
-            .show(BuddySitterLocation.selectYourService, change: true);
+            .show(BuddySitterLocation.selectYourService);
       },
       text: 'Continue',
     );

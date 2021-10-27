@@ -30,7 +30,7 @@ class ProviderSelectYourService extends ProviderSearchFilter {
       const Duration(seconds: 2),
       () => [
         ItemListItem(
-          image: 'assets/image/9.png',
+          image: 'assets/image/12.png',
           imageType: AtomImage.typeAsset,
           title: 'Walk',
           action: BuddySitterAction(
@@ -44,7 +44,7 @@ class ProviderSelectYourService extends ProviderSearchFilter {
           content: '',
         ),
         ItemListItem(
-          image: 'assets/image/10.png',
+          image: 'assets/image/11.png',
           imageType: AtomImage.typeAsset,
           title: 'Sleepover',
           action: BuddySitterAction(
@@ -58,7 +58,7 @@ class ProviderSelectYourService extends ProviderSearchFilter {
           content: '',
         ),
         ItemListItem(
-          image: 'assets/image/11.png',
+          image: 'assets/image/10.png',
           imageType: AtomImage.typeAsset,
           title: 'Special medical care',
           action: BuddySitterAction(
@@ -72,8 +72,8 @@ class ProviderSelectYourService extends ProviderSearchFilter {
           content: '',
         ),
         ItemListItem(
-          image: 'assets/image/12.png',
           imageType: AtomImage.typeAsset,
+          image: 'assets/image/9.png',
           title: 'Daycare',
           action: BuddySitterAction(
             text: 'Select',
