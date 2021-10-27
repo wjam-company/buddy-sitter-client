@@ -1,6 +1,7 @@
 import 'package:buddy_sitter/presentation/pages/interfaces/search_filter.dart';
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
+import 'package:buddy_sitter/presentation/widgets/atoms/assets/image.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +30,11 @@ class ProviderSelectYourService extends ProviderSearchFilter {
       const Duration(seconds: 2),
       () => [
         ItemListItem(
-          image:
-              'https://lh4.googleusercontent.com/sh_Kga2Kq5HjE0xX8B2pivJXT7yJG4e25cBt9xZvygBvxsgH3xOu9vzWxTT_FY8JKA1EOOF5BPvn44zZllAejPo=w1280',
+          image: 'assets/image/9.png',
+          imageType: AtomImage.typeAsset,
           title: 'Walk',
           action: BuddySitterAction(
-            text: '',
+            text: 'Select',
             onPressed: () {},
             icon: Icon(
               CupertinoIcons.check_mark_circled,
@@ -43,11 +44,11 @@ class ProviderSelectYourService extends ProviderSearchFilter {
           content: '',
         ),
         ItemListItem(
-          image:
-              'https://lh6.googleusercontent.com/PSIt6C2ErJU-Or31Edk38xoaw5qd70qZCYcMRT_D8EhwZ95L1hBl8AVmGTTXCtkAX-9S6KVrv6iEGqqfaGpNH1E=w1280',
+          image: 'assets/image/10.png',
+          imageType: AtomImage.typeAsset,
           title: 'Sleepover',
           action: BuddySitterAction(
-            text: '',
+            text: 'Select',
             onPressed: () {},
             icon: Icon(
               CupertinoIcons.check_mark_circled,
@@ -57,11 +58,11 @@ class ProviderSelectYourService extends ProviderSearchFilter {
           content: '',
         ),
         ItemListItem(
-          image:
-              'https://lh5.googleusercontent.com/SClcJS3R0jj5DJxf0nD8NxyVwBXyXE5KnCgU16ff93msJhu1jpBZmIzJ2f9TBqM6wKGox3eas5f1zPghg40im78=w1280',
+          image: 'assets/image/11.png',
+          imageType: AtomImage.typeAsset,
           title: 'Special medical care',
           action: BuddySitterAction(
-            text: '',
+            text: 'Select',
             onPressed: () {},
             icon: Icon(
               CupertinoIcons.check_mark_circled,
@@ -71,11 +72,11 @@ class ProviderSelectYourService extends ProviderSearchFilter {
           content: '',
         ),
         ItemListItem(
-          image:
-              'https://lh3.googleusercontent.com/zLjFLLzGSLNPcBjeURZRb9XcQERlEPeK1p1mjDUDrBMfkhBFVTTB6mFWPQAFJp6T-tc4T2H63aNaJd11Nz4a8rM=w1280',
+          image: 'assets/image/12.png',
+          imageType: AtomImage.typeAsset,
           title: 'Daycare',
           action: BuddySitterAction(
-            text: '',
+            text: 'Select',
             onPressed: () {},
             icon: Icon(
               CupertinoIcons.check_mark_circled,

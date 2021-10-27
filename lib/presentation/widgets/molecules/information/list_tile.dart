@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:buddy_sitter/presentation/pages/interfaces/search_filter.dart';
 import 'package:buddy_sitter/presentation/utils/clipper/card.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
@@ -7,20 +7,13 @@ import 'package:buddy_sitter/presentation/utils/theme/text.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/assets/image.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
-import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
 import 'package:flutter/material.dart';
 
 class MoleculeListTile extends StatelessWidget {
-  final String image;
-  final String title;
-  final BuddySitterAction action;
-  final String content;
+  final ItemListItem data;
   const MoleculeListTile({
     Key? key,
-    required this.image,
-    required this.title,
-    required this.content,
-    required this.action,
+    required this.data,
   }) : super(key: key);
 
   @override
@@ -47,13 +40,13 @@ class MoleculeListTile extends StatelessWidget {
                     height: double.infinity,
                     fit: BoxFit.cover,
                     repeat: ImageRepeat.repeat,
-                    src: image,
-                    type: AtomImage.typeNetwork,
+                    src: data.image,
+                    type: data.imageType,
                   ),
                   AtomImage.simple(
                     fit: BoxFit.cover,
-                    src: image,
-                    type: AtomImage.typeNetwork,
+                    src: data.image,
+                    type: data.imageType,
                   ),
                 ],
               ),
@@ -63,19 +56,20 @@ class MoleculeListTile extends StatelessWidget {
             padding: EdgeInsets.all(BuddySitterMeasurement.sizeHalf * 0.5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 AtomText.headingLeast(
-                  text: title,
+                  text: data.title,
                   padding: EdgeInsets.zero,
                 ),
                 SizedBox(
                   height: BuddySitterMeasurement.sizeHalf / 2,
                 ),
-                AtomText.content(
-                  text: content,
-                  padding: EdgeInsets.zero,
-                ),
+                if (data.content.isNotEmpty)
+                  AtomText.content(
+                    text: data.content,
+                    padding: EdgeInsets.zero,
+                  ),
                 SizedBox(
                   height: BuddySitterMeasurement.sizeHalf / 2,
                 ),
@@ -85,7 +79,7 @@ class MoleculeListTile extends StatelessWidget {
                   ),
                   child: AtomButton.bottom(
                     text: AtomText.subheading(
-                      text: action.text,
+                      text: data.action.text,
                       padding: EdgeInsets.symmetric(
                         vertical: BuddySitterMeasurement.sizeHalf -
                             (BuddySitterText.subheading.fontSize ?? 1) * .75,
@@ -93,11 +87,11 @@ class MoleculeListTile extends StatelessWidget {
                       ),
                       color: BuddySitterColor.light,
                     ),
-                    onPressed: action.onPressed,
-                    onLongPress: action.onLongPress,
+                    onPressed: data.action.onPressed,
+                    onLongPress: data.action.onLongPress,
                     colorHadler: (_) => BuddySitterColor.actionsLog,
                     height: BuddySitterMeasurement.sizeHigh,
-                    icon: action.icon,
+                    icon: data.action.icon,
                     /*
                     */
                   ),

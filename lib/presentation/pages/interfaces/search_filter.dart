@@ -3,6 +3,7 @@ import 'package:buddy_sitter/presentation/utils/form/provider.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/utils/theme/text.dart';
+import 'package:buddy_sitter/presentation/widgets/atoms/assets/image.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/feedback/snack.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
@@ -21,12 +22,14 @@ class ItemListItem {
   final String title;
   final BuddySitterAction action;
   final String content;
+  final int imageType;
 
   ItemListItem({
     required this.image,
     required this.title,
     required this.action,
     required this.content,
+    this.imageType = AtomImage.typeNetwork,
   });
 }
 
@@ -144,10 +147,7 @@ class BodySearchFilter extends StatelessWidget {
                 }
                 index -= 1;
                 return MoleculeListTile(
-                  image: snapshot.data[index].image,
-                  title: snapshot.data[index].title,
-                  content: snapshot.data[index].content,
-                  action: snapshot.data[index].action,
+                  data: snapshot.data[index],
                 );
               },
             );
