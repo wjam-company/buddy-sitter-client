@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:buddy_sitter/presentation/utils/clipper/card.dart';
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
@@ -114,31 +115,38 @@ class OrganismCard extends StatelessWidget {
         ),
       );
 
-  Widget decoratorColorImage(Widget Function(BuddySitterColor color) widget) =>
-      kIsWeb
-          ? widget(BuddySitterColor.complementaryLilac.brighten(.6))
-          : FutureBuilder(
-              future: (typeImage == AtomImage.typeNetwork
-                  ? NetworkAssetBundle(Uri.parse(
-                      image,
-                    )).load(
-                      image,
-                    )
-                  : rootBundle.load(image)),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  BuddySitterColor color = BuddySitterColor.getAverageColor(
-                    BuddySitterColor.sortColors(
-                      BuddySitterColor.extractPixelsColors(
-                        (snapshot.data as ByteData).buffer.asUint8List(),
-                      ),
-                    ),
-                  );
-                  return widget(color.brighten(.2));
-                }
-                return widget(BuddySitterColor.light.brighten(.6));
-              },
-            );
+  Widget decoratorColorImage(Widget Function(BuddySitterColor color) widget) {
+    if (kIsWeb) {
+      return widget(BuddySitterColor.complementaryLilac.brighten(.6));
+    }
+    if (BuddySitterData().colorFromImages.containsKey(image)) {
+      return widget(BuddySitterData().colorFromImages[image]!);
+    }
+    return FutureBuilder(
+      future: (typeImage == AtomImage.typeNetwork
+          ? NetworkAssetBundle(Uri.parse(
+              image,
+            )).load(
+              image,
+            )
+          : rootBundle.load(image)),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          BuddySitterColor color = BuddySitterColor.getAverageColor(
+            BuddySitterColor.sortColors(
+              BuddySitterColor.extractPixelsColors(
+                (snapshot.data as ByteData).buffer.asUint8List(),
+              ),
+            ),
+          );
+          BuddySitterData().colorFromImages[image] = color.brighten(.2);
+          return widget(BuddySitterData().colorFromImages[image]!);
+        }
+        return widget(BuddySitterColor.light.brighten(.6));
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return decoratorMargin(

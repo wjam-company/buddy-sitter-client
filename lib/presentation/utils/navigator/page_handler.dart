@@ -1,4 +1,3 @@
-import 'package:buddy_sitter/presentation/utils/localstorage/localstorage.dart';
 import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/router_information_parser.dart';
 import './pages.dart';
@@ -55,9 +54,15 @@ class RouterPageHandler extends ChangeNotifier {
     List<Page>? stack,
   }) {
     List<Page> curentPages = stack ?? _pagesActive;
+    if (curentPages.isNotEmpty &&
+        (curentPages.last.name == buddySitterLocation)) {
+      return;
+    }
+
     if (change && curentPages.isNotEmpty) {
       curentPages.removeLast();
     }
+
     if (BuddySitterPage.access(
         buddySitterLocation, BuddySitterData().state.syncGet())) {
       curentPages.add(BuddySitterPage.of(buddySitterLocation));
