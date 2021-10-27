@@ -3,6 +3,7 @@ import 'package:buddy_sitter/presentation/pages/forgot_password/forgot_password.
 import 'package:buddy_sitter/presentation/pages/home/home.dart';
 import 'package:buddy_sitter/presentation/pages/interfaces/interfaces.dart';
 import 'package:buddy_sitter/presentation/pages/onboarding/onboarding.dart';
+import 'package:buddy_sitter/presentation/pages/search_sitters/search_sitters.dart';
 import 'package:buddy_sitter/presentation/pages/select_your_pet/select_your_pet.dart';
 import 'package:buddy_sitter/presentation/pages/select_your_services/select_your_services.dart';
 import 'package:buddy_sitter/presentation/pages/sign_in/sing_in.dart';
@@ -24,6 +25,18 @@ class BuddySitterPage {
     BuddySitterLocation.home: true,
     BuddySitterLocation.selectYourPet: true,
     BuddySitterLocation.selectYourService: true,
+    BuddySitterLocation.resultSitters: true,
+    BuddySitterLocation.schedule: true,
+    BuddySitterLocation.sitterSchedule: true,
+    BuddySitterLocation.pendingServices: true,
+    BuddySitterLocation.sitterServices: true,
+    BuddySitterLocation.sitterProfile: true,
+    BuddySitterLocation.petProfile: true,
+    BuddySitterLocation.configSitterProfile: true,
+    BuddySitterLocation.configPetProfile: true,
+    BuddySitterLocation.addPet: true,
+    BuddySitterLocation.sitterInfo: true,
+    BuddySitterLocation.petInfo: true,
   });
   static final Map<String, BuddySitterPageProvider> _pages = Map.unmodifiable({
     BuddySitterLocation.splahs: const Splash(),
@@ -36,6 +49,18 @@ class BuddySitterPage {
     BuddySitterLocation.home: const Home(),
     BuddySitterLocation.selectYourPet: const SelectYourPet(),
     BuddySitterLocation.selectYourService: const SelectYourService(),
+    BuddySitterLocation.resultSitters: const ResultSitters(),
+    BuddySitterLocation.schedule: const ResultSitters(),
+    BuddySitterLocation.sitterSchedule: const ResultSitters(),
+    BuddySitterLocation.pendingServices: const ResultSitters(),
+    BuddySitterLocation.sitterServices: const ResultSitters(),
+    BuddySitterLocation.sitterProfile: const ResultSitters(),
+    BuddySitterLocation.petProfile: const ResultSitters(),
+    BuddySitterLocation.configSitterProfile: const ResultSitters(),
+    BuddySitterLocation.configPetProfile: const ResultSitters(),
+    BuddySitterLocation.addPet: const ResultSitters(),
+    BuddySitterLocation.sitterInfo: const ResultSitters(),
+    BuddySitterLocation.petInfo: const ResultSitters(),
   });
 
   static bool access(String location, bool state) {

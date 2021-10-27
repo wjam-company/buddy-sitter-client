@@ -1,3 +1,5 @@
+import 'package:buddy_sitter/presentation/pages/interfaces/interfaces.dart';
+import 'package:buddy_sitter/presentation/pages/interfaces/search_filter.dart';
 import 'package:buddy_sitter/presentation/utils/form/exporer_validate.dart';
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
@@ -15,7 +17,6 @@ import 'package:buddy_sitter/presentation/widgets/template/action_bottom.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../interfaces/interfaces.dart';
 
 class PostSitterItem {
   final String image;
@@ -33,10 +34,10 @@ class PostSitterItem {
   });
 }
 
-class ProviderSearchFilter with ChangeNotifier {
+class ProviderPostList with ChangeNotifier {
   final FormProvider formProvider;
 
-  ProviderSearchFilter(this.formProvider) {
+  ProviderPostList(this.formProvider) {
     formProvider.addListener(notifyListeners);
   }
 
@@ -49,9 +50,9 @@ class ProviderSearchFilter with ChangeNotifier {
   }
 }
 
-class SearchFilter<T extends ProviderSearchFilter>
+class SearchSitter<T extends ProviderPostList>
     extends BuddySitterPageProvider<T> {
-  const SearchFilter({Key? key}) : super(key: key);
+  const SearchSitter({Key? key}) : super(key: key);
 
   BuddySitterAction appBarAction(BuildContext context, T currentProvider) {
     throw UnimplementedError();
@@ -109,12 +110,12 @@ class SearchFilter<T extends ProviderSearchFilter>
   }
 }
 
-class BodySearchFilter extends StatelessWidget {
-  const BodySearchFilter({
+class BodySearchSitter extends StatelessWidget {
+  const BodySearchSitter({
     Key? key,
   }) : super(key: key);
 
-  Future<List<ItemListItem>> listData(BuildContext context) {
+  Future<List<PostSitterItem>> listData(BuildContext context) {
     throw UnimplementedError();
   }
 
@@ -129,7 +130,7 @@ class BodySearchFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TemplateActionBottom(
-      child: FutureBuilder<List<ItemListItem>>(
+      child: FutureBuilder<List<PostSitterItem>>(
         future: listData(context),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
