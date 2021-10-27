@@ -119,7 +119,11 @@ class OrganismCard extends StatelessWidget {
           ? widget(BuddySitterColor.complementaryLilac.brighten(.6))
           : FutureBuilder(
               future: (typeImage == AtomImage.typeNetwork
-                  ? NetworkAssetBundle(Uri.parse(image)).load(image)
+                  ? NetworkAssetBundle(Uri.parse(
+                      image,
+                    )).load(
+                      image,
+                    )
                   : rootBundle.load(image)),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
@@ -130,9 +134,9 @@ class OrganismCard extends StatelessWidget {
                       ),
                     ),
                   );
-                  return widget(color);
+                  return widget(color.brighten(.3));
                 }
-                return widget(BuddySitterColor.complementaryLilac.brighten(.6));
+                return widget(BuddySitterColor.light.brighten(.6));
               },
             );
   @override

@@ -172,9 +172,9 @@ class BuddySitterColor implements Color {
         pixels.add(pixel);
         colors.add(
           BuddySitterColor.fromRGBO(
-            (pixel >> 24) & 0x0ff,
-            (pixel >> 16) & 0x0ff,
-            (pixel >> 8) & 0x0ff,
+            (pixel) & 0x0ff, // red
+            (pixel >> 8) & 0x0ff, // green
+            (pixel >> 16) & 0x0ff, // blue
             1,
           ),
         );
