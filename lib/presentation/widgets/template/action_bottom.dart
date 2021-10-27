@@ -129,8 +129,10 @@ class TemplateActionBottom extends StatelessWidget {
 
     return SafeArea(
       child: MediaHandler.requiredSingle(
-        mobile: Column(
-          children: content,
+        mobile: SizedBox(
+          child: Column(
+            children: content,
+          ),
         ),
         desktop: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

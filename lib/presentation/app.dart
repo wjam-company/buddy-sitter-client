@@ -1,8 +1,9 @@
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'utils/navigator/router_information_parser.dart';
+
 import 'utils/navigator/router_delegate.dart';
+import 'utils/navigator/router_information_parser.dart';
 
 class BuddySitterApp extends StatefulWidget {
   const BuddySitterApp({Key? key}) : super(key: key);
@@ -32,7 +33,7 @@ class _BuddySitterApp extends State<BuddySitterApp>
 
   @override
   void didChangeMetrics() {
-    setState(() {});
+    // setState(() {});
   }
 
   @override
