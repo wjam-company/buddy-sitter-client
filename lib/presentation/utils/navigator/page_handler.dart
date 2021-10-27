@@ -25,10 +25,12 @@ class RouterPageHandler extends ChangeNotifier {
     );
     _state.get().then((value) {
       show(
-        //value ? BuddySitterLocation.explore : BuddySitterLocation.onboarding,
+        value ? BuddySitterLocation.explore : BuddySitterLocation.onboarding,
+        /*
         value
             ? BuddySitterLocation.resultSitters
             : BuddySitterLocation.onboarding,
+            */
       );
       _state.addListener(notifyListeners);
     });
