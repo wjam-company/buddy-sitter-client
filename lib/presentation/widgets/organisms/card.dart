@@ -134,7 +134,7 @@ class OrganismCard extends StatelessWidget {
                       ),
                     ),
                   );
-                  return widget(color.brighten(.3));
+                  return widget(color.brighten(.2));
                 }
                 return widget(BuddySitterColor.light.brighten(.6));
               },
@@ -197,6 +197,8 @@ class OrganismCard extends StatelessWidget {
                 child: MoleculeRowFLex.simple(
                   children: [
                     AtomButton.cicle(
+                      colorHadler: (_) =>
+                          Color(BuddySitterColor.light.value).withOpacity(.2),
                       onPressed: actionLeft.onPressed,
                       onLongPress: actionLeft.onLongPress,
                       height: BuddySitterMeasurement.sizeHalf * 3,
@@ -208,6 +210,8 @@ class OrganismCard extends StatelessWidget {
                       type: AtomImage.typeNetwork,
                     ),
                     AtomButton.cicle(
+                      colorHadler: (_) =>
+                          Color(BuddySitterColor.light.value).withOpacity(.2),
                       onPressed: actionRight.onPressed,
                       onLongPress: actionRight.onLongPress,
                       height: BuddySitterMeasurement.sizeHalf * 3,
