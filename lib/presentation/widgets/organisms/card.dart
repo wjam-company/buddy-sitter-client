@@ -139,7 +139,7 @@ class OrganismCard extends StatelessWidget {
               ),
             ),
           );
-          BuddySitterData().colorFromImages[image] = color.brighten(.2);
+          BuddySitterData().colorFromImages[image] = color.brighten(.3);
           return widget(BuddySitterData().colorFromImages[image]!);
         }
         return widget(BuddySitterColor.light.brighten(.6));
@@ -206,7 +206,7 @@ class OrganismCard extends StatelessWidget {
                   children: [
                     AtomButton.cicle(
                       colorHadler: (_) =>
-                          Color(BuddySitterColor.light.value).withOpacity(.2),
+                          Color(BuddySitterColor.light.value).withOpacity(.3),
                       onPressed: actionLeft.onPressed,
                       onLongPress: actionLeft.onLongPress,
                       height: BuddySitterMeasurement.sizeHalf * 3,
@@ -219,7 +219,7 @@ class OrganismCard extends StatelessWidget {
                     ),
                     AtomButton.cicle(
                       colorHadler: (_) =>
-                          Color(BuddySitterColor.light.value).withOpacity(.2),
+                          Color(BuddySitterColor.light.value).withOpacity(.3),
                       onPressed: actionRight.onPressed,
                       onLongPress: actionRight.onLongPress,
                       height: BuddySitterMeasurement.sizeHalf * 3,

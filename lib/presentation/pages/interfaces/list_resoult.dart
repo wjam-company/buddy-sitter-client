@@ -18,18 +18,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class PostSitterItem {
+  final String name;
   final String image;
-  final String title;
-  final BuddySitterAction action;
+  final String profile;
   final String content;
-  final int imageType;
+  final BuddySitterAction actionLeft;
+  final BuddySitterAction actionRight;
 
   PostSitterItem({
     required this.image,
-    required this.title,
-    required this.action,
     required this.content,
-    this.imageType = AtomImage.typeNetwork,
+    required this.name,
+    required this.profile,
+    required this.actionLeft,
+    required this.actionRight,
   });
 }
 
@@ -146,27 +148,12 @@ class BodySearchSitter extends StatelessWidget {
                 }
                 index -= 1;
                 return OrganismCard.simple(
-                  actionLeft: BuddySitterAction(
-                    onPressed: () {},
-                    icon: Icon(
-                      CupertinoIcons.equal_square,
-                      color: BuddySitterColor.actionsLog,
-                    ),
-                  ),
-                  actionRight: BuddySitterAction(
-                    onPressed: () {},
-                    icon: Icon(
-                      CupertinoIcons.calendar_badge_plus,
-                      color: BuddySitterColor.complementaryRed,
-                    ),
-                  ),
-                  content:
-                      'Eu adipisicing eu ex sit non in nulla incididunt adipisicing culpa incididunt elit. Ut cillum incididunt anim velit aute est duis esse esse et est.',
-                  image:
-                      'https://media.istockphoto.com/photos/young-redhead-woman-hug-her-small-mixedbreed-dog-picture-id485251750?b=1&k=20&m=485251750&s=170667a&w=0&h=v7Wf4tPLnkGl_yZxXiWyjzKYdLgirM_zieYBLilAM5c=',
-                  name: 'Juanita',
-                  profile:
-                      'https://media.istockphoto.com/photos/young-redhead-woman-hug-her-small-mixedbreed-dog-picture-id485251750?b=1&k=20&m=485251750&s=170667a&w=0&h=v7Wf4tPLnkGl_yZxXiWyjzKYdLgirM_zieYBLilAM5c=',
+                  actionLeft: snapshot.data[index].actionLeft,
+                  actionRight: snapshot.data[index].actionRight,
+                  content: snapshot.data[index].content,
+                  image: snapshot.data[index].image,
+                  name: snapshot.data[index].name,
+                  profile: snapshot.data[index].profile,
                 );
                 /*  data: snapshot.data[index],*/
               },

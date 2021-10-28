@@ -9,6 +9,15 @@ import 'package:flutter/widgets.dart';
 class ProviderSearchSitter extends ProviderPostList {
   ProviderSearchSitter(FormProvider formProvider) : super(formProvider);
 
+  final Icon leftIcon = Icon(
+    CupertinoIcons.equal_square,
+    color: BuddySitterColor.actionsLog,
+  );
+
+  final Icon rightIcon = Icon(
+    CupertinoIcons.calendar_badge_plus,
+    color: BuddySitterColor.complementaryRed,
+  );
   @override
   BuddySitterAction action(BuildContext context) {
     return BuddySitterAction(
@@ -27,35 +36,92 @@ class ProviderSearchSitter extends ProviderPostList {
   @override
   Future<List<PostSitterItem>> get data async {
     List<PostSitterItem> value = await Future<List<PostSitterItem>>.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 0),
       () => [
         PostSitterItem(
           image:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjh5E6lDdlw5R7h6tiwcvuly5qfbRnrVV6tKrGc-bb1Zq-Mu1kbcwPgFIN0w_jKsAFbNo&usqp=CAU',
-          title: 'Buster',
-          action: BuddySitterAction(
-            text: 'Select',
+              'https://media.istockphoto.com/photos/young-redhead-woman-hug-her-small-mixedbreed-dog-picture-id485251750?b=1&k=20&m=485251750&s=170667a&w=0&h=v7Wf4tPLnkGl_yZxXiWyjzKYdLgirM_zieYBLilAM5c=',
+          name: 'Emma',
+          actionLeft: BuddySitterAction(
             onPressed: () {},
-            icon: Icon(
-              CupertinoIcons.check_mark_circled,
-              color: BuddySitterColor.light,
-            ),
+            icon: leftIcon,
           ),
-          content: 'Deserunt aqui Buster',
+          actionRight: BuddySitterAction(
+            onPressed: () {},
+            icon: rightIcon,
+          ),
+          content:
+              'Eu adipisicing eu ex sit non in nulla incididunt adipisicing culpa incididunt elit. Ut cillum incididunt anim velit aute est duis esse esse et est.',
+          profile:
+              'https://media.istockphoto.com/photos/young-redhead-woman-hug-her-small-mixedbreed-dog-picture-id485251750?b=1&k=20&m=485251750&s=170667a&w=0&h=v7Wf4tPLnkGl_yZxXiWyjzKYdLgirM_zieYBLilAM5c=',
         ),
         PostSitterItem(
           image:
-              'https://t3.ftcdn.net/jpg/02/95/94/94/360_F_295949484_8BrlWkTrPXTYzgMn3UebDl1O13PcVNMU.jpg',
-          title: 'Magna',
-          action: BuddySitterAction(
-            text: 'Select',
+              'https://www.cfsph.iastate.edu/Assets/Course-CA-Zoonoses-600x600.jpg',
+          name: 'Ava and Noah',
+          actionLeft: BuddySitterAction(
             onPressed: () {},
-            icon: Icon(
-              CupertinoIcons.check_mark_circled,
-              color: BuddySitterColor.light,
-            ),
+            icon: leftIcon,
           ),
-          content: 'Deserunt aqui magna',
+          actionRight: BuddySitterAction(
+            onPressed: () {},
+            icon: rightIcon,
+          ),
+          content:
+              'Eu adipisicing eu ex sit non in nulla incididunt adipisicing culpa incididunt elit. Ut cillum incididunt anim velit aute est duis esse esse et est.',
+          profile:
+              'https://www.cfsph.iastate.edu/Assets/Course-CA-Zoonoses-600x600.jpg',
+        ),
+        PostSitterItem(
+          image:
+              'https://post.healthline.com/wp-content/uploads/2021/06/Man-laying-on-the-grass-and-playing-with-the-dog-732x549-thumbnail.jpg',
+          name: 'Liam',
+          actionLeft: BuddySitterAction(
+            onPressed: () {},
+            icon: leftIcon,
+          ),
+          actionRight: BuddySitterAction(
+            onPressed: () {},
+            icon: rightIcon,
+          ),
+          content:
+              'Eu adipisicing eu ex sit non in nulla incididunt adipisicing culpa incididunt elit. Ut cillum incididunt anim velit aute est duis esse esse et est.',
+          profile:
+              'https://post.healthline.com/wp-content/uploads/2021/06/Man-laying-on-the-grass-and-playing-with-the-dog-732x549-thumbnail.jpg',
+        ),
+        PostSitterItem(
+          image:
+              'https://media.istockphoto.com/photos/love-you-picture-id1224405573?b=1&k=20&m=1224405573&s=170667a&w=0&h=tF2crXTAAHxyVzO3Ogtw4fGr36GKVw_zKNb2IXFw-Z8=',
+          name: 'Charlotte',
+          actionLeft: BuddySitterAction(
+            onPressed: () {},
+            icon: leftIcon,
+          ),
+          actionRight: BuddySitterAction(
+            onPressed: () {},
+            icon: rightIcon,
+          ),
+          content:
+              'Eu adipisicing eu ex sit non in nulla incididunt adipisicing culpa incididunt elit. Ut cillum incididunt anim velit aute est duis esse esse et est.',
+          profile:
+              'https://media.istockphoto.com/photos/love-you-picture-id1224405573?b=1&k=20&m=1224405573&s=170667a&w=0&h=tF2crXTAAHxyVzO3Ogtw4fGr36GKVw_zKNb2IXFw-Z8=',
+        ),
+        PostSitterItem(
+          image:
+              'https://www.thesimpledollar.com/wp-content/uploads/2020/06/english.jpg',
+          name: 'Olivia',
+          actionLeft: BuddySitterAction(
+            onPressed: () {},
+            icon: leftIcon,
+          ),
+          actionRight: BuddySitterAction(
+            onPressed: () {},
+            icon: rightIcon,
+          ),
+          content:
+              'Eu adipisicing eu ex sit non in nulla incididunt adipisicing culpa incididunt elit. Ut cillum incididunt anim velit aute est duis esse esse et est.',
+          profile:
+              'https://www.thesimpledollar.com/wp-content/uploads/2020/06/english.jpg',
         ),
       ],
     );
@@ -65,7 +131,7 @@ class ProviderSearchSitter extends ProviderPostList {
       value.removeWhere(
         (element) =>
             !(element.content.toLowerCase().contains(filter.toLowerCase()) ||
-                element.title.toLowerCase().contains(filter.toLowerCase())),
+                element.name.toLowerCase().contains(filter.toLowerCase())),
       );
     }
     return value;

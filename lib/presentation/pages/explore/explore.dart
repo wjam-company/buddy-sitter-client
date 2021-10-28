@@ -36,40 +36,7 @@ class Explore extends BuddySitterPageProvider<ProviderExplore> {
         color: BuddySitterColor.dark.brighten(.5),
       ),
     );
-
-    /*
-    final FormProvider validators = FormProvider([
-      ExploreValidator.search,
-    ]);
-    return Stack(
-      children: [
-        OrganismForm.column(
-          provider: validators,
-          fields: [
-            MoleculeInput.text(
-              entry: ExploreValidator.search,
-              controler: validators.valid(
-                ExploreValidator.search,
-                validator: ExploreValidator.validSearch,
-              ),
-              text: 'Search',
-            ),
-          ],
-        ),
-        Positioned(
-          right: BuddySitterMeasurement.sizeHalf,
-          top: BuddySitterMeasurement.sizeHalf,
-          child: AtomButton.cicle(
-            onPressed: () {},
-            height: BuddySitterMeasurement.sizeHigh,
-            icon: const Icon(Icons.search),
-          ),
-        ),
-      ],
-    );
-    */
   }
-// ,
 
   @override
   // ignore: avoid_renaming_method_parameters
