@@ -21,16 +21,13 @@ class RouterPageHandler extends ChangeNotifier {
       BuddySitterLocation.splahs,
       notify: false,
     );
-    BuddySitterData().state.get().then((value) {
-      show(
-        value ? BuddySitterLocation.explore : BuddySitterLocation.onboarding,
-        /*
-        value
-            ? BuddySitterLocation.resultSitters
-            : BuddySitterLocation.onboarding,
-            */
-      );
-      BuddySitterData().state.addListener(notifyListeners);
+    Future<void>.delayed(const Duration(seconds: 4), () {
+      BuddySitterData().state.get().then((value) {
+        show(
+          value ? BuddySitterLocation.explore : BuddySitterLocation.onboarding,
+        );
+        BuddySitterData().state.addListener(notifyListeners);
+      });
     });
   }
 

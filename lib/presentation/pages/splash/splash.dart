@@ -1,6 +1,12 @@
+import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
+import 'package:buddy_sitter/presentation/utils/navigator/locations.dart';
+import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
+import 'package:buddy_sitter/presentation/widgets/atoms/assets/image.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 import '../interfaces/interfaces.dart';
 import './provider.dart';
 
@@ -11,11 +17,7 @@ class Splash extends BuddySitterPageProvider<ProviderSplash> {
   ProviderSplash provider(BuildContext context) => ProviderSplash();
 
   @override
-  // ignore: avoid_renaming_method_parameters
-  Widget appBarTitle(_) => AtomText.headingLeast(
-        text: 'Buddy Sitter',
-        color: BuddySitterColor.primaryBeige,
-      );
+  bool get haveAppBar => false;
 
   @override
   // ignore: avoid_renaming_method_parameters
@@ -29,10 +31,13 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: AtomText.headingHigh(
-        text: 'Buddy Sitter',
-        color: BuddySitterColor.actionsSuccess.brighten(.3),
+    return Container(
+      color: BuddySitterColor.primaryBeige,
+      child: const Center(
+        child: AtomImage.simple(
+          type: AtomImage.typeAsset,
+          src: 'assets/image/cat_dog.gif',
+        ),
       ),
     );
   }
