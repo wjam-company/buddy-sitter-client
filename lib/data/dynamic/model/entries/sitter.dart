@@ -1,27 +1,24 @@
 class Sitter {
-  final String id;
-  final int givenServices;
-  final double rating;
-  final List<String> typeAnimalsAccepted;
-  final List<String> animalsAgesAccepted;
-  final List<String> typeServiceAccepted;
-  final List<String> lifeStyle;
-  final int amountReviews;
+  final int? givenServices;
+  final double? rating;
+  final List<String>? typeAnimalsAccepted;
+  final List<String>? animalsAgesAccepted;
+  final List<String>? typeServiceAccepted;
+  final List<String>? lifeStyle;
+  final int? amountReviews;
 
   Sitter({
-    required this.givenServices,
-    required this.rating,
-    required this.typeAnimalsAccepted,
-    required this.animalsAgesAccepted,
-    required this.typeServiceAccepted,
-    required this.lifeStyle,
-    required this.amountReviews,
-    required this.id,
+    this.givenServices,
+    this.rating,
+    this.typeAnimalsAccepted,
+    this.animalsAgesAccepted,
+    this.typeServiceAccepted,
+    this.lifeStyle,
+    this.amountReviews,
   });
 
   factory Sitter.fromJson(Map<String, dynamic> json) {
     return Sitter(
-      id: json['id'],
       amountReviews: json['amount_reviews'],
       animalsAgesAccepted: json['animals_ages_accepted'],
       givenServices: json['given_services'],

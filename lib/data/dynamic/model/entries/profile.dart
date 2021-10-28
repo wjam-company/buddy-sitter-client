@@ -43,7 +43,6 @@ class Profile {
         createdAt: DateTime.parse(json['created_at']),
         updatedAt: DateTime.parse(json['updated_at']),
         sitter: json['sitter'] != null ? Sitter(
-          id: json['sitter']['id'],
           amountReviews: json['sitter']['amount_reviews'],
           animalsAgesAccepted: json['sitter']['animals_ages_accepted'],
           givenServices: json['sitter']['given_services'],

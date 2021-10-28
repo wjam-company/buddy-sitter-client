@@ -76,7 +76,6 @@ class Service {
       listPets: json[listOfPets],
       listReviews: json[listOfReviews],
       sitter: Sitter(
-        id: json['id'],
         amountReviews: json['amount_reviews'],
         animalsAgesAccepted: json['animals_ages_accepted'],
         givenServices: json['given_services'],

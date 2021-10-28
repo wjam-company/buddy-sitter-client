@@ -4,4 +4,5 @@ class Url {
   static String signup = base + '/sign_up';
   static String recoverpwd = base + '/recover';
   static String profile = base + '/profile';
+  static String pets = base + '/pets';
 }

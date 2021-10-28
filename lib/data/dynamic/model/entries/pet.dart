@@ -10,13 +10,13 @@ class Pet {
   final String name;
   final String vaccinationationCard;
   final String observations;
-  final int walkFrequencyPerDay;
-  final Bathroom bathroom;
-  final List<String> mealHours;
-  final String diet;
-  final String disabilities;
-  final String healthStatus;
-  final String prevSurgeries;
+  final int? walkFrequencyPerDay;
+  final Bathroom? bathroom;
+  final List<String>? mealHours;
+  final String? diet;
+  final String? disabilities;
+  final String? healthStatus;
+  final String? prevSurgeries;
   final String vetsPhone;
   final String vetsName;
   final String breed;
@@ -30,13 +30,13 @@ class Pet {
     required this.name,
     required this.vaccinationationCard,
     required this.observations,
-    required this.walkFrequencyPerDay,
-    required this.bathroom,
-    required this.mealHours,
-    required this.diet,
-    required this.disabilities,
-    required this.healthStatus,
-    required this.prevSurgeries,
+    this.walkFrequencyPerDay,
+    this.bathroom,
+    this.mealHours,
+    this.diet,
+    this.disabilities,
+    this.healthStatus,
+    this.prevSurgeries,
     required this.vetsPhone,
     required this.vetsName,
     required this.breed,
