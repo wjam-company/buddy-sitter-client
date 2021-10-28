@@ -11,6 +11,7 @@ import 'package:buddy_sitter/presentation/widgets/template/action_bottom.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../interfaces/interfaces.dart';
 import './provider.dart';
 
@@ -36,23 +37,68 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TemplateActionBottom(
-      child: ListView(
+      child: Column(
         children: [
           // Popus
           ListTile(
             //contentPadding: EdgeInsets.zero,
             leading: AtomText.subheading(
-              text: 'Sitters',
+              text: 'Schedule',
               padding: EdgeInsets.zero,
             ),
           ),
+          Expanded(
+            child: SfDateRangePicker(
+              view: DateRangePickerView.month,
+              monthViewSettings: const DateRangePickerMonthViewSettings(
+                firstDayOfWeek: 6,
+              ),
+              selectionMode: DateRangePickerSelectionMode.range,
+            ),
+          )
           // Schedule
         ],
       ),
       childrenBottom: [
         ItemActionBottom(
-          color: BuddySitterColor.primaryPurple.brighten(.9),
-          child: const OrganismBarMenu(),
+          color: BuddySitterColor.actionsLog,
+          child: AtomButton.bottom(
+            icon: Icon(
+              CupertinoIcons.xmark,
+              color: BuddySitterColor.actionsError,
+            ),
+            height: BuddySitterMeasurement.sizeHalf / 2,
+            text: AtomText.content(
+              text: 'Cancel',
+              color: BuddySitterColor.light.brighten(0.5),
+            ),
+            colorHadler: (_) => BuddySitterColor.actionsLog,
+            onPressed: () {
+              Provider.of<RouterPageHandler>(context, listen: false)
+                  .show(BuddySitterLocation.resultSitters);
+            },
+            onLongPress: null,
+          ),
+        ),
+        ItemActionBottom(
+          color: BuddySitterColor.actionsLog,
+          child: AtomButton.bottom(
+            icon: Icon(
+              CupertinoIcons.check_mark,
+              color: BuddySitterColor.actionsSuccess,
+            ),
+            height: BuddySitterMeasurement.sizeHalf / 2,
+            text: AtomText.content(
+              text: 'Continue',
+              color: BuddySitterColor.light.brighten(0.5),
+            ),
+            colorHadler: (_) => BuddySitterColor.actionsLog,
+            onPressed: () {
+              Provider.of<RouterPageHandler>(context, listen: false)
+                  .show(BuddySitterLocation.resultSitters);
+            },
+            onLongPress: null,
+          ),
         ),
       ],
     );

@@ -22,7 +22,7 @@ class ProviderSelectYourService extends ProviderSearchFilter {
       ),
       onPressed: () {
         Provider.of<RouterPageHandler>(context, listen: false)
-            .show(BuddySitterLocation.resultSitters);
+            .show(BuddySitterLocation.schedule);
       },
       text: 'Continue',
     );
