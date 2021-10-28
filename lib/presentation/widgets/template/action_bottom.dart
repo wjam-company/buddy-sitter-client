@@ -3,6 +3,7 @@ import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ItemActionBottom {
   final Widget child;
@@ -69,6 +70,7 @@ class TemplateActionBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<MediaHandler>(context);
     List<Widget> children = childrenBottom
         .asMap()
         .map(

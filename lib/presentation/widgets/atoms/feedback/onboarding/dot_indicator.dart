@@ -50,6 +50,7 @@ class AtomDotIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<MediaHandler>(context);
     final bool active = Provider.of<ProviderOnboarding>(context).index >= index;
     return Stack(children: [
       Container(

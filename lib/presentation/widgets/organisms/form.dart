@@ -28,31 +28,33 @@ class OrganismForm extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      ChangeNotifierProvider<FormProvider>.value(
-        value: provider,
-        child: Form(
-          child: Padding(
-            padding: padding
-                ? MediaHandler.dynamicType(
-                    mobile: BuddySitterMeasurement.marginsHalf.copyWith(
-                      bottom: 0.0,
-                    ),
-                    tablet: BuddySitterMeasurement.marginsHalf.copyWith(
-                      bottom: 0.0,
-                    ),
-                    desktop: EdgeInsets.symmetric(
-                      vertical: BuddySitterMeasurement.sizeHigh,
-                      horizontal: BuddySitterMeasurement.sizeHigh * 5,
-                    ).copyWith(
-                      bottom: 0.0,
-                    ),
-                  )
-                : EdgeInsets.zero,
-            child: Column(children: children),
-          ),
+  Widget build(BuildContext context) {
+    Provider.of<MediaHandler>(context);
+    return ChangeNotifierProvider<FormProvider>.value(
+      value: provider,
+      child: Form(
+        child: Padding(
+          padding: padding
+              ? MediaHandler.dynamicType(
+                  mobile: BuddySitterMeasurement.marginsHalf.copyWith(
+                    bottom: 0.0,
+                  ),
+                  tablet: BuddySitterMeasurement.marginsHalf.copyWith(
+                    bottom: 0.0,
+                  ),
+                  desktop: EdgeInsets.symmetric(
+                    vertical: BuddySitterMeasurement.sizeHigh,
+                    horizontal: BuddySitterMeasurement.sizeHigh * 5,
+                  ).copyWith(
+                    bottom: 0.0,
+                  ),
+                )
+              : EdgeInsets.zero,
+          child: Column(children: children),
         ),
-      );
+      ),
+    );
+  }
 
   List<Widget> get children => valid
       ? List.generate(

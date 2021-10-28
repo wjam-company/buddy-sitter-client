@@ -33,6 +33,8 @@ class _BuddySitterApp extends State<BuddySitterApp>
 
   @override
   void didChangeMetrics() {
+    MediaHandler.of(context);
+    MediaHandler.change();
     // setState(() {});
   }
 

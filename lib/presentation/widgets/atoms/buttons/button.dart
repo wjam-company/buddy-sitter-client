@@ -4,6 +4,7 @@ import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/utils/theme/text.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AtomButton extends StatelessWidget {
   final MaterialPropertyResolver<Color>? colorHadler;
@@ -69,6 +70,7 @@ class AtomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<MediaHandler>(context);
     switch (type) {
       case typeBottom:
         return bottom;

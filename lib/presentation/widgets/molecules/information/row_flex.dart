@@ -2,6 +2,7 @@ import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BuddySitterAction {
   final Icon icon;
@@ -53,6 +54,7 @@ class MoleculeRowFLex extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<MediaHandler>(context);
     List<Widget> childrenFLex =
         List.generate((currentList.length * 2) + 1, (index) {
       if (index % 2 == 0) {

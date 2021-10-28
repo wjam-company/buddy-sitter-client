@@ -1,10 +1,11 @@
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
+import 'package:flutter/foundation.dart';
 
 import './localstorage.dart';
 
 // ! TODO add color to url of image
 
-class BuddySitterData {
+class BuddySitterData extends ChangeNotifier {
   final BuddySitterStorage state;
   final Map<String, BuddySitterColor> colorFromImages = {};
 

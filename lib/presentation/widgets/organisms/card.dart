@@ -11,6 +11,7 @@ import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class OrganismCard extends StatelessWidget {
   final String image;
@@ -149,6 +150,7 @@ class OrganismCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<MediaHandler>(context);
     return decoratorMargin(
       decoratorBorderRadius(
         SizedBox(

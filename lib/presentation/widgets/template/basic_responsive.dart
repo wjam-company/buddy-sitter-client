@@ -1,6 +1,7 @@
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BasicResponsive extends StatelessWidget {
   final Widget child;
@@ -8,6 +9,7 @@ class BasicResponsive extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<MediaHandler>(context);
     return SafeArea(
       child: MediaHandler.requiredSingle(
         mobile: SizedBox(

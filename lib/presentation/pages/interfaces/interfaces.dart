@@ -1,4 +1,5 @@
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
+import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:flutter/material.dart';
@@ -49,9 +50,12 @@ abstract class BuddySitterPageProvider<T extends ChangeNotifier>
     } else {
       currentProvider = provider(context);
     }
-    MediaHandler.of(context);
-    return ChangeNotifierProvider<T>.value(
-      value: currentProvider,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<T>.value(value: currentProvider),
+        ChangeNotifierProvider<BuddySitterData>.value(value: BuddySitterData()),
+        ChangeNotifierProvider<MediaHandler>.value(value: MediaHandler()),
+      ],
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: haveAppBar

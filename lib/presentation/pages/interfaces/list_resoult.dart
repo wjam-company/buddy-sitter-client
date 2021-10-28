@@ -1,6 +1,7 @@
 import 'package:buddy_sitter/presentation/pages/interfaces/interfaces.dart';
 import 'package:buddy_sitter/presentation/utils/form/exporer_validate.dart';
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
+import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/utils/theme/text.dart';
@@ -16,6 +17,7 @@ import 'package:buddy_sitter/presentation/widgets/template/basic_responsive.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
 
 class PostSitterItem {
   final String name;
@@ -134,6 +136,7 @@ class BodySearchSitter extends StatelessWidget {
       child: FutureBuilder<List<PostSitterItem>>(
         future: listData(context),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          Provider.of<MediaHandler>(context);
           if (snapshot.hasData) {
             return ListView.builder(
               itemCount: snapshot.data.length + 1,

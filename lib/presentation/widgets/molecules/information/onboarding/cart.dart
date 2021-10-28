@@ -3,6 +3,7 @@ import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MoleculeOnboardingCart extends StatelessWidget {
   final String title;
@@ -20,6 +21,7 @@ class MoleculeOnboardingCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<MediaHandler>(context);
     return Column(
       children: [
         SizedBox(
