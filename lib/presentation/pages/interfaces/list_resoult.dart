@@ -5,7 +5,6 @@ import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/utils/theme/text.dart';
-import 'package:buddy_sitter/presentation/widgets/atoms/assets/image.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/feedback/snack.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';

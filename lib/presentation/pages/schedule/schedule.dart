@@ -22,7 +22,11 @@ class Schedule extends BuddySitterPageProvider<ProviderSchedule> {
   ProviderSchedule provider(BuildContext context) => ProviderSchedule();
 
   @override
-  bool get haveAppBar => false;
+  // ignore: avoid_renaming_method_parameters
+  Widget appBarTitle(_) => AtomText.content(
+        text: 'Schedule',
+        color: BuddySitterColor.dark.brighten(0.3),
+      );
 
   @override
   // ignore: avoid_renaming_method_parameters
@@ -40,13 +44,6 @@ class Body extends StatelessWidget {
       child: Column(
         children: [
           // Popus
-          ListTile(
-            //contentPadding: EdgeInsets.zero,
-            leading: AtomText.subheading(
-              text: 'Schedule',
-              padding: EdgeInsets.zero,
-            ),
-          ),
           Expanded(
             child: SfDateRangePicker(
               view: DateRangePickerView.month,
@@ -61,18 +58,18 @@ class Body extends StatelessWidget {
       ),
       childrenBottom: [
         ItemActionBottom(
-          color: BuddySitterColor.actionsLog,
+          color: BuddySitterColor.actionsSuccess,
           child: AtomButton.bottom(
             icon: Icon(
-              CupertinoIcons.xmark,
-              color: BuddySitterColor.actionsError,
+              CupertinoIcons.check_mark,
+              color: BuddySitterColor.light,
             ),
             height: BuddySitterMeasurement.sizeHalf / 2,
             text: AtomText.content(
-              text: 'Cancel',
+              text: 'Continue',
               color: BuddySitterColor.light.brighten(0.5),
             ),
-            colorHadler: (_) => BuddySitterColor.actionsLog,
+            colorHadler: (_) => BuddySitterColor.actionsSuccess,
             onPressed: () {
               Provider.of<RouterPageHandler>(context, listen: false)
                   .show(BuddySitterLocation.resultSitters);
@@ -84,12 +81,12 @@ class Body extends StatelessWidget {
           color: BuddySitterColor.actionsLog,
           child: AtomButton.bottom(
             icon: Icon(
-              CupertinoIcons.check_mark,
-              color: BuddySitterColor.actionsSuccess,
+              CupertinoIcons.xmark,
+              color: BuddySitterColor.actionsError,
             ),
             height: BuddySitterMeasurement.sizeHalf / 2,
             text: AtomText.content(
-              text: 'Continue',
+              text: 'Cancel',
               color: BuddySitterColor.light.brighten(0.5),
             ),
             colorHadler: (_) => BuddySitterColor.actionsLog,
