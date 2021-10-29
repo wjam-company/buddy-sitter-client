@@ -14,6 +14,7 @@ class OrganismBarMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String active = Provider.of<RouterPageHandler>(context).active;
     return MoleculeRowFLex.action(
       height: BuddySitterMeasurement.sizeHalf * 3,
       actions: [
@@ -25,6 +26,11 @@ class OrganismBarMenu extends StatelessWidget {
             CupertinoIcons.home,
             color: BuddySitterColor.actionsLog,
           ),
+          activeIcon: Icon(
+            CupertinoIcons.home,
+            color: BuddySitterColor.primaryBeige,
+          ),
+          isActive: active == BuddySitterLocation.home,
         ),
         BuddySitterAction(
           onPressed: () =>
@@ -34,6 +40,11 @@ class OrganismBarMenu extends StatelessWidget {
             CupertinoIcons.search,
             color: BuddySitterColor.actionsLog,
           ),
+          activeIcon: Icon(
+            CupertinoIcons.search,
+            color: BuddySitterColor.primaryBeige,
+          ),
+          isActive: active == BuddySitterLocation.explore,
         ),
         BuddySitterAction(
           onPressed: () {},
@@ -41,6 +52,11 @@ class OrganismBarMenu extends StatelessWidget {
             CupertinoIcons.calendar,
             color: BuddySitterColor.actionsLog,
           ),
+          activeIcon: Icon(
+            CupertinoIcons.calendar,
+            color: BuddySitterColor.primaryBeige,
+          ),
+          isActive: active == BuddySitterLocation.schedule,
         ),
       ],
     );

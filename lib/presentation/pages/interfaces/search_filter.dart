@@ -103,6 +103,8 @@ class SearchFilter<T extends ProviderSearchFilter>
               height: (BuddySitterMeasurement.sizeHigh) -
                   ((BuddySitterText.content.fontSize as double) / 2),
               icon: appBarAction(context, currentProvider).icon,
+              circleColor: null,
+              dotsColor: null,
             ),
           ),
         ),

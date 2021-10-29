@@ -4,14 +4,19 @@ import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:buddy_sitter/presentation/utils/theme/text.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:flutter/material.dart';
+import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
 
 class AtomButton extends StatelessWidget {
   final MaterialPropertyResolver<Color>? colorHadler;
   final MaterialPropertyResolver<Color>? splashColorHandler;
   final Icon? icon;
+  final Icon? activeIcon;
+  final bool isActive;
   final double? height;
   final AtomText? text;
+  final BubblesColor? dotsColor;
+  final CircleColor? circleColor;
   final void Function()? onPressed;
   final void Function()? onLongPress;
   static const int typeBottom = 0;
@@ -29,6 +34,10 @@ class AtomButton extends StatelessWidget {
     this.colorHadler,
     this.splashColorHandler,
     this.onLongPress,
+    this.activeIcon,
+    this.dotsColor,
+    this.circleColor,
+    this.isActive = false,
   })  : type = typeBottom,
         super(key: key);
 
@@ -41,6 +50,10 @@ class AtomButton extends StatelessWidget {
     this.height,
     this.icon,
     this.onLongPress,
+    this.activeIcon,
+    this.dotsColor,
+    this.circleColor,
+    this.isActive = false,
   })  : type = typeText,
         super(key: key);
 
@@ -53,6 +66,10 @@ class AtomButton extends StatelessWidget {
     required this.height,
     required this.icon,
     this.onLongPress,
+    this.activeIcon,
+    this.dotsColor,
+    this.circleColor,
+    this.isActive = false,
   })  : type = typeCicle,
         super(key: key);
 
@@ -65,6 +82,10 @@ class AtomButton extends StatelessWidget {
     this.height,
     required this.icon,
     this.onLongPress,
+    this.activeIcon,
+    this.dotsColor,
+    this.circleColor,
+    this.isActive = false,
   })  : type = typeInput,
         super(key: key);
 
@@ -137,20 +158,42 @@ class AtomButton extends StatelessWidget {
         color: colorHadler != null
             ? colorHadler!(<MaterialState>{})
             : Colors.transparent,
-        child: InkWell(
-          splashColor: splashColorHandler != null
-              ? splashColorHandler!(<MaterialState>{})
-              : Color.lerp(
-                  Colors.transparent,
-                  BuddySitterColor.light,
-                  0.2,
+        child: SizedBox(
+          width: height,
+          height: height,
+          child: LikeButton(
+            isLiked: isActive,
+            onTap: (active) async {
+              Future.delayed(const Duration(milliseconds: 800), onPressed);
+              return !active;
+            },
+            padding: EdgeInsets.zero.copyWith(
+              top: (height ?? 30) * 0.01,
+              left: (height ?? 30) * 0.05,
+            ),
+            size: (height ?? 30) * 0.5,
+            circleColor: circleColor ??
+                CircleColor(
+                  start: BuddySitterColor.primaryBeige,
+                  end: BuddySitterColor.primaryBeige.brighten(.3),
                 ),
-          onTap: onPressed,
-          onLongPress: onLongPress,
-          child: SizedBox(
-            width: height,
-            height: height,
-            child: icon,
+            bubblesColor: dotsColor ??
+                BubblesColor(
+                  dotPrimaryColor: BuddySitterColor.primaryPurple,
+                  dotSecondaryColor: BuddySitterColor.primaryGreen,
+                  dotThirdColor: BuddySitterColor.complementaryLilac,
+                  dotLastColor: BuddySitterColor.complementaryRed,
+                ),
+            likeCountAnimationType: LikeCountAnimationType.none,
+            likeBuilder: (bool isLiked) {
+              if (isActive) {
+                return (activeIcon);
+              }
+              if (isLiked) {
+                return (activeIcon ?? icon!);
+              }
+              return (icon!);
+            },
           ),
         ),
       ),

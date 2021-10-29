@@ -1,12 +1,6 @@
-import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
-import 'package:buddy_sitter/presentation/utils/navigator/locations.dart';
-import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/assets/image.dart';
-import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
 import '../interfaces/interfaces.dart';
 import './provider.dart';
 

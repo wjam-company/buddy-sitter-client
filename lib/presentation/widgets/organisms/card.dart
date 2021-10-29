@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:buddy_sitter/presentation/utils/clipper/card.dart';
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
@@ -21,6 +22,8 @@ class OrganismCard extends StatelessWidget {
   final BuddySitterAction actionLeft;
   final BuddySitterAction actionRight;
   final bool margin;
+  final bool _ranking;
+  final int ranking;
   final bool topBorderRadius;
   final int typeImage;
   const OrganismCard.simple({
@@ -32,11 +35,13 @@ class OrganismCard extends StatelessWidget {
     required this.actionLeft,
     required this.actionRight,
     this.typeImage = AtomImage.typeNetwork,
+    this.ranking = 0,
   })  : margin = true,
         topBorderRadius = true,
+        _ranking = false,
         super(key: key);
 
-  const OrganismCard.complete({
+  const OrganismCard.ranking({
     Key? key,
     required this.image,
     required this.profile,
@@ -44,8 +49,10 @@ class OrganismCard extends StatelessWidget {
     required this.content,
     required this.actionLeft,
     required this.actionRight,
+    required this.ranking,
     this.typeImage = AtomImage.typeNetwork,
   })  : margin = true,
+        _ranking = true,
         topBorderRadius = true,
         super(key: key);
 
@@ -57,8 +64,10 @@ class OrganismCard extends StatelessWidget {
     required this.content,
     required this.actionLeft,
     required this.actionRight,
+    this.ranking = 0,
     this.typeImage = AtomImage.typeNetwork,
   })  : margin = false,
+        _ranking = false,
         topBorderRadius = false,
         super(key: key);
 
@@ -92,7 +101,7 @@ class OrganismCard extends StatelessWidget {
 
   Widget containerInfo(BuddySitterColor color) => Container(
         color: color,
-        height: BuddySitterMeasurement.sizeHigh * 3,
+        height: containerInfoHeigth,
         width: double.infinity,
         padding: EdgeInsets.all(BuddySitterMeasurement.sizeHalf),
         child: Column(
@@ -106,6 +115,43 @@ class OrganismCard extends StatelessWidget {
               color: BuddySitterColor.dark,
             ),
             const Spacer(),
+            if (_ranking)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(10, (index) {
+                  if (index % 2 == 0) {
+                    return (index ~/ 2 <= ranking)
+                        ? Stack(
+                            children: [
+                              Icon(
+                                CupertinoIcons.star_fill,
+                                color: BuddySitterColor.actionsWarning,
+                              ),
+                              Icon(
+                                CupertinoIcons.star,
+                                color: Colors.yellowAccent.shade700,
+                              ),
+                            ],
+                          )
+                        : Stack(
+                            children: [
+                              Icon(
+                                CupertinoIcons.star_fill,
+                                color: BuddySitterColor.dark.brighten(.6),
+                              ),
+                              Icon(
+                                CupertinoIcons.star,
+                                color: BuddySitterColor.dark.brighten(.5),
+                              ),
+                            ],
+                          );
+                  }
+                  return SizedBox(
+                    width: BuddySitterMeasurement.sizeLeast,
+                  );
+                }),
+              ),
+            if (_ranking) const Spacer(),
             AtomText.content(
               text: content,
               padding: EdgeInsets.zero,
@@ -148,27 +194,46 @@ class OrganismCard extends StatelessWidget {
     );
   }
 
+  double get containerInfoHeigth {
+    if (_ranking) {
+      return BuddySitterMeasurement.sizeHigh * 3.2;
+    }
+    return BuddySitterMeasurement.sizeHigh * 3;
+  }
+
+  double get containerHeight {
+    if (_ranking) {
+      return MediaHandler.dynamicType(
+        mobile: BuddySitterMeasurement.sizeHigh * 6,
+        tablet: BuddySitterMeasurement.sizeHigh * 8.2,
+        desktop: BuddySitterMeasurement.sizeHigh * 8.2,
+      );
+    }
+    return MediaHandler.dynamicType(
+      mobile: BuddySitterMeasurement.sizeHigh * 5.8,
+      tablet: BuddySitterMeasurement.sizeHigh * 8,
+      desktop: BuddySitterMeasurement.sizeHigh * 8,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Provider.of<MediaHandler>(context);
+    double headderHeight = MediaHandler.dynamicType(
+      mobile: BuddySitterMeasurement.sizeHigh * 2.8,
+      tablet: BuddySitterMeasurement.sizeHigh * 5,
+      desktop: BuddySitterMeasurement.sizeHigh * 5,
+    );
     return decoratorMargin(
       decoratorBorderRadius(
         SizedBox(
-          height: MediaHandler.dynamicType(
-            mobile: BuddySitterMeasurement.sizeHigh * 5.8,
-            tablet: BuddySitterMeasurement.sizeHigh * 8,
-            desktop: BuddySitterMeasurement.sizeHigh * 8,
-          ),
+          height: containerHeight,
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
               SizedBox(
                 width: double.infinity,
-                height: MediaHandler.dynamicType(
-                  mobile: BuddySitterMeasurement.sizeHigh * 5.8,
-                  tablet: BuddySitterMeasurement.sizeHigh * 8,
-                  desktop: BuddySitterMeasurement.sizeHigh * 8,
-                ),
+                height: containerHeight,
                 child: AtomImage.simple(
                   repeat: ImageRepeat.repeat,
                   imageFilter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
@@ -180,11 +245,7 @@ class OrganismCard extends StatelessWidget {
                 children: [
                   AtomImage.simple(
                     src: image,
-                    height: MediaHandler.dynamicType(
-                      mobile: BuddySitterMeasurement.sizeHigh * 2.8,
-                      tablet: BuddySitterMeasurement.sizeHigh * 5,
-                      desktop: BuddySitterMeasurement.sizeHigh * 5,
-                    ),
+                    height: headderHeight,
                     type: typeImage,
                   ),
                   ClipPath(
@@ -198,11 +259,7 @@ class OrganismCard extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.only(
-                  top: MediaHandler.dynamicType(
-                    mobile: BuddySitterMeasurement.sizeHigh * 2.8,
-                    tablet: BuddySitterMeasurement.sizeHigh * 5,
-                    desktop: BuddySitterMeasurement.sizeHigh * 5,
-                  ),
+                  top: headderHeight,
                 ),
                 child: MoleculeRowFLex.simple(
                   children: [
@@ -213,6 +270,8 @@ class OrganismCard extends StatelessWidget {
                       onLongPress: actionLeft.onLongPress,
                       height: BuddySitterMeasurement.sizeHalf * 3,
                       icon: actionLeft.icon,
+                      circleColor: null,
+                      dotsColor: null,
                     ),
                     AtomImage.circle(
                       src: profile,
@@ -226,6 +285,8 @@ class OrganismCard extends StatelessWidget {
                       onLongPress: actionRight.onLongPress,
                       height: BuddySitterMeasurement.sizeHalf * 3,
                       icon: actionRight.icon,
+                      circleColor: null,
+                      dotsColor: null,
                     ),
                   ],
                 ),

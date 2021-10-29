@@ -24,7 +24,8 @@ class RouterPageHandler extends ChangeNotifier {
     Future<void>.delayed(const Duration(seconds: 4), () {
       BuddySitterData().state.get().then((value) {
         show(
-          value ? BuddySitterLocation.explore : BuddySitterLocation.onboarding,
+          // value ? BuddySitterLocation.explore : BuddySitterLocation.onboarding,
+          value ? BuddySitterLocation.home : BuddySitterLocation.onboarding,
         );
         BuddySitterData().state.addListener(notifyListeners);
       });
@@ -43,6 +44,9 @@ class RouterPageHandler extends ChangeNotifier {
   set state(bool value) {
     BuddySitterData().state.set(value);
   }
+
+  String get active =>
+      _pagesActive.isNotEmpty ? _pagesActive.last.name ?? '' : '';
 
   void show(
     String buddySitterLocation, {

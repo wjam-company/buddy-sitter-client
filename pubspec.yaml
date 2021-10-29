@@ -42,6 +42,7 @@ dependencies:
   image: ^3.0.8
   syncfusion_flutter_datepicker: ^19.3.47
   video_player: ^2.2.5
+  like_button: ^2.0.3
 
 dev_dependencies:
   flutter_test:

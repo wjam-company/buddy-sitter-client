@@ -33,7 +33,7 @@ class Body extends StatelessWidget {
       child: ListView(
         children: [
           // Popus
-          OrganismCard.headder(
+          OrganismCard.ranking(
             actionLeft: BuddySitterAction(
               onPressed: () {},
               icon: Icon(
@@ -55,6 +55,7 @@ class Body extends StatelessWidget {
             name: 'Buster',
             profile:
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjh5E6lDdlw5R7h6tiwcvuly5qfbRnrVV6tKrGc-bb1Zq-Mu1kbcwPgFIN0w_jKsAFbNo&usqp=CAU',
+            ranking: 3,
           ),
         ],
       ),
