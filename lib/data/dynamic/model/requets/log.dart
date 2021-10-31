@@ -1,7 +1,7 @@
 class Login {
-  final int accessToken;
-  final int expiredIn;
-  final int refreshToken;
+  final String accessToken;
+  final String expiredIn;
+  final String refreshToken;
 
   Login({
     required this.accessToken,
@@ -12,7 +12,7 @@ class Login {
   factory Login.fromJson(Map<String, dynamic> json) {
     return Login(
       accessToken: json['access_token'],
-      expiredIn: json['expired_ind'],
+      expiredIn: json['expires_in'],
       refreshToken: json['refresh_token'],
     );
   }
@@ -22,7 +22,7 @@ class Login {
       jsons.length,
       (index) => Login(
         accessToken: jsons[index]['access_token'],
-        expiredIn: jsons[index]['expired_ind'],
+        expiredIn: jsons[index]['expires_in'],
         refreshToken: jsons[index]['refresh_token'],
       ),
     );
@@ -32,7 +32,7 @@ class Login {
       logins.add(
         Login(
           accessToken: json['access_token'],
-          expiredIn: json['expired_ind'],
+          expiredIn: json['expires_in'],
           refreshToken: json['refresh_token'],
         ),
       );

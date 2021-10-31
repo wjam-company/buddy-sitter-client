@@ -1,4 +1,8 @@
 class Url {
-  static String login = 'http://localhost:8080/v1/login';
-  static String profile = 'https://';
+  static String base = 'http://localhost:8000';
+  static String login = base + '/login';
+  static String signup = base + '/sign_up';
+  static String recoverpwd = base + '/recover';
+  static String profile = base + '/profile';
+  static String pets = base + '/pets';
 }
