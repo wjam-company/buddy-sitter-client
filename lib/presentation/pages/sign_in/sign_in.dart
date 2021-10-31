@@ -1,6 +1,7 @@
 import 'package:buddy_sitter/data/static/texts/sign_in.dart';
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
 import 'package:buddy_sitter/presentation/utils/form/sign_in_validate.dart';
+import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/locations.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
@@ -12,8 +13,9 @@ import 'package:buddy_sitter/presentation/widgets/organisms/form.dart';
 import 'package:buddy_sitter/presentation/widgets/template/action_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../interfaces/interfaces.dart';
+
 import './provider.dart';
+import '../interfaces/interfaces.dart';
 
 class SignIn extends BuddySitterPageProvider<ProviderSignIn> {
   const SignIn({Key? key}) : super(key: key);
@@ -112,7 +114,9 @@ class Body extends StatelessWidget {
               if (validators.isValid) {
                 final RouterPageHandler pageHandler =
                     Provider.of<RouterPageHandler>(context, listen: false);
-                pageHandler.state = true;
+                var state = BuddySitterData().state.syncGet();
+                state["user"] = "william";
+                pageHandler.state = state;
                 pageHandler.show(BuddySitterLocation.explore);
               }
             },

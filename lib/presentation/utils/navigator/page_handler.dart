@@ -1,14 +1,16 @@
 import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/router_information_parser.dart';
-import './pages.dart';
-import './path.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import './locations.dart';
+import './pages.dart';
+import './path.dart';
 
 class RouterPageHandler extends ChangeNotifier {
   static BuddySitterRouteInformationParser routeInformationParser =
       BuddySitterRouteInformationParser();
+
   static RouterPageHandler of(BuildContext context) =>
       Provider.of<RouterPageHandler>(context, listen: false);
 
@@ -18,14 +20,22 @@ class RouterPageHandler extends ChangeNotifier {
     BuddySitterData();
     // show splash
     show(
-      BuddySitterLocation.splahs,
+      BuddySitterLocation.splash,
       notify: false,
     );
     Future<void>.delayed(const Duration(seconds: 4), () {
+      var map = BuddySitterData().state.syncGet();
+      print("______");
+      print("splash map $map");
+      print("______");
       BuddySitterData().state.get().then((value) {
+        bool? isAuth = value?.containsKey("user") == true;
+        print("splash state $value");
+        print("splash auth: $isAuth");
         show(
-          // value ? BuddySitterLocation.explore : BuddySitterLocation.onboarding,
-          value ? BuddySitterLocation.home : BuddySitterLocation.onboarding,
+          // value ? BuddySitterLocation.explore : BuddySitterLocation.onBoarding,
+          // TODO: fix state login
+          isAuth ? BuddySitterLocation.home : BuddySitterLocation.onBoarding,
         );
         BuddySitterData().state.addListener(notifyListeners);
       });
@@ -35,13 +45,17 @@ class RouterPageHandler extends ChangeNotifier {
   final List<Page> _pages = [];
   final List<Page> _authPages = [];
 
-  List<Page> get _pagesActive =>
-      BuddySitterData().state.syncGet() ? _authPages : _pages;
+  // TODO:
+  List<Page> get _pagesActive {
+    var map = BuddySitterData().state.syncGet();
+    return BuddySitterData().state.syncGet().isNotEmpty ? _authPages : _pages;
+    // BuddySitterData().state.syncGet().isNotEmpty ? _authPages : _pages;
+  }
 
   BuddySitterPath get currentPath =>
       BuddySitterPath.parse(_pagesActive.last.name);
 
-  set state(bool value) {
+  set state(Map value) {
     BuddySitterData().state.set(value);
   }
 
@@ -54,23 +68,23 @@ class RouterPageHandler extends ChangeNotifier {
     bool change = false,
     List<Page>? stack,
   }) {
-    List<Page> curentPages = stack ?? _pagesActive;
-    if (curentPages.isNotEmpty &&
-        (curentPages.last.name == buddySitterLocation)) {
+    List<Page> currentPages = stack ?? _pagesActive;
+    if (currentPages.isNotEmpty &&
+        (currentPages.last.name == buddySitterLocation)) {
       return;
     }
 
-    if (change && curentPages.isNotEmpty) {
-      curentPages.removeLast();
+    if (change && currentPages.isNotEmpty) {
+      currentPages.removeLast();
     }
 
     if (BuddySitterPage.access(
         buddySitterLocation, BuddySitterData().state.syncGet())) {
-      curentPages.add(BuddySitterPage.of(buddySitterLocation));
-    } else if (buddySitterLocation == BuddySitterLocation.splahs) {
-      curentPages.add(BuddySitterPage.of(buddySitterLocation));
+      currentPages.add(BuddySitterPage.of(buddySitterLocation));
+    } else if (buddySitterLocation == BuddySitterLocation.splash) {
+      currentPages.add(BuddySitterPage.of(buddySitterLocation));
     } else {
-      curentPages.add(BuddySitterPage.of(BuddySitterLocation.unknown));
+      currentPages.add(BuddySitterPage.of(BuddySitterLocation.unknown));
     }
 
     if (notify) {
@@ -84,6 +98,7 @@ class RouterPageHandler extends ChangeNotifier {
   }
 
   bool get canNotPop => _pagesActive.length < 2;
+
   bool get canPop => _pagesActive.length >= 2;
 
   Future<void> setNewRoutePath(BuddySitterPath configuration) async {

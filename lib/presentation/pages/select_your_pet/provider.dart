@@ -1,5 +1,6 @@
 import 'package:buddy_sitter/presentation/pages/interfaces/search_filter.dart';
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
+import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/locations.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
@@ -53,7 +54,12 @@ class ProviderSelectYourPet extends ProviderSearchFilter {
           title: 'Magna',
           action: BuddySitterAction(
             text: 'Select',
-            onPressed: () {},
+            onPressed: () {
+              Map map = {};
+              map["pet_selected"] = "80291380812038";
+              BuddySitterData().state.set(map);
+              // BuddySitterData().state.get().then((value) => {print(value)});
+            },
             icon: Icon(
               CupertinoIcons.check_mark_circled,
               color: BuddySitterColor.light,

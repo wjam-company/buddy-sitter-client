@@ -11,8 +11,9 @@ import 'package:buddy_sitter/presentation/widgets/template/action_bottom.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../interfaces/interfaces.dart';
+
 import './provider.dart';
+import '../interfaces/interfaces.dart';
 
 class Onboarding extends BuddySitterPageProvider<ProviderOnboarding> {
   const Onboarding({Key? key}) : super(key: key);
@@ -96,7 +97,7 @@ class Body extends StatelessWidget {
             },
             onPressed: () =>
                 Provider.of<RouterPageHandler>(context, listen: false)
-                    .show(BuddySitterLocation.signin),
+                    .show(BuddySitterLocation.signIn),
           ),
         ),
       ],

@@ -8,7 +8,7 @@ class BuddySitterData extends ChangeNotifier {
   final Map<String, BuddySitterColor> colorFromImages = {};
 
   BuddySitterData._internal()
-      : state = BuddySitterStorage<bool>(type: 'log', initial: false);
+      : state = BuddySitterStorage(type: 'data', initial: {});
 
   static final BuddySitterData _singleton = BuddySitterData._internal();
 

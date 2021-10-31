@@ -7,20 +7,21 @@ import 'package:buddy_sitter/presentation/pages/schedule/schedule.dart';
 import 'package:buddy_sitter/presentation/pages/search_sitters/search_sitters.dart';
 import 'package:buddy_sitter/presentation/pages/select_your_pet/select_your_pet.dart';
 import 'package:buddy_sitter/presentation/pages/select_your_services/select_your_services.dart';
-import 'package:buddy_sitter/presentation/pages/sign_in/sing_in.dart';
+import 'package:buddy_sitter/presentation/pages/sign_in/sign_in.dart';
 import 'package:buddy_sitter/presentation/pages/sign_up/sing_up.dart';
 import 'package:buddy_sitter/presentation/pages/splash/splash.dart';
 import 'package:buddy_sitter/presentation/pages/unknown/unknown.dart';
 import 'package:flutter/material.dart';
+
 import 'locations.dart';
 
 class BuddySitterPage {
   static final Map<String, bool> _auth = Map.unmodifiable({
-    BuddySitterLocation.splahs: false,
+    BuddySitterLocation.splash: false,
     BuddySitterLocation.unknown: false,
-    BuddySitterLocation.signin: false,
+    BuddySitterLocation.signIn: false,
     BuddySitterLocation.signup: false,
-    BuddySitterLocation.onboarding: false,
+    BuddySitterLocation.onBoarding: false,
     BuddySitterLocation.explore: true,
     BuddySitterLocation.recoverPassword: true,
     BuddySitterLocation.home: true,
@@ -40,12 +41,12 @@ class BuddySitterPage {
     BuddySitterLocation.petInfo: true,
   });
   static final Map<String, BuddySitterPageProvider> _pages = Map.unmodifiable({
-    BuddySitterLocation.splahs: const Splash(),
+    BuddySitterLocation.splash: const Splash(),
     BuddySitterLocation.unknown: const Unknown(),
-    BuddySitterLocation.signin: const SignIn(),
+    BuddySitterLocation.signIn: const SignIn(),
     BuddySitterLocation.signup: const SignUp(),
     BuddySitterLocation.explore: const Explore(),
-    BuddySitterLocation.onboarding: const Onboarding(),
+    BuddySitterLocation.onBoarding: const Onboarding(),
     BuddySitterLocation.recoverPassword: const RecoverPassword(),
     BuddySitterLocation.home: const Home(),
     BuddySitterLocation.selectYourPet: const SelectYourPet(),
@@ -64,8 +65,15 @@ class BuddySitterPage {
     BuddySitterLocation.petInfo: const ResultSitters(),
   });
 
-  static bool access(String location, bool state) {
-    return (_auth[location] ?? false) == state;
+  static bool access(String location, Map state) {
+    // TODO: manage access
+    // print("_______________");
+    // print("state $state");
+    // print("location $location");
+    // print("authorized ${_auth[location]}");
+
+    return (_auth[location] ?? false) == state.containsKey("user");
+    return true;
   }
 
   static int get length => _pages.length;

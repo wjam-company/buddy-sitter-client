@@ -1,65 +1,51 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class BuddySitterStorage<T> extends ChangeNotifier {
+class BuddySitterStorage extends ChangeNotifier {
   Future<SharedPreferences>? _storage;
   late String _key;
   final String _prefix = 'BuddySitter';
-  final List<T> _data = [];
+  final Map<dynamic, dynamic> _data = {};
 
-  BuddySitterStorage({required type, required T initial}) : super() {
+  BuddySitterStorage({required type, required Map initial}) : super() {
     _key = '${_prefix}_$type';
     _storage = SharedPreferences.getInstance();
-    _data.add(initial);
+
+    get().then((value) {
+      if (value == null) {
+        set(initial);
+        // .then((value) => get())
+        // .then((value) => print("constructor $value"));
+      }
+    });
   }
 
-  T syncGet() => _data.last;
+  Map syncGet() => _data;
 
-  Future<T?> get() async {
+  Future<Map?> get() async {
     try {
-      late T? data;
-      if (T is int) {
-        data = (await _storage)?.getInt(_key) as T?;
-      } else if (T == double) {
-        data = (await _storage)?.getDouble(_key) as T?;
-      } else if (T == bool) {
-        data = (await _storage)?.getBool(_key) as T?;
-      } else if (T == String) {
-        data = (await _storage)?.getString(_key) as T?;
-      } else if (T == List) {
-        data = (await _storage)?.getStringList(_key) as T?;
+      late Map? data;
+      String? s = (await _storage)?.getString(_key);
+      if (s == null) {
+        return syncGet();
       }
+
+      data = jsonDecode(s);
       if (data != null) {
-        _data.add(data);
+        _data.addAll(data);
       }
       return syncGet();
-    } catch (_) {
-      return null;
+    } catch (e) {
+      throw Error();
     }
   }
 
-  Future<void> set(T value, {bool notify = true}) async {
+  Future<void> set(Map value, {bool notify = true}) async {
     try {
-      if (T == int) {
-        _data.add(value);
-        (await _storage)?.setInt(_key, value as int);
-      }
-      if (T == double) {
-        _data.add(value);
-        (await _storage)?.setDouble(_key, value as double);
-      }
-      if (T == bool) {
-        _data.add(value);
-        (await _storage)?.setBool(_key, value as bool);
-      }
-      if (T == String) {
-        _data.add(value);
-        (await _storage)?.setString(_key, value as String);
-      }
-      if (T == List) {
-        _data.add(value);
-        (await _storage)?.setStringList(_key, value as List<String>);
-      }
+      _data.addAll(value);
+      (await _storage)?.setString(_key, jsonEncode(_data));
       if (notify) {
         notifyListeners();
       }
@@ -68,33 +54,15 @@ class BuddySitterStorage<T> extends ChangeNotifier {
     }
   }
 
-  Future<void> update(T value, {bool notify = true}) async {
-    try {
-      if (T == int) {
-        _data.add(value);
-        (await _storage)?.setInt(_key, value as int);
-      }
-      if (T == double) {
-        _data.add(value);
-        (await _storage)?.setDouble(_key, value as double);
-      }
-      if (T == bool) {
-        _data.add(value);
-        (await _storage)?.setBool(_key, value as bool);
-      }
-      if (T == String) {
-        _data.add(value);
-        (await _storage)?.setString(_key, value as String);
-      }
-      if (T == List) {
-        _data.add(value);
-        (await _storage)?.setStringList(_key, value as List<String>);
-      }
-      if (notify) {
-        notifyListeners();
-      }
-    } catch (_) {
-      return;
-    }
-  }
+// Future<void> update(Map value, {bool notify = true}) async {
+//   try {
+//     _data.addAll(value);
+//     (await _storage)?.setString(_key, value.toString());
+//     if (notify) {
+//       notifyListeners();
+//     }
+//   } catch (_) {
+//     return;
+//   }
+// }
 }

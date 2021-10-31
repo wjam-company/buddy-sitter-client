@@ -5,6 +5,7 @@ import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import './provider.dart';
 
 class SelectYourService extends SearchFilter<ProviderSelectYourService> {
@@ -42,7 +43,7 @@ class Body extends BodySearchFilter {
   }
 
   @override
-  String listTitle(BuildContext context) => 'Chouse your service';
+  String listTitle(BuildContext context) => 'Choose your service';
 
   @override
   BuddySitterAction action(BuildContext context) =>

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import './path.dart';
+
 import './locations.dart';
+import './path.dart';
 
 class BuddySitterRouteInformationParser
     implements RouteInformationParser<BuddySitterPath> {
@@ -19,12 +20,12 @@ class BuddySitterRouteInformationParser
     }
     if (configuration.isSplashPage) {
       return const RouteInformation(
-        location: BuddySitterLocation.splahs,
+        location: BuddySitterLocation.splash,
       );
     }
     if (configuration.isSinginPage) {
       return const RouteInformation(
-        location: BuddySitterLocation.signin,
+        location: BuddySitterLocation.signIn,
       );
     }
     if (configuration.isExplorePage) {
@@ -34,7 +35,7 @@ class BuddySitterRouteInformationParser
     }
     if (configuration.isOnboardingPage) {
       return const RouteInformation(
-        location: BuddySitterLocation.onboarding,
+        location: BuddySitterLocation.onBoarding,
       );
     }
     if (configuration.isSignupPage) {
