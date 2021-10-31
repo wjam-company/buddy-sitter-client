@@ -66,14 +66,7 @@ class BuddySitterPage {
   });
 
   static bool access(String location, Map state) {
-    // TODO: manage access
-    // print("_______________");
-    // print("state $state");
-    // print("location $location");
-    // print("authorized ${_auth[location]}");
-
     return (_auth[location] ?? false) == state.containsKey("user");
-    return true;
   }
 
   static int get length => _pages.length;

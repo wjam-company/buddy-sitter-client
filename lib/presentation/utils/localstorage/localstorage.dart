@@ -12,12 +12,9 @@ class BuddySitterStorage extends ChangeNotifier {
   BuddySitterStorage({required type, required Map initial}) : super() {
     _key = '${_prefix}_$type';
     _storage = SharedPreferences.getInstance();
-
     get().then((value) {
       if (value == null) {
         set(initial);
-        // .then((value) => get())
-        // .then((value) => print("constructor $value"));
       }
     });
   }

@@ -24,17 +24,9 @@ class RouterPageHandler extends ChangeNotifier {
       notify: false,
     );
     Future<void>.delayed(const Duration(seconds: 4), () {
-      var map = BuddySitterData().state.syncGet();
-      print("______");
-      print("splash map $map");
-      print("______");
       BuddySitterData().state.get().then((value) {
         bool? isAuth = value?.containsKey("user") == true;
-        print("splash state $value");
-        print("splash auth: $isAuth");
         show(
-          // value ? BuddySitterLocation.explore : BuddySitterLocation.onBoarding,
-          // TODO: fix state login
           isAuth ? BuddySitterLocation.home : BuddySitterLocation.onBoarding,
         );
         BuddySitterData().state.addListener(notifyListeners);
@@ -45,11 +37,10 @@ class RouterPageHandler extends ChangeNotifier {
   final List<Page> _pages = [];
   final List<Page> _authPages = [];
 
-  // TODO:
   List<Page> get _pagesActive {
-    var map = BuddySitterData().state.syncGet();
-    return BuddySitterData().state.syncGet().isNotEmpty ? _authPages : _pages;
-    // BuddySitterData().state.syncGet().isNotEmpty ? _authPages : _pages;
+    return BuddySitterData().state.syncGet().containsKey("user")
+        ? _authPages
+        : _pages;
   }
 
   BuddySitterPath get currentPath =>

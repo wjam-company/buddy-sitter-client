@@ -21,7 +21,7 @@ class ProviderSelectYourPet extends ProviderSearchFilter {
         color: BuddySitterColor.actionsSuccess,
       ),
       onPressed: () {
-        print('save the model of pet');
+        // TODO: select pet
         Provider.of<RouterPageHandler>(context, listen: false)
             .show(BuddySitterLocation.selectYourService);
       },
@@ -56,9 +56,7 @@ class ProviderSelectYourPet extends ProviderSearchFilter {
             text: 'Select',
             onPressed: () {
               Map map = {};
-              map["pet_selected"] = "80291380812038";
               BuddySitterData().state.set(map);
-              // BuddySitterData().state.get().then((value) => {print(value)});
             },
             icon: Icon(
               CupertinoIcons.check_mark_circled,
