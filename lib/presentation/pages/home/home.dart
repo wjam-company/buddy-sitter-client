@@ -1,5 +1,7 @@
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
+import 'package:buddy_sitter/presentation/widgets/atoms/assets/image.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
+import 'package:buddy_sitter/presentation/widgets/molecules/information/list_tile.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
 import 'package:buddy_sitter/presentation/widgets/organisms/bar_menu.dart';
 import 'package:buddy_sitter/presentation/widgets/organisms/card.dart';
@@ -56,9 +58,16 @@ class Body extends StatelessWidget {
             name: 'Buster',
             profile:
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjh5E6lDdlw5R7h6tiwcvuly5qfbRnrVV6tKrGc-bb1Zq-Mu1kbcwPgFIN0w_jKsAFbNo&usqp=CAU',
-            ranking: 3,
-            children: [
-              AtomText.caption(text: 'hola'),
+            children: const [
+              MoleculeListTile.review(
+                imageType: AtomImage.typeNetwork,
+                content:
+                    'Reprehenderit aliqua officia incididunt ad velit aliquip Lorem magna.',
+                image:
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjh5E6lDdlw5R7h6tiwcvuly5qfbRnrVV6tKrGc-bb1Zq-Mu1kbcwPgFIN0w_jKsAFbNo&usqp=CAU',
+                title: 'Sunt quis.',
+                ranking: 4,
+              ),
             ],
           ),
         ],

@@ -1,6 +1,7 @@
 import 'package:buddy_sitter/presentation/pages/interfaces/search_filter.dart';
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
+import 'package:buddy_sitter/presentation/widgets/molecules/information/list_tile.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class Body extends BodySearchFilter {
   Future<List<ItemListItem>> listData(BuildContext context) async {
     ProviderSelectYourService providerSelectYourPet =
         Provider.of<ProviderSelectYourService>(context);
-    return await providerSelectYourPet.data;
+    return (await providerSelectYourPet.data);
   }
 
   @override

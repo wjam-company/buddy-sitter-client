@@ -19,22 +19,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import '../interfaces/interfaces.dart';
 
-class ItemListItem {
-  final String image;
-  final String title;
-  final BuddySitterAction action;
-  final String content;
-  final int imageType;
-
-  ItemListItem({
-    required this.image,
-    required this.title,
-    required this.action,
-    required this.content,
-    this.imageType = AtomImage.typeNetwork,
-  });
-}
-
 class ProviderSearchFilter with ChangeNotifier {
   final FormProvider formProvider;
 
@@ -151,7 +135,7 @@ class BodySearchFilter extends StatelessWidget {
                   );
                 }
                 index -= 1;
-                return MoleculeListTile(
+                return MoleculeListTile.data(
                   data: snapshot.data[index],
                 );
               },

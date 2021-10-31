@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 
+import 'package:buddy_sitter/presentation/utils/clipper/card.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class AtomImage extends StatelessWidget {
   final double? radius;
   final double? scale;
   final ImageFilter? imageFilter;
+  final BorderRadiusClipper? borderRadius;
   final BoxFit? fit;
   final ImageRepeat? repeat;
   static const int typeNetwork = 0;
@@ -37,7 +39,26 @@ class AtomImage extends StatelessWidget {
     this.scale,
     this.fit,
     this.repeat,
+    this.borderRadius,
   }) : super(key: key);
+
+  const AtomImage.borderRadius({
+    Key? key,
+    required this.type,
+    this.src,
+    this.aspectRatio,
+    this.file,
+    this.bytes,
+    this.imageFilter,
+    this.height,
+    this.width,
+    this.radius,
+    this.scale,
+    this.fit,
+    this.repeat,
+    required this.borderRadius,
+  }) : super(key: key);
+
   const AtomImage.aspectRatio({
     Key? key,
     required this.aspectRatio,
@@ -50,9 +71,10 @@ class AtomImage extends StatelessWidget {
     this.width,
     this.radius,
     this.scale,
-    this.fit,
     this.repeat,
-  }) : super(key: key);
+    this.borderRadius,
+  })  : fit = BoxFit.cover,
+        super(key: key);
 
   AtomImage.circle({
     Key? key,
@@ -64,11 +86,24 @@ class AtomImage extends StatelessWidget {
     this.bytes,
     this.imageFilter,
     this.scale,
-    this.fit,
     this.repeat,
+    this.borderRadius,
+    this.fit,
   })  : height = fromRadius(radius ?? BuddySitterMeasurement.sizeHalf),
         width = fromRadius(radius ?? BuddySitterMeasurement.sizeHalf),
         super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (borderRadius != null) {
+      return buildBorderRadius();
+    }
+    return decoratorCircle(
+      decoratorAspectRatio(
+        decoratorFiltered(getImage),
+      ), // decoratorAspectRatio
+    ); // decoratorCircle
+  }
 
   static double fromRadius(double radius) => (radius * 2.0);
 
@@ -81,6 +116,7 @@ class AtomImage extends StatelessWidget {
           width: width,
           repeat: repeat ?? ImageRepeat.noRepeat,
           scale: scale ?? 1.0,
+          fit: fit,
         );
       case typeAsset:
         return Image.asset(
@@ -89,6 +125,7 @@ class AtomImage extends StatelessWidget {
           width: width,
           repeat: repeat ?? ImageRepeat.noRepeat,
           scale: scale ?? 1.0,
+          fit: fit,
         );
       case typeFile:
         assert(file != null, 'file no defined');
@@ -99,6 +136,7 @@ class AtomImage extends StatelessWidget {
           width: width,
           repeat: repeat ?? ImageRepeat.noRepeat,
           scale: scale ?? 1.0,
+          fit: fit,
         );
       case typeMemory:
         assert(bytes != null, 'bytes no defined');
@@ -109,6 +147,7 @@ class AtomImage extends StatelessWidget {
           width: width,
           repeat: repeat ?? ImageRepeat.noRepeat,
           scale: scale ?? 1.0,
+          fit: fit,
         );
       default:
         return Image.asset(
@@ -117,6 +156,7 @@ class AtomImage extends StatelessWidget {
           width: width,
           repeat: repeat ?? ImageRepeat.noRepeat,
           scale: scale ?? 1.0,
+          fit: fit,
         );
     }
   }
@@ -151,12 +191,31 @@ class AtomImage extends StatelessWidget {
     return child;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return decoratorCircle(
-      decoratorAspectRatio(
-        decoratorFiltered(getImage),
-      ), // decoratorAspectRatio
-    ); // decoratorCircle
+  ClipPath buildBorderRadius() {
+    return ClipPath(
+      clipper: borderRadius,
+      child: SizedBox(
+        width: width,
+        height: height,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            AtomImage.simple(
+              imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              height: height,
+              fit: fit,
+              repeat: ImageRepeat.repeat,
+              src: src,
+              type: type,
+            ),
+            AtomImage.simple(
+              fit: fit,
+              src: src,
+              type: type,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
