@@ -1,4 +1,5 @@
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
+import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
 import 'package:buddy_sitter/presentation/widgets/organisms/bar_menu.dart';
 import 'package:buddy_sitter/presentation/widgets/organisms/card.dart';
@@ -33,7 +34,7 @@ class Body extends StatelessWidget {
       child: ListView(
         children: [
           // Popus
-          OrganismCard.ranking(
+          OrganismCard.list(
             actionLeft: BuddySitterAction(
               onPressed: () {},
               icon: Icon(
@@ -56,6 +57,9 @@ class Body extends StatelessWidget {
             profile:
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjh5E6lDdlw5R7h6tiwcvuly5qfbRnrVV6tKrGc-bb1Zq-Mu1kbcwPgFIN0w_jKsAFbNo&usqp=CAU',
             ranking: 3,
+            children: [
+              AtomText.caption(text: 'hola'),
+            ],
           ),
         ],
       ),

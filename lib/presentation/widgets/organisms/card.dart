@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:ui';
 import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,6 +23,7 @@ class OrganismCard extends StatelessWidget {
   final BuddySitterAction actionLeft;
   final BuddySitterAction actionRight;
   final bool margin;
+  final List<Widget>? children;
   final bool _ranking;
   final int ranking;
   final bool topBorderRadius;
@@ -36,6 +38,7 @@ class OrganismCard extends StatelessWidget {
     required this.actionRight,
     this.typeImage = AtomImage.typeNetwork,
     this.ranking = 0,
+    this.children,
   })  : margin = true,
         topBorderRadius = true,
         _ranking = false,
@@ -50,9 +53,26 @@ class OrganismCard extends StatelessWidget {
     required this.actionLeft,
     required this.actionRight,
     required this.ranking,
+    this.children,
     this.typeImage = AtomImage.typeNetwork,
   })  : margin = true,
         _ranking = true,
+        topBorderRadius = true,
+        super(key: key);
+
+  const OrganismCard.list({
+    Key? key,
+    required this.image,
+    required this.profile,
+    required this.name,
+    required this.content,
+    required this.actionLeft,
+    required this.actionRight,
+    this.ranking = -1,
+    required this.children,
+    this.typeImage = AtomImage.typeNetwork,
+  })  : margin = true,
+        _ranking = ranking < 0 ? false : true,
         topBorderRadius = true,
         super(key: key);
 
@@ -66,6 +86,7 @@ class OrganismCard extends StatelessWidget {
     required this.actionRight,
     this.ranking = 0,
     this.typeImage = AtomImage.typeNetwork,
+    this.children,
   })  : margin = false,
         _ranking = false,
         topBorderRadius = false,
@@ -116,40 +137,8 @@ class OrganismCard extends StatelessWidget {
             ),
             const Spacer(),
             if (_ranking)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(10, (index) {
-                  if (index % 2 == 0) {
-                    return (index ~/ 2 <= ranking)
-                        ? Stack(
-                            children: [
-                              Icon(
-                                CupertinoIcons.star_fill,
-                                color: BuddySitterColor.actionsWarning,
-                              ),
-                              Icon(
-                                CupertinoIcons.star,
-                                color: Colors.yellowAccent.shade700,
-                              ),
-                            ],
-                          )
-                        : Stack(
-                            children: [
-                              Icon(
-                                CupertinoIcons.star_fill,
-                                color: BuddySitterColor.dark.brighten(.6),
-                              ),
-                              Icon(
-                                CupertinoIcons.star,
-                                color: BuddySitterColor.dark.brighten(.5),
-                              ),
-                            ],
-                          );
-                  }
-                  return SizedBox(
-                    width: BuddySitterMeasurement.sizeLeast,
-                  );
-                }),
+              AtomRanking.stars(
+                ranking: ranking,
               ),
             if (_ranking) const Spacer(),
             AtomText.content(
@@ -216,85 +205,162 @@ class OrganismCard extends StatelessWidget {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    Provider.of<MediaHandler>(context);
-    double headderHeight = MediaHandler.dynamicType(
+  double get headderHeight {
+    return MediaHandler.dynamicType(
       mobile: BuddySitterMeasurement.sizeHigh * 2.8,
       tablet: BuddySitterMeasurement.sizeHigh * 5,
       desktop: BuddySitterMeasurement.sizeHigh * 5,
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Provider.of<MediaHandler>(context);
     return decoratorMargin(
       decoratorBorderRadius(
-        SizedBox(
-          height: containerHeight,
-          child: Stack(
-            alignment: Alignment.topCenter,
-            children: [
-              SizedBox(
-                width: double.infinity,
-                height: containerHeight,
-                child: AtomImage.simple(
-                  repeat: ImageRepeat.repeat,
-                  imageFilter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                  src: image,
-                  type: typeImage,
-                ),
-              ),
-              Column(
-                children: [
-                  AtomImage.simple(
-                    src: image,
-                    height: headderHeight,
-                    type: typeImage,
-                  ),
-                  ClipPath(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    clipper: CardProfileClipper(
-                      radius: BuddySitterMeasurement.sizeHalf,
-                    ),
-                    child: decoratorColorImage(containerInfo),
-                  ),
-                ],
-              ),
+        Stack(
+          children: [
+            decoratorBorderRadius(
               Container(
-                margin: EdgeInsets.only(
-                  top: headderHeight,
-                ),
-                child: MoleculeRowFLex.simple(
+                width: double.infinity,
+                color: BuddySitterColor.complementaryLilac.brighten(.65),
+                child: Column(
                   children: [
-                    AtomButton.cicle(
-                      colorHadler: (_) =>
-                          Color(BuddySitterColor.light.value).withOpacity(.3),
-                      onPressed: actionLeft.onPressed,
-                      onLongPress: actionLeft.onLongPress,
-                      height: BuddySitterMeasurement.sizeHalf * 3,
-                      icon: actionLeft.icon,
-                      circleColor: null,
-                      dotsColor: null,
+                    SizedBox(
+                      height: containerHeight,
                     ),
-                    AtomImage.circle(
-                      src: profile,
-                      radius: BuddySitterMeasurement.sizeHalf * 1.8,
-                      type: AtomImage.typeNetwork,
+                    if (children != null) ...(children ?? []),
+                  ],
+                ),
+              ),
+            ),
+            decoratorBorderRadius(
+              SizedBox(
+                height: containerHeight,
+                child: Stack(
+                  alignment: Alignment.topCenter,
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      height: containerHeight,
+                      child: AtomImage.simple(
+                        repeat: ImageRepeat.repeat,
+                        imageFilter:
+                            ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                        src: image,
+                        type: typeImage,
+                      ),
                     ),
-                    AtomButton.cicle(
-                      colorHadler: (_) =>
-                          Color(BuddySitterColor.light.value).withOpacity(.3),
-                      onPressed: actionRight.onPressed,
-                      onLongPress: actionRight.onLongPress,
-                      height: BuddySitterMeasurement.sizeHalf * 3,
-                      icon: actionRight.icon,
-                      circleColor: null,
-                      dotsColor: null,
+                    Column(
+                      children: [
+                        AtomImage.simple(
+                          src: image,
+                          height: headderHeight,
+                          type: typeImage,
+                        ),
+                        ClipPath(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          clipper: CardProfileClipper(
+                            radius: BuddySitterMeasurement.sizeHalf,
+                          ),
+                          child: decoratorColorImage(containerInfo),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: headderHeight,
+                      ),
+                      child: MoleculeRowFLex.simple(
+                        children: [
+                          AtomButton.cicle(
+                            colorHadler: (_) =>
+                                Color(BuddySitterColor.light.value)
+                                    .withOpacity(.3),
+                            onPressed: actionLeft.onPressed,
+                            onLongPress: actionLeft.onLongPress,
+                            height: BuddySitterMeasurement.sizeHalf * 3,
+                            icon: actionLeft.icon,
+                            circleColor: null,
+                            dotsColor: null,
+                          ),
+                          AtomImage.circle(
+                            src: profile,
+                            radius: BuddySitterMeasurement.sizeHalf * 1.8,
+                            type: AtomImage.typeNetwork,
+                          ),
+                          AtomButton.cicle(
+                            colorHadler: (_) =>
+                                Color(BuddySitterColor.light.value)
+                                    .withOpacity(.3),
+                            onPressed: actionRight.onPressed,
+                            onLongPress: actionRight.onLongPress,
+                            height: BuddySitterMeasurement.sizeHalf * 3,
+                            icon: actionRight.icon,
+                            circleColor: null,
+                            dotsColor: null,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ), // decoratorBorderRadius
     ); // decoratorMargin
+  }
+}
+
+class AtomRanking extends StatelessWidget {
+  const AtomRanking.stars({
+    Key? key,
+    required this.ranking,
+  }) : super(key: key);
+
+  final int ranking;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(
+        10,
+        (index) {
+          if (index % 2 == 0) {
+            return (index ~/ 2 <= ranking)
+                ? Stack(
+                    children: [
+                      Icon(
+                        CupertinoIcons.star_fill,
+                        color: BuddySitterColor.actionsWarning,
+                      ),
+                      Icon(
+                        CupertinoIcons.star,
+                        color: Colors.yellowAccent.shade700,
+                      ),
+                    ],
+                  )
+                : Stack(
+                    children: [
+                      Icon(
+                        CupertinoIcons.star_fill,
+                        color: BuddySitterColor.dark.brighten(.6),
+                      ),
+                      Icon(
+                        CupertinoIcons.star,
+                        color: BuddySitterColor.dark.brighten(.5),
+                      ),
+                    ],
+                  );
+          }
+          return SizedBox(
+            width: BuddySitterMeasurement.sizeLeast,
+          );
+        },
+      ),
+    );
   }
 }
