@@ -49,11 +49,9 @@ class Service {
         vaccinationationCard: pet['vaccination_card'],
         walkFrequencyPerDay: pet['walk_frequency'],
         weight: pet['weight'],
-        bathroom: Bathroom(
-          hours: pet['bathroom_hours'],
-          times: pet['bathroom_times'],
-          type: pet['bathroom'],
-        ),
+        bathroomHours: json['bathroom_hours'],
+        bathroomTimes: json['bathroom_times'],
+        bathroomType: json['bathroom_type'],
         birthDate: DateTime(pet['birth_date']),
         breed: pet['breed'],
         diet: pet['diet'],
@@ -65,6 +63,9 @@ class Service {
         typeAnimal: pet['type_animal'],
         vetsName: pet['vets_name'],
         vetsPhone: pet['vets_phone'],
+        idOwner: pet['id_owner'],
+        createdAt: pet['created_at'],
+        updatedAt: pet['updated_at'],
       ));
     }
     return Service(

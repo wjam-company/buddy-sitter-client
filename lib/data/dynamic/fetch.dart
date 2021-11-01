@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'package:buddy_sitter/data/dynamic/model/entries/review.dart';
+
 import 'model/entries/pet.dart';
 import 'model/entries/profile.dart';
 import './url.dart';
@@ -250,6 +252,7 @@ class ApiManager {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
+      body: jsonEncode(updatedProfile)
     );
 
     if (response.statusCode == 200) {
@@ -266,11 +269,14 @@ class ApiManager {
 
   // Pets
   // Fetch all pets
-  static Future<List<Pet>> fetchAllPet() async {
+  static Future<List<Pet>> fetchAllPet({
+    required String token,
+  }) async {
     final response = await http.get(
       Uri.parse(Url.pets),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
       },
     );
 
@@ -289,10 +295,96 @@ class ApiManager {
       throw Exception('Failed to load album');
     }
   }
+
+  // Fetch a pet by its id
+  static Future<Pet> fetchPetId({
+    required String petId,
+  }) async {
+    final response = await http.get(
+      Uri.parse(Url.pets + '/' + petId),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      Pet pet = Pet.fromJson(jsonDecode(response.body));
+      return pet;
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load album');
+    }
+  }
+
+  // Create a pet
+  static Future<Pet> postPet({
+    required Map<String, dynamic> pet,
+    required String token,
+  }) async {
+    final response = await http.post(
+      Uri.parse(Url.pets),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode(pet)
+    );
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return Pet.fromJson(jsonDecode(response.body));
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load album');
+    }
+  }
+
+  // Review
+  // Fetch all the reviews
+  // Fetch all sitter profiles
+  static Future<List<Review>> fetchAllReviews() async {
+    final response = await http.get(
+      Uri.parse(Url.reviews),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      List<Review> allReviews = [];
+      for (var review in jsonDecode(response.body)) {
+        Review reviewObj = Review.fromJson(review);
+        allReviews.add(reviewObj);
+      }
+      return allReviews;
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load album');
+    }
+  }
+
+  // Fetch a review by its id
+  // Post a review
+  
+
+  
 }
 
 void main() {
-  ApiManager.fetchAllPet()
-      .then((value) => print(value))
+  // ApiManager.fetchLogin(
+  //         password: '12345678fF*', email: 'adriana.er98@gmail.com')
+  //     .then((value) =>
+  //         print(ApiManager.postPet(pet: pet, token: value.accessToken)))
+  //     .catchError((e) => print(e));
+  ApiManager.fetchAllReviews().then((value) =>
+          print(value))
       .catchError((e) => print(e));
 }

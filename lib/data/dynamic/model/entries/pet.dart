@@ -1,37 +1,37 @@
-class Bathroom {
-  final int times;
-  final List<String> hours;
-  final String type;
-  Bathroom({required this.times, required this.hours, required this.type});
-}
-
 class Pet {
-  final String id;
+  final String? id;
   final String name;
-  final String vaccinationationCard;
-  final String observations;
+  final String? vaccinationationCard;
+  final String? observations;
   final int? walkFrequencyPerDay;
-  final Bathroom? bathroom;
-  final List<String>? mealHours;
+  final int? bathroomTimes;
+  final List<dynamic>? bathroomHours;
+  final String? bathroomType;
+  final List<dynamic>? mealHours;
   final String? diet;
   final String? disabilities;
   final String? healthStatus;
   final String? prevSurgeries;
   final String vetsPhone;
   final String vetsName;
-  final String breed;
+  final String? breed;
   final double weight;
   final String gender;
   final DateTime birthDate;
   final String typeAnimal;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final String? idOwner;
 
   Pet({
-    required this.id,
+    this.id,
     required this.name,
-    required this.vaccinationationCard,
-    required this.observations,
+    this.vaccinationationCard,
+    this.observations,
     this.walkFrequencyPerDay,
-    this.bathroom,
+    this.bathroomHours,
+    this.bathroomTimes,
+    this.bathroomType,
     this.mealHours,
     this.diet,
     this.disabilities,
@@ -39,36 +39,41 @@ class Pet {
     this.prevSurgeries,
     required this.vetsPhone,
     required this.vetsName,
-    required this.breed,
+    this.breed,
     required this.weight,
     required this.gender,
     required this.birthDate,
     required this.typeAnimal,
+    this.createdAt,
+    this.updatedAt,
+    this.idOwner,
   });
+
   factory Pet.fromJson(Map<String, dynamic> json) {
     return Pet(
-      id: json['id'],
+      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : null,
+      updatedAt: json['created_at'] != null ? DateTime.parse(json['updated_at']) : null,
+      id: json['_id'],
       name: json['name'],
-      observations: json['observations'],
       vaccinationationCard: json['vaccination_card'],
-      walkFrequencyPerDay: json['walk_frequency'],
-      weight: json['weight'],
-      bathroom: Bathroom(
-        hours: json['bathroom_hours'],
-        times: json['bathroom_times'],
-        type: json['bathroom'],
-      ),
-      birthDate: DateTime(json['birth_date']),
-      breed: json['breed'],
+      observations: json['additional_observations'],
+      walkFrequencyPerDay: json['walk_frequency_per_day'],
+      bathroomHours: json['bathroom_hours'],
+      bathroomTimes: json['bathroom_times'],
+      bathroomType: json['bathroom_type'],
+      mealHours: json['meal_hours'],
       diet: json['diet'],
       disabilities: json['disabilities'],
-      gender: json['gender'],
       healthStatus: json['health_status'],
-      mealHours: json['meal_hours'],
       prevSurgeries: json['prev_surgeries'],
-      typeAnimal: json['type_animal'],
       vetsName: json['vets_name'],
       vetsPhone: json['vets_phone'],
+      breed: json['breed'],
+      weight: json['weight'],
+      gender: json['gender'],
+      birthDate: DateTime.parse(json['birth_date']),
+      typeAnimal: json['type_animal'],
+      idOwner: json['id_owner'],
     );
   }
 }
