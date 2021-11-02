@@ -1,9 +1,7 @@
-import 'dart:ffi';
 import 'dart:ui';
-import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
+
 import 'package:buddy_sitter/presentation/utils/clipper/card.dart';
+import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
 import 'package:buddy_sitter/presentation/utils/media/media.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/utils/theme/measurement.dart';
@@ -11,6 +9,8 @@ import 'package:buddy_sitter/presentation/widgets/atoms/assets/image.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -223,7 +223,7 @@ class OrganismCard extends StatelessWidget {
             decoratorBorderRadius(
               Container(
                 width: double.infinity,
-                color: BuddySitterColor.complementaryLilac.brighten(.65),
+                color: BuddySitterColor.complementaryLilac.brighten(.85),
                 child: Column(
                   children: [
                     SizedBox(

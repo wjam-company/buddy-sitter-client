@@ -9,6 +9,7 @@ import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/feedback/snack.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
+import 'package:buddy_sitter/presentation/widgets/molecules/information/sitter_card.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/input_controls/input.dart';
 import 'package:buddy_sitter/presentation/widgets/organisms/card.dart';
 import 'package:buddy_sitter/presentation/widgets/organisms/form.dart';
@@ -47,7 +48,7 @@ class ProviderPostList with ChangeNotifier {
     throw UnimplementedError();
   }
 
-  Future<List<PostSitterItem>> get data async {
+  Future<List<SitterCard>> get data async {
     throw UnimplementedError();
   }
 }
@@ -119,7 +120,7 @@ class BodySearchSitter extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  Future<List<PostSitterItem>> listData(BuildContext context) {
+  Future<List<SitterCard>> listData(BuildContext context) {
     throw UnimplementedError();
   }
 
@@ -134,7 +135,7 @@ class BodySearchSitter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasicResponsive(
-      child: FutureBuilder<List<PostSitterItem>>(
+      child: FutureBuilder<List<SitterCard>>(
         future: listData(context),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           Provider.of<MediaHandler>(context);
@@ -158,6 +159,7 @@ class BodySearchSitter extends StatelessWidget {
                   image: snapshot.data[index].image,
                   name: snapshot.data[index].name,
                   profile: snapshot.data[index].profile,
+                  children: snapshot.data[index].children,
                 );
                 /*  data: snapshot.data[index],*/
               },

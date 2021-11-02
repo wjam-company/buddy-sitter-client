@@ -13,6 +13,16 @@ import 'package:provider/provider.dart';
 class ProviderSelectYourPet extends ProviderSearchFilter {
   ProviderSelectYourPet(FormProvider formProvider) : super(formProvider);
 
+  final String _key = "selected_pet";
+  void selectPet(String text) {
+    BuddySitterData().state.setKey(_key, text);
+  }
+
+  bool isSelected() {
+    var map = BuddySitterData().state.syncGet();
+    return map.containsKey(_key);
+  }
+
   @override
   BuddySitterAction action(BuildContext context) {
     return BuddySitterAction(
@@ -21,7 +31,9 @@ class ProviderSelectYourPet extends ProviderSearchFilter {
         color: BuddySitterColor.actionsSuccess,
       ),
       onPressed: () {
-        // TODO: select pet
+        if (!isSelected()) {
+          return;
+        }
         Provider.of<RouterPageHandler>(context, listen: false)
             .show(BuddySitterLocation.selectYourService);
       },
@@ -40,7 +52,9 @@ class ProviderSelectYourPet extends ProviderSearchFilter {
           title: 'Buster',
           action: BuddySitterAction(
             text: 'Select',
-            onPressed: () {},
+            onPressed: () {
+              selectPet("Buster");
+            },
             icon: Icon(
               CupertinoIcons.check_mark_circled,
               color: BuddySitterColor.light,
@@ -55,8 +69,7 @@ class ProviderSelectYourPet extends ProviderSearchFilter {
           action: BuddySitterAction(
             text: 'Select',
             onPressed: () {
-              Map map = {};
-              BuddySitterData().state.set(map);
+              selectPet("Magna");
             },
             icon: Icon(
               CupertinoIcons.check_mark_circled,

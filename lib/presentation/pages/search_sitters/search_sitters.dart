@@ -2,9 +2,11 @@ import 'package:buddy_sitter/presentation/pages/interfaces/list_resoult.dart';
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
+import 'package:buddy_sitter/presentation/widgets/molecules/information/sitter_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import './provider.dart';
 
 class ResultSitters extends SearchSitter<ProviderSearchSitter> {
@@ -31,7 +33,7 @@ class ResultSitters extends SearchSitter<ProviderSearchSitter> {
 
 class Body extends BodySearchSitter {
   @override
-  Future<List<PostSitterItem>> listData(BuildContext context) async {
+  Future<List<SitterCard>> listData(BuildContext context) async {
     ProviderSearchSitter providerSelectYourPet =
         Provider.of<ProviderSearchSitter>(context);
     return await providerSelectYourPet.data;

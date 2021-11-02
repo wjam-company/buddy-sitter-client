@@ -51,15 +51,18 @@ class BuddySitterStorage extends ChangeNotifier {
     }
   }
 
-// Future<void> update(Map value, {bool notify = true}) async {
-//   try {
-//     _data.addAll(value);
-//     (await _storage)?.setString(_key, value.toString());
-//     if (notify) {
-//       notifyListeners();
-//     }
-//   } catch (_) {
-//     return;
-//   }
-// }
+  Future<void> setKey(String key, dynamic value) async {
+    _data[key] = value;
+    set(_data);
+  }
+
+  Future<void> clear() async {
+    try {
+      _data.clear();
+      (await _storage)?.setString(_key, jsonEncode(_data));
+      notifyListeners();
+    } catch (_) {
+      return;
+    }
+  }
 }

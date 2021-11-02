@@ -1,5 +1,6 @@
 import 'package:buddy_sitter/presentation/pages/interfaces/search_filter.dart';
 import 'package:buddy_sitter/presentation/utils/form/provider.dart';
+import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/locations.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
@@ -13,6 +14,16 @@ import 'package:provider/provider.dart';
 class ProviderSelectYourService extends ProviderSearchFilter {
   ProviderSelectYourService(FormProvider formProvider) : super(formProvider);
 
+  final String _key = "selected_service";
+  void select(String text) {
+    BuddySitterData().state.setKey(_key, text);
+  }
+
+  bool isSelected() {
+    var map = BuddySitterData().state.syncGet();
+    return map.containsKey(_key);
+  }
+
   @override
   BuddySitterAction action(BuildContext context) {
     return BuddySitterAction(
@@ -21,6 +32,10 @@ class ProviderSelectYourService extends ProviderSearchFilter {
         color: BuddySitterColor.actionsSuccess,
       ),
       onPressed: () {
+        print(isSelected());
+        if (!isSelected()) {
+          return;
+        }
         Provider.of<RouterPageHandler>(context, listen: false)
             .show(BuddySitterLocation.schedule);
       },
@@ -39,7 +54,9 @@ class ProviderSelectYourService extends ProviderSearchFilter {
           title: 'Walk',
           action: BuddySitterAction(
             text: 'Select',
-            onPressed: () {},
+            onPressed: () {
+              select("walk");
+            },
             icon: Icon(
               CupertinoIcons.check_mark_circled,
               color: BuddySitterColor.light,
@@ -53,7 +70,9 @@ class ProviderSelectYourService extends ProviderSearchFilter {
           title: 'Sleepover',
           action: BuddySitterAction(
             text: 'Select',
-            onPressed: () {},
+            onPressed: () {
+              select("sleepover");
+            },
             icon: Icon(
               CupertinoIcons.check_mark_circled,
               color: BuddySitterColor.light,
@@ -81,7 +100,9 @@ class ProviderSelectYourService extends ProviderSearchFilter {
           title: 'Daycare',
           action: BuddySitterAction(
             text: 'Select',
-            onPressed: () {},
+            onPressed: () {
+              select("Daycare");
+            },
             icon: Icon(
               CupertinoIcons.check_mark_circled,
               color: BuddySitterColor.light,
