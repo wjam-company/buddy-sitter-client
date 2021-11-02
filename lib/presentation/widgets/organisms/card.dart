@@ -315,8 +315,10 @@ class OrganismCard extends StatelessWidget {
 }
 
 class AtomRanking extends StatelessWidget {
+  final MainAxisAlignment mainAxisAlignment;
   const AtomRanking.stars({
     Key? key,
+    this.mainAxisAlignment = MainAxisAlignment.center,
     required this.ranking,
   }) : super(key: key);
 
@@ -325,7 +327,7 @@ class AtomRanking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: mainAxisAlignment,
       children: List.generate(
         10,
         (index) {
