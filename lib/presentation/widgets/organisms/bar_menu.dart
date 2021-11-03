@@ -47,7 +47,10 @@ class OrganismBarMenu extends StatelessWidget {
           isActive: active == BuddySitterLocation.explore,
         ),
         BuddySitterAction(
-          onPressed: () {},
+          onPressed: () {
+            Provider.of<RouterPageHandler>(context, listen: false)
+                .show(BuddySitterLocation.pendingServices);
+          },
           icon: Icon(
             CupertinoIcons.calendar,
             color: BuddySitterColor.actionsLog,

@@ -61,23 +61,23 @@ class ProviderSelectYourPet extends ProviderSearchFilter {
               color: BuddySitterColor.light,
             ),
           ),
-          content: 'Deserunt aqui Buster',
+          content: 'Weight: 40lbs',
         ),
         ItemListItem(
           image:
               'https://t3.ftcdn.net/jpg/02/95/94/94/360_F_295949484_8BrlWkTrPXTYzgMn3UebDl1O13PcVNMU.jpg',
-          title: 'Magna',
+          title: 'Buddy',
           action: BuddySitterAction(
             text: 'Select',
             onPressed: () {
-              selectPet("Magna");
+              selectPet("Buddy");
             },
             icon: Icon(
               CupertinoIcons.check_mark_circled,
               color: BuddySitterColor.light,
             ),
           ),
-          content: 'Deserunt aqui magna',
+          content: 'Weight: 20lbs',
         ),
       ],
     );

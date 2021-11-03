@@ -56,6 +56,25 @@ class BuddySitterStorage extends ChangeNotifier {
     set(_data);
   }
 
+  Future<void> updateKey(String key, Map value) async {
+    var data = _data[key];
+    data.addAll(value);
+    _data[key] = data;
+    set(_data);
+  }
+
+  Future<void> removeKey(String key) async {
+    _data.remove(key);
+    set(_data);
+  }
+
+  Future<void> removeKeys(List<String> keys) async {
+    for (var key in keys) {
+      _data.remove(key);
+      set(_data);
+    }
+  }
+
   Future<void> clear() async {
     try {
       _data.clear();

@@ -2,6 +2,7 @@ import 'package:buddy_sitter/presentation/pages/explore/explore.dart';
 import 'package:buddy_sitter/presentation/pages/forgot_password/forgot_password.dart';
 import 'package:buddy_sitter/presentation/pages/home/home.dart';
 import 'package:buddy_sitter/presentation/pages/interfaces/interfaces.dart';
+import 'package:buddy_sitter/presentation/pages/list_services/list_services.dart';
 import 'package:buddy_sitter/presentation/pages/onboarding/onboarding.dart';
 import 'package:buddy_sitter/presentation/pages/schedule/schedule.dart';
 import 'package:buddy_sitter/presentation/pages/search_sitters/search_sitters.dart';
@@ -54,7 +55,7 @@ class BuddySitterPage {
     BuddySitterLocation.resultSitters: const ResultSitters(),
     BuddySitterLocation.schedule: const Schedule(),
     BuddySitterLocation.sitterSchedule: const ResultSitters(),
-    BuddySitterLocation.pendingServices: const ResultSitters(),
+    BuddySitterLocation.pendingServices: const ListService(),
     BuddySitterLocation.sitterServices: const ResultSitters(),
     BuddySitterLocation.sitterProfile: const ResultSitters(),
     BuddySitterLocation.petProfile: const ResultSitters(),

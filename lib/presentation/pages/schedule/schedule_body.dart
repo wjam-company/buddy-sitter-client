@@ -1,3 +1,4 @@
+import 'package:buddy_sitter/presentation/utils/localstorage/stateless.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/locations.dart';
 import 'package:buddy_sitter/presentation/utils/navigator/page_handler.dart';
 import 'package:buddy_sitter/presentation/utils/theme/color.dart';
@@ -19,10 +20,13 @@ class ScheduleBody extends StatefulWidget {
 
 class _ScheduleBodyState extends State<ScheduleBody> {
   bool isRangeSelected = false;
+  Map<String, DateTime> rangeMap = {};
 
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     PickerDateRange range = args.value as PickerDateRange;
     if (range.startDate != null && range.endDate != null) {
+      rangeMap["start"] = range.startDate!;
+      rangeMap["end"] = range.endDate!;
       setState(() {
         isRangeSelected = true;
       });
@@ -33,6 +37,7 @@ class _ScheduleBodyState extends State<ScheduleBody> {
     if (!isRangeSelected) {
       return;
     }
+    BuddySitterData().state.setKey("range", rangeMap);
     Provider.of<RouterPageHandler>(context, listen: false)
         .show(BuddySitterLocation.resultSitters);
   }

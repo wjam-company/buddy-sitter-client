@@ -9,7 +9,6 @@ import 'package:buddy_sitter/presentation/widgets/atoms/buttons/button.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/feedback/snack.dart';
 import 'package:buddy_sitter/presentation/widgets/atoms/texts/text.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/information/row_flex.dart';
-import 'package:buddy_sitter/presentation/widgets/molecules/information/sitter_card.dart';
 import 'package:buddy_sitter/presentation/widgets/molecules/input_controls/input.dart';
 import 'package:buddy_sitter/presentation/widgets/organisms/card.dart';
 import 'package:buddy_sitter/presentation/widgets/organisms/form.dart';
@@ -48,7 +47,7 @@ class ProviderPostList with ChangeNotifier {
     throw UnimplementedError();
   }
 
-  Future<List<SitterCard>> get data async {
+  Future<List<dynamic>> get data async {
     throw UnimplementedError();
   }
 }
@@ -120,7 +119,7 @@ class BodySearchSitter extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  Future<List<SitterCard>> listData(BuildContext context) {
+  Future<List<dynamic>> listData(BuildContext context) {
     throw UnimplementedError();
   }
 
@@ -135,7 +134,7 @@ class BodySearchSitter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasicResponsive(
-      child: FutureBuilder<List<SitterCard>>(
+      child: FutureBuilder<List<dynamic>>(
         future: listData(context),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           Provider.of<MediaHandler>(context);
@@ -152,12 +151,13 @@ class BodySearchSitter extends StatelessWidget {
                   );
                 }
                 index -= 1;
-                return OrganismCard.simple(
-                  actionLeft: snapshot.data[index].actionLeft,
+                return OrganismCard.list(
+                  actionLeft: snapshot.data[index].actionLeft(context),
                   actionRight: snapshot.data[index].actionRight,
                   content: snapshot.data[index].content,
                   image: snapshot.data[index].image,
                   name: snapshot.data[index].name,
+                  ranking: snapshot.data[index].rating,
                   profile: snapshot.data[index].profile,
                   children: snapshot.data[index].children,
                 );
